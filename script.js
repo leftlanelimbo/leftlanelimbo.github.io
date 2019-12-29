@@ -12,7 +12,7 @@ function main() {
      1, // far
   );
   const scene = new THREE.Scene();
-  const plane = new THREE.PlaneBufferGeometry(2, 2);
+  const plane = new THREE.PlaneBufferGeometry(1, 1);
 
   const fragmentShader = `
   #include <common>
