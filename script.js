@@ -50,7 +50,7 @@ float perlin(vec2 p, int res){
     float persistance = .4; //og .4
     float n = .8; //.9 makes it mostly dark minus highlight (og.4)
     float normK = 0.;
-    float f = tweak_c; //<< from flat to form 5 is solid target
+    float f = 5.; //<< from flat to form 5 is solid target
     float amp = 1.;
     int iCount = 0;
     for (int i = 0; i<50; i++){
