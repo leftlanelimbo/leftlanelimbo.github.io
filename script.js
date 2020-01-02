@@ -163,9 +163,9 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     let x = Math.abs(event.accelerationIncludingGravity.x * 0.3);
     // console.log(x);
     let y = Math.abs(event.accelerationIncludingGravity.y * .05 +.2);
-    let r,g,b 
-    [r,g,b] = hslToRgb(x.toFixed(0),100,100);
-    console.log(r,g,b);
+    let r_out,g_out,b_put 
+    [r_out,g_out,b_out] = hslToRgb(x.toFixed(0),100,100);
+    console.log(r_out,g_out,b_out);
     // let z = Math.abs(event.accelerationIncludingGravity.z *.09);
     // let z = event.accelerationIncludingGravity.z.toFixed(2);
 
@@ -175,9 +175,9 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     TweenMax.to(material.uniforms.tweak_c, 1, { value: x });
     TweenMax.to(material.uniforms.tweak_p, 1, { value: y });
     
-    TweenMax.to(material.uniforms.r_passed, 1, { value: r });
-    TweenMax.to(material.uniforms.g_passed, 1, { value: g });
-    TweenMax.to(material.uniforms.b_passed, 1, { value: b });
+    TweenMax.to(material.uniforms.r_passed, 1, { value: r_out });
+    TweenMax.to(material.uniforms.g_passed, 1, { value: g_out });
+    TweenMax.to(material.uniforms.b_passed, 1, { value: b_out });
     // TweenMax.to('#hed', 1, { opacity: `${y}` });
     // stereoPanner.pan = pan;
     //el.style.background = `hsl(${x},100%,50%)`;
