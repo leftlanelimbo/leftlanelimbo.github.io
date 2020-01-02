@@ -78,7 +78,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     float f = perlin(p+q, res);
     fragColor.rgb = vec3(f, f, f);
 #else
-    float t = iTime * 0.09; //(og 0.2)
+    float t = iTime * tweak_p; //(og 0.2)
     vec2 p = fragCoord.xy;
     vec2 q = vec2(
         perlin(p, res),
