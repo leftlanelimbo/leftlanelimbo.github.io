@@ -102,7 +102,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     color += tmp;
     color += vec3(0.2,0.2,0.0) * dot(q,q);
     color = mix(color, vec3(0.5, 0.2, 0.5), f);
-    color *= (0.1/0.8); //(og 1.0/0.8) //full scene dim
+    color *= (0.1/0.8); //(og 1.0/0.8) full scene dim
     
     //color = mix(vec3(0.6, 0.4, 0.2), vec3(0.1, 0.1, 0.3), f);
     //color = mix(vec3(0.6, 0.4, 0.2), vec3(0.1, 0.1, 0.3), dot(q,q));
@@ -175,9 +175,9 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     TweenMax.to(material.uniforms.tweak_c, 1, { value: x });
     TweenMax.to(material.uniforms.tweak_p, 1, { value: y });
     
-    TweenMax.to(material.uniforms.r_passed, 1, { value: r_out });
-    TweenMax.to(material.uniforms.g_passed, 1, { value: g_out });
-    TweenMax.to(material.uniforms.b_passed, 1, { value: b_out });
+//     TweenMax.to(material.uniforms.r_passed, 1, { value: r_out });
+//     TweenMax.to(material.uniforms.g_passed, 1, { value: g_out });
+//     TweenMax.to(material.uniforms.b_passed, 1, { value: b_out });
     // TweenMax.to('#hed', 1, { opacity: `${y}` });
     // stereoPanner.pan = pan;
     //el.style.background = `hsl(${x},100%,50%)`;
