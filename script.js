@@ -7,6 +7,7 @@ function main() {
 //   overlay.remove();
   let xval = document.getElementById("xval");
   let yval = document.getElementById("yval");
+  let x, y;
   const canvas = document.querySelector('#c');
   const renderer = new THREE.WebGLRenderer({canvas});
   renderer.autoClearColor = false;
@@ -155,9 +156,9 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
   requestAnimationFrame(render);
 
   function handleMotionEvent(event) {
-    let x = Math.abs(event.accelerationIncludingGravity.x * 0.3);
+    x = Math.abs(event.accelerationIncludingGravity.x * 0.3);
     // console.log(x);
-    let y = Math.abs(event.accelerationIncludingGravity.y * .05 +.2);
+    y = Math.abs(event.accelerationIncludingGravity.y * .05 +.2);
 //     console.log(x,y);
     xval.innerText = x;
     yval.innerText = y;
