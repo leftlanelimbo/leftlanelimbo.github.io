@@ -47,7 +47,7 @@ float noise(vec2 p, float freq ){
 
 
 float perlin(vec2 p, int res){
-    float persistance = .4; 
+    float persistance = .4; //og .4
     float n = 0.9; //.9 makes it mostly dark minus highlight (og.4)
     float normK = 0.;
     float f = 5.; //<<< this value tween from zero  
@@ -157,6 +157,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     let x = Math.abs(event.accelerationIncludingGravity.x * 0.3);
     // console.log(x);
     let y = Math.abs(event.accelerationIncludingGravity.y * .05 +.2);
+    console.log(x,y);
     // let z = Math.abs(event.accelerationIncludingGravity.z *.09);
     // let z = event.accelerationIncludingGravity.z.toFixed(2);
 
@@ -184,22 +185,22 @@ function loaded() {
     document.getElementById("startButton").style.color = '#000000';
     document.getElementById("startButton").addEventListener("click", onClick);
     document.getElementById("startButton").addEventListener("click", removeOverlay);
-//     document.getElementById("startButton").addEventListener("click", main);
-
 }
+
 function removeOverlay() {
-    var overlay = document.getElementById( 'overlay' );
-    var hide = function () {
-        window.setTimeout(function () {
-            overlay.style.opacity = '0';
-        }, 1.5);
-        window.setTimeout(function () {
-            overlay.remove();
-        }, 450);
-        };
+  var overlay = document.getElementById( 'overlay' );
+  var hide = function () {
+    window.setTimeout(function () {
+        overlay.style.opacity = '0';
+    }, 1.5);
+    window.setTimeout(function () {
+        overlay.remove();
+    }, 450);
+  };
     
   hide();
 }
+
 function onClick() {
     // feature detect
     if (typeof DeviceMotionEvent.requestPermission === 'function') {
@@ -216,21 +217,12 @@ function onClick() {
       window.addEventListener('devicemotion', handleMotionEvent, true);
       console.log('cry to your fruit overlords');
     }
-  }
+}
   
 window.addEventListener('load', loaded);
 
-  
-
-  
-
+    
 }
-
-
-
-
-
-
 
 main();
  
