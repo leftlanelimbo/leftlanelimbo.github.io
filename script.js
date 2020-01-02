@@ -28,9 +28,9 @@ function main() {
   uniform float iTime;
   uniform float tweak_c;
   uniform float tweak_p;
-  uniform float r_passed;
-  uniform float g_passed;
-  uniform float b_passed;
+  //uniform float r_passed;
+  //uniform float g_passed;
+  //uniform float b_passed;
 
 float noise(vec2 p, float freq ){
     //float unit = iResolution.x/freq;
@@ -97,7 +97,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
     vec3 color = vec3(0.0,0.0,0.0);
     color = mix(color, vec3(tweak_c,0.7,0.3), dot(r,r));
-    vec3 tmp = vec3(r_passed,g_passed,b_passed) * dot(s,s); //seems to change highlight the most
+    vec3 tmp = vec3(0.9,0.2,0.9) * dot(s,s); //seems to change highlight the most
     tmp = tmp*tmp;
     color += tmp;
     color += vec3(0.2,0.2,0.0) * dot(q,q);
@@ -122,9 +122,9 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     iResolution:  { value: new THREE.Vector3() },
     tweak_c: { type: "f", value: 0.1},
     tweak_p: { type: "f", value: 0.5},
-    r_passed: {type: "f", value: 0.9},
-    g_passed: {type: "f", value: 0.2},
-    b_passed: {type: "f", value: 0.9}
+//     r_passed: {type: "f", value: 0.9},
+//     g_passed: {type: "f", value: 0.2},
+//     b_passed: {type: "f", value: 0.9}
   };
   const material = new THREE.ShaderMaterial({
     fragmentShader,
@@ -163,9 +163,9 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     let x = Math.abs(event.accelerationIncludingGravity.x * 0.3);
     // console.log(x);
     let y = Math.abs(event.accelerationIncludingGravity.y * .05 +.2);
-    let r_out,g_out,b_put 
-    [r_out,g_out,b_out] = hslToRgb(x.toFixed(0),1,1);
-    console.log(r_out,g_out,b_out);
+//     let r_out,g_out,b_put 
+//     [r_out,g_out,b_out] = hslToRgb(x.toFixed(0),1,1);
+//     console.log(r_out,g_out,b_out);
     // let z = Math.abs(event.accelerationIncludingGravity.z *.09);
     // let z = event.accelerationIncludingGravity.z.toFixed(2);
 
@@ -190,31 +190,31 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
   }
   
-  //hsl conversion copied from https://stackoverflow.com/questions/2353211/hsl-to-rgb-color-conversion
-  function hslToRgb(h, s, l){
-    var r, g, b;
-
-    if(s == 0){
-        r = g = b = l; // achromatic
-    }else{
-        var hue2rgb = function hue2rgb(p, q, t){
-            if(t < 0) t += 1;
-            if(t > 1) t -= 1;
-            if(t < 1/6) return p + (q - p) * 6 * t;
-            if(t < 1/2) return q;
-            if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
-            return p;
-        }
-
-        var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-        var p = 2 * l - q;
-        r = hue2rgb(p, q, h + 1/3);
-        g = hue2rgb(p, q, h);
-        b = hue2rgb(p, q, h - 1/3);
-    }
-
-    return [Math.round(r), Math.round(g), Math.round(b)];
-  }
+//   hsl conversion copied from https://stackoverflow.com/questions/2353211/hsl-to-rgb-color-conversion
+//   function hslToRgb(h, s, l){
+//     var r, g, b;
+// 
+//     if(s == 0){
+//         r = g = b = l; // achromatic
+//     }else{
+//         var hue2rgb = function hue2rgb(p, q, t){
+//             if(t < 0) t += 1;
+//             if(t > 1) t -= 1;
+//             if(t < 1/6) return p + (q - p) * 6 * t;
+//             if(t < 1/2) return q;
+//             if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+//             return p;
+//         }
+// 
+//         var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+//         var p = 2 * l - q;
+//         r = hue2rgb(p, q, h + 1/3);
+//         g = hue2rgb(p, q, h);
+//         b = hue2rgb(p, q, h - 1/3);
+//     }
+// 
+//     return [Math.round(r), Math.round(g), Math.round(b)];
+//   }
   
 
   function loaded() {
