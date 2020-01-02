@@ -70,6 +70,25 @@
     stroke-opacity: 0.8;
 /*     filter:url(#tile); */
     }
+    #xval {
+    position: absolute;
+	top: 10px;
+	width: 100vw;
+	height: 80vh;
+	text-align: left;
+	z-index: 150;
+	display:block;
+    }
+    #yval {
+    position: absolute;
+	top: 10px;
+	width: 100vw;
+	height: 80vh;
+	text-align: left;
+	z-index: 150;
+	display:block;
+    }
+    
   </style>
 </head>
 <body>
@@ -136,6 +155,8 @@
     
   </svg>
 </div>
+  <p id='xval'>xval</p>
+  <p id='yval'>yval</p>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>  
   <script src="script.js"></script>
