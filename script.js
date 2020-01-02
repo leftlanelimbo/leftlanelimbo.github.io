@@ -164,7 +164,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     // console.log(x);
     let y = Math.abs(event.accelerationIncludingGravity.y * .05 +.2);
     let r_out,g_out,b_put 
-    [r_out,g_out,b_out] = hslToRgb(x.toFixed(0),100,100);
+    [r_out,g_out,b_out] = hslToRgb(x.toFixed(0),1,1);
     console.log(r_out,g_out,b_out);
     // let z = Math.abs(event.accelerationIncludingGravity.z *.09);
     // let z = event.accelerationIncludingGravity.z.toFixed(2);
