@@ -1,15 +1,5 @@
 function main() {
-  var overlay = document.getElementById( 'overlay' );
-  var hide = function () {
-	window.setTimeout(function () {
-		overlay.style.opacity = '0';
-	}, 1.5);
-	window.setTimeout(function () {
-		overlay.remove();
-	}, 450);
-    };
-    
-  hide();
+
 //   setTimeout(() => {
 //     overlay.style.opacity = 0;
 //     }, 50000); 
@@ -226,19 +216,16 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
   }
   
 
-  
-
-}
-
-function loaded() {
+  function loaded() {
     document.getElementById("startButton").innerText = 'E N T E R';
     document.getElementById("overlay").style.backgroundColor = '#111111';
     document.getElementById("startButton").style.background = '#ffffff';
     document.getElementById("startButton").style.color = '#000000';
     document.getElementById("startButton").addEventListener("click", onClick);
     document.getElementById("startButton").addEventListener("click", main);
-}
-function onClick() {
+    }
+  
+  function onClick() {
     // feature detect
     if (typeof DeviceMotionEvent.requestPermission === 'function') {
       DeviceMotionEvent.requestPermission()
@@ -256,7 +243,25 @@ function onClick() {
     }
   }
   
-window.addEventListener('load', loaded);
+  function removeOverlay(){
+    var overlay = document.getElementById( 'overlay' );
+    var hide = function () {
+	window.setTimeout(function () {
+		overlay.style.opacity = '0';
+	}, 1.5);
+	window.setTimeout(function () {
+		overlay.remove();
+	}, 450);
+    };
+    
+  hide();
+  }
+  
+  window.addEventListener('load', loaded);
+
+}
+
+
 
 
 
