@@ -48,9 +48,9 @@ float noise(vec2 p, float freq ){
 
 float perlin(vec2 p, int res){
     float persistance = .4; //og .4
-    float n = tweak_c; //.9 makes it mostly dark minus highlight (og.4)
+    float n = .8; //.9 makes it mostly dark minus highlight (og.4)
     float normK = 0.;
-    float f = 5.; //<<< this value tween from zero  
+    float f = tweak_c; //<< from flat to form 5 is solid target
     float amp = 1.;
     int iCount = 0;
     for (int i = 0; i<50; i++){
@@ -78,7 +78,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     float f = perlin(p+q, res);
     fragColor.rgb = vec3(f, f, f);
 #else
-    float t = iTime * 0.03; //(og 0.2)
+    float t = iTime * 0.09; //(og 0.2)
     vec2 p = fragCoord.xy;
     vec2 q = vec2(
         perlin(p, res),
