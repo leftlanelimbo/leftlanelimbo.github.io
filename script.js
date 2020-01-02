@@ -48,7 +48,7 @@ float noise(vec2 p, float freq ){
 
 float perlin(vec2 p, int res){
     float persistance = .4; //og .4
-    float n = tweak_p; //.9 makes it mostly dark minus highlight (og.4)
+    float n = tweak_c; //.9 makes it mostly dark minus highlight (og.4)
     float normK = 0.;
     float f = 5.; //<<< this value tween from zero  
     float amp = 1.;
