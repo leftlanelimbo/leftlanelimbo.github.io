@@ -47,7 +47,7 @@ float noise(vec2 p, float freq ){
 
 
 float perlin(vec2 p, int res){
-    float persistance = .4; //og .4
+    float persistance = tweak_p; //og .4
     float n = 0.9; //.9 makes it mostly dark minus highlight (og.4)
     float normK = 0.;
     float f = 5.; //<<< this value tween from zero  
@@ -157,7 +157,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     let x = Math.abs(event.accelerationIncludingGravity.x * 0.3);
     // console.log(x);
     let y = Math.abs(event.accelerationIncludingGravity.y * .05 +.2);
-    console.log(x,y);
+//     console.log(x,y);
     // let z = Math.abs(event.accelerationIncludingGravity.z *.09);
     // let z = event.accelerationIncludingGravity.z.toFixed(2);
 
