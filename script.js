@@ -5,7 +5,8 @@ function main() {
 //     }, 50000); 
 //   overlay.style.opacity = 0;
 //   overlay.remove();
-  
+  let xval = document.getElementById("xval");
+  let yval = document.getElementById("yval");
   const canvas = document.querySelector('#c');
   const renderer = new THREE.WebGLRenderer({canvas});
   renderer.autoClearColor = false;
@@ -157,7 +158,9 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     let x = Math.abs(event.accelerationIncludingGravity.x * 0.3);
     // console.log(x);
     let y = Math.abs(event.accelerationIncludingGravity.y * .05 +.2);
-    console.log(x,y);
+//     console.log(x,y);
+    xval.innerText = x;
+    yval.innerText = y;
     // let z = Math.abs(event.accelerationIncludingGravity.z *.09);
     // let z = event.accelerationIncludingGravity.z.toFixed(2);
 
