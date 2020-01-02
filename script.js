@@ -213,7 +213,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
         b = hue2rgb(p, q, h - 1/3);
     }
 
-    return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+    return [Math.round(r), Math.round(g), Math.round(b)];
   }
   
 
