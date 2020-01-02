@@ -1,15 +1,5 @@
 function main() {
-  var overlay = document.getElementById( 'overlay' );
-  var hide = function () {
-	window.setTimeout(function () {
-		overlay.style.opacity = '0';
-	}, 1.5);
-	window.setTimeout(function () {
-		overlay.remove();
-	}, 450);
-    };
-    
-  hide();
+
 //   setTimeout(() => {
 //     overlay.style.opacity = 0;
 //     }, 50000); 
@@ -198,7 +188,22 @@ function loaded() {
     document.getElementById("startButton").style.background = '#ffffff';
     document.getElementById("startButton").style.color = '#000000';
     document.getElementById("startButton").addEventListener("click", onClick);
+    document.getElementById("startButton").addEventListener("click", removeOverlay);
     document.getElementById("startButton").addEventListener("click", main);
+
+}
+function removeOverlay() {
+    var overlay = document.getElementById( 'overlay' );
+    var hide = function () {
+        window.setTimeout(function () {
+            overlay.style.opacity = '0';
+        }, 1.5);
+        window.setTimeout(function () {
+            overlay.remove();
+        }, 450);
+        };
+    
+  hide();
 }
 function onClick() {
     // feature detect
