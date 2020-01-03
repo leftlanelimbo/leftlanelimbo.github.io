@@ -7,7 +7,7 @@ function main() {
 //   overlay.remove();
   let xval = document.getElementById("xval");
   let yval = document.getElementById("yval");
-  let x, y;
+  let x, y, lastX, lastY;
   const canvas = document.querySelector('#c');
   const renderer = new THREE.WebGLRenderer({canvas});
   renderer.autoClearColor = false;
@@ -159,8 +159,14 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     x = Math.abs(event.accelerationIncludingGravity.x * 0.3);
     // console.log(x);
     y = Math.abs(event.accelerationIncludingGravity.y * .05 +.2);
-//     console.log(x,y);
+    
+    if (Math.abs(lastX-x) >= .01) {
+    lastX = x;
     xval.innerText = x;
+    TweenMax.to(material.uniforms.tweak_c, 1, { value: x });
+    }
+//     console.log(x,y);
+    
     yval.innerText = y;
     // let z = Math.abs(event.accelerationIncludingGravity.z *.09);
     // let z = event.accelerationIncludingGravity.z.toFixed(2);
@@ -168,17 +174,11 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     // x = x.toFixed(0)
     // y = y.toFixed(0)
     // z = z.toFixed(0)
-    TweenMax.to(material.uniforms.tweak_c, 1, { value: x });
+//     TweenMax.to(material.uniforms.tweak_c, 1, { value: x });
     TweenMax.to(material.uniforms.tweak_p, 1, { value: y });
     // TweenMax.to('#hed', 1, { opacity: `${y}` });
     // stereoPanner.pan = pan;
     //el.style.background = `hsl(${x},100%,50%)`;
-    // console.log(x, y, z)
-    // if (x > 200) {
-    //     el.innerHTML = 'Direction Change Works!!'
-    // } else {
-    //     el.innerHTML = 'Tween Max Includes'
-    // }
 
   }
   
