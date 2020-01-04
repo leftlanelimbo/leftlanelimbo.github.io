@@ -9,6 +9,7 @@ function main() {
   let yval = document.getElementById("yval");
   let x, y, lastX, lastY;
   lastX = 0.0;
+  lastY = 0.0;
   const canvas = document.querySelector('#c');
   const renderer = new THREE.WebGLRenderer({canvas});
   renderer.autoClearColor = false;
