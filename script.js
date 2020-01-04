@@ -161,7 +161,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     // console.log(x);
     y = Math.abs(event.accelerationIncludingGravity.y * .05 +.2);
     
-    if (Math.abs(lastX-x) >= .01) {
+    if (Math.abs(lastX-x) >= .1) {
     lastX = x;
     xval.innerText = x;
     TweenMax.to(material.uniforms.tweak_c, 1, { value: x });
