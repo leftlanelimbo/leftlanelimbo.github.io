@@ -167,8 +167,12 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     TweenMax.to(material.uniforms.tweak_c, 1, { value: x });
     }
 //     console.log(x,y);
-    
+    if (Math.abs(lastY-y) >= 1.0) {
+    lastY = y;
     yval.innerText = y;
+    TweenMax.to(material.uniforms.tweak_p, 1, { value: y });
+    }
+    
     // let z = Math.abs(event.accelerationIncludingGravity.z *.09);
     // let z = event.accelerationIncludingGravity.z.toFixed(2);
 
@@ -176,7 +180,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     // y = y.toFixed(0)
     // z = z.toFixed(0)
 //     TweenMax.to(material.uniforms.tweak_c, 1, { value: x });
-    TweenMax.to(material.uniforms.tweak_p, 1, { value: y });
+    
     // TweenMax.to('#hed', 1, { opacity: `${y}` });
     // stereoPanner.pan = pan;
     //el.style.background = `hsl(${x},100%,50%)`;
