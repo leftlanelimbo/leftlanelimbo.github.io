@@ -169,11 +169,11 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
   requestAnimationFrame(render);
 
   function handleMotionEvent(event) {
-    x = Math.abs(event.accelerationIncludingGravity.x * 0.3);
+    x = Math.abs(event.accelerationIncludingGravity.x * 0.03);
     // console.log(x);
     y = Math.abs(event.accelerationIncludingGravity.y * .05 +.2);
     
-    if (Math.abs(lastX-x) >= 0.01) {
+    if (Math.abs(lastX-x) >= 0.1) {
     lastX = x;
     xval.innerText = x;
     TweenMax.to(material.uniforms.tweak_c, 1, { value: x });
