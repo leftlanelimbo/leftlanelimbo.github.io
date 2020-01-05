@@ -169,7 +169,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
   requestAnimationFrame(render);
 
   function handleMotionEvent(event) {
-    x = Math.abs(event.accelerationIncludingGravity.x * 0.01);
+    x = Math.abs(event.accelerationIncludingGravity.x * 0.1);
     // console.log(x);
 //     y = Math.abs(event.accelerationIncludingGravity.y * .05 +.2);
     
