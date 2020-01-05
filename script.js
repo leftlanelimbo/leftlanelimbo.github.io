@@ -50,6 +50,15 @@ float noise(vec2 p, float freq ){
 }
 
 
+vec3 hue2rgb(float hue){
+	hue=fract(hue);
+	return saturate(vec3(
+		abs(hue*6.-3.)-1.,
+		2.-abs(hue*6.-2.),
+		2.-abs(hue*6.-4.)
+	));
+}
+
 float perlin(vec2 p, int res){
     float persistance = .4; //og .4
     float n = .8; //.9 makes it mostly dark minus highlight (og.4)
@@ -97,7 +106,9 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
         perlin(p+256.0*r + vec2(23.8*-t,37.0*-t), res));
 
     vec3 color = vec3(0.0,0.0,0.0);
-    color = mix(color, vec3(tweak_c,0.7,0.3), dot(r,r));
+    vec3 tweak_color = hue2rgb(tweak_c);
+    color = mix(color, tweak_color, dot(r,r));
+//     color = mix(color, vec3(tweak_c,0.7,0.3), dot(r,r));
     vec3 tmp = vec3(0.9,0.2,0.9) * dot(s,s);
     tmp = tmp*tmp;
     color += tmp;
