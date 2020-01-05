@@ -171,7 +171,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
   function handleMotionEvent(event) {
     x = Math.abs(event.accelerationIncludingGravity.x * 0.03);
     // console.log(x);
-    y = Math.abs(event.accelerationIncludingGravity.y * .05 +.2);
+//     y = Math.abs(event.accelerationIncludingGravity.y * .05 +.2);
     
     if (Math.abs(lastX-x) >= 0.1) {
     lastX = x;
@@ -179,11 +179,11 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     TweenMax.to(material.uniforms.tweak_c, 1, { value: x });
     }
 //     console.log(x,y);
-    if (Math.abs(lastY-y) >= 0.01) {
-    lastY = y;
-    yval.innerText = y;
-    TweenMax.to(material.uniforms.tweak_p, 1, { value: y });
-    }
+//     if (Math.abs(lastY-y) >= 0.01) {
+//     lastY = y;
+//     yval.innerText = y;
+//     TweenMax.to(material.uniforms.tweak_p, 1, { value: y });
+//     }
     
     // let z = Math.abs(event.accelerationIncludingGravity.z *.09);
     // let z = event.accelerationIncludingGravity.z.toFixed(2);
