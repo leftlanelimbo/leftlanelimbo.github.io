@@ -178,7 +178,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 //     xval.innerText = x;
 //     TweenMax.to(material.uniforms.tweak_c, 1, { value: x });
     
-    if (Math.abs(lastX-x) >= 0.1) {
+    if (Math.abs(lastX-x) >= 0.05) {
     lastX = x;
     xval.innerText = x;
     TweenMax.to(material.uniforms.tweak_c, 1, { value: x });
