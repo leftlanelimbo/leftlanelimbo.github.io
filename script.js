@@ -196,8 +196,8 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     lastX = x;
     xval.innerText = xwhite;
     TweenMax.to(material.uniforms.tweak_c, 1, { value: x });
-    TweenMax.to("#blackPattern", 2.25, { x:xblack });
-    TweenMax.to("#whitePattern", 2.25, { x:xwhite });
+    TweenMax.to("#blackPattern", 1.5, { x:xblack });
+    TweenMax.to("#whitePattern", 1.5, { x:xwhite });
     TweenMax.to("#bripplSVG", 2.25, {'fill-opacity':1.5*x });
     TweenMax.to("#wripplSVG", 2.25, {'fill-opacity':-x*.5 });
 //     TweenMax.to("#wripplSVG", .25, { skewX:xskew });
