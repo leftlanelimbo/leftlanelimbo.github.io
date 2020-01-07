@@ -188,6 +188,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     TweenMax.to(material.uniforms.tweak_c, 1, { value: x });
     TweenMax.to("#blackPattern", 1, { x:xblack });
     TweenMax.to("#whitePattern", 1, { x:xwhite });
+    TweenMax.to("#ripplSVG", 1, { skewX:xwhite });
     }
 //     console.log(x,y);
 //     if (Math.abs(lastY-y) >= 0.01) {
