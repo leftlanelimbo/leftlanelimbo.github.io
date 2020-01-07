@@ -99,6 +99,13 @@
 	display:block;
 	color: white;
     }
+    #vignette {
+    position: absolute;
+    width:100vw;
+    height:100vh;
+    z-index:151;
+    background: radial-gradient(circle, transparent 40%, black 150%);
+    }
     
   </style>
 </head>
@@ -205,6 +212,7 @@
     <rect id="whitePattern" fill="url(#wPattern)" width="120vw" height="100vh" x="-152" y="-430" transform="translate(142 430)"/>
     
   </svg>
+  <div id="vignette"></div>
 </div>
   <p id='xval'>xval</p>
   <p id='yval'>yval</p>
