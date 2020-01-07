@@ -175,8 +175,8 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 //     x = Math.abs(event.accelerationIncludingGravity.x * 0.1);
       x = event.accelerationIncludingGravity.x * 0.1;
       xwhite = x* 100;
-      xblack = -2*xwhite;
-      xskew = x*15;
+      xblack = -xwhite;
+      xskew = x*10;
 //     console.log(xwhite);
 //     y = Math.abs(event.accelerationIncludingGravity.y * .05 +.2);
     
