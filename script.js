@@ -10,6 +10,8 @@ function main() {
   let x, y, lastX, lastY;
   lastX = 0.0;
   lastY = 0.0;
+  let bsvg = document.getElementById("blackPattern");
+  
   const canvas = document.querySelector('#c');
   const renderer = new THREE.WebGLRenderer({canvas});
   renderer.autoClearColor = false;
@@ -172,7 +174,9 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
   function handleMotionEvent(event) {
 //     x = Math.abs(event.accelerationIncludingGravity.x * 0.1);
       x = event.accelerationIncludingGravity.x * 0.1;
-    // console.log(x);
+      xwhite = x* 100;
+      xblack = -xwhite;
+//     console.log(xwhite);
 //     y = Math.abs(event.accelerationIncludingGravity.y * .05 +.2);
     
 //     xval.innerText = x;
@@ -182,6 +186,8 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     lastX = x;
     xval.innerText = x;
     TweenMax.to(material.uniforms.tweak_c, 1, { value: x });
+    TweenMax.to("#blackPattern", 1, { x:xblack });
+    TweenMax.to("#whitePattern", 1, { x:xwhite });
     }
 //     console.log(x,y);
 //     if (Math.abs(lastY-y) >= 0.01) {
