@@ -195,7 +195,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     if (Math.abs(lastX-x) >= 0.05) {
     lastX = x;
     xval.innerText = xwhite;
-    TweenMax.to(material.uniforms.tweak_c, 1, { value: x });
+    TweenMax.to(material.uniforms.tweak_c, 1.5, { value: x });
     TweenMax.to("#blackPattern", 1.5, { x:xblack });
     TweenMax.to("#whitePattern", 1.5, { x:xwhite });
     TweenMax.to("#bripplSVG", 2.25, {'fill-opacity':1.5*x });
