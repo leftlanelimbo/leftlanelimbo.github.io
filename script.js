@@ -176,6 +176,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
       x = event.accelerationIncludingGravity.x * 0.1;
       xwhite = x* 100;
       xblack = -xwhite + 142;
+      xskew = x*10;
 //     console.log(xwhite);
 //     y = Math.abs(event.accelerationIncludingGravity.y * .05 +.2);
     
@@ -188,7 +189,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     TweenMax.to(material.uniforms.tweak_c, 1, { value: x });
     TweenMax.to("#blackPattern", 1, { x:xblack });
     TweenMax.to("#whitePattern", 1, { x:xwhite });
-    TweenMax.to("#ripplSVG", 1, { skewX:xwhite });
+    TweenMax.to("#ripplSVG", 1, { skewX:xskew });
     }
 //     console.log(x,y);
 //     if (Math.abs(lastY-y) >= 0.01) {
