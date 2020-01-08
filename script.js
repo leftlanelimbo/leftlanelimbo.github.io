@@ -114,9 +114,10 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     color = mix(color, 0.8*tweak_color, dot(r,r));//-
 //     color = mix(color, vec3(0.5,0.9,0.5), dot(r,r));
     
-//     vec3 tmp = -1.0*tweak_color * dot(s,s);
+//     vec3 tmp = -1.0*tweak_color * dot(s,s);//-
 //     vec3 tmp = vec3(0.9,0.2,0.9) * dot(s,s);//-
-    vec3 tmp = vec3(0.6,0.3,0.6) * dot(s,s);//-
+//     vec3 tmp = vec3(0.6,0.3,0.6) * dot(s,s);
+    vec3 tmp = tweak_pColor * dot(s,s);
     
     tmp = tmp*tmp;
     color += tmp;
@@ -203,7 +204,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     TweenMax.to("#blackPattern", .5, { x:xblack });
     TweenMax.to("#whitePattern", .5, { x:xwhite });
     TweenMax.to("#bripplSVG", 2.25, {'fill-opacity':1.5*x });
-    TweenMax.to("#wripplSVG", 2.25, {'fill-opacity':-x*.5 });
+    TweenMax.to("#wripplSVG", 2.25, {'fill-opacity':-x });
 //     TweenMax.to("#wripplSVG", .25, { skewX:xskew });
 //     TweenMax.to("#bripplSVG", .25, { skewX:xskew });
     }
