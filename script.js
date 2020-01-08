@@ -182,13 +182,14 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
   function handleMotionEvent(event) {
 //     x = Math.abs(event.accelerationIncludingGravity.x * 0.1);
-      x = event.accelerationIncludingGravity.x * 0.1;
-      xwhite = x* 100;
-      xblack = -xwhite;
-      xskew = x*10;
+    x = event.accelerationIncludingGravity.x * 0.1;
+      
+    xwhite = x* 100;
+    xblack = -xwhite;
+    xskew = x*10;
 //     console.log(xwhite);
 //     y = Math.abs(event.accelerationIncludingGravity.y * .05 +.2);
-    
+    y = event.accelerationIncludingGravity.y * .01;
 //     xval.innerText = x;
 //     TweenMax.to(material.uniforms.tweak_c, 1, { value: x });
     
