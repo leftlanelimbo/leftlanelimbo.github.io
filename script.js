@@ -190,8 +190,12 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
   requestAnimationFrame(render);
   
-  TweenMax.to(material.uniforms.tweak_p, 95, {ease: Expo.easeInOut, value: .6 });
-  TweenMax.to(material.uniforms.tweak_k, 95, {ease: Expo.easeInOut, value: 0.0 });
+  function startAnimation() {
+//     gsap.to(material.uniforms.tweak_p,{duration:93,ease: "circ.inOut", value: .5});
+    gsap.to(material.uniforms.tweak_p,{duration:93,ease: "slow(0.1, 1, false)", value: .4});
+    gsap.to(material.uniforms.tweak_k,{duration:93, ease: "expo.in", value: 0.0});
+
+  }
 
   function handleMotionEvent(event) {
 //     x = Math.abs(event.accelerationIncludingGravity.x * 0.1);
@@ -209,11 +213,11 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     if (Math.abs(lastX-x) >= 0.05) {
     lastX = x;
 //     xval.innerText = xwhite;
-    TweenMax.to(material.uniforms.tweak_c, 1.5, { value: x });
-    TweenMax.to("#blackPattern", .5, { x:xblack });
-    TweenMax.to("#whitePattern", .5, { x:xwhite });
-    TweenMax.to("#bripplSVG", 2.25, {'fill-opacity':1.5*x });
-    TweenMax.to("#wripplSVG", 2.25, {'fill-opacity':-x });
+    gsap.to(material.uniforms.tweak_c, {duration:1.5, value: x });
+    gsap.to("#blackPattern",{ duration:.5, x:xblack });
+    gsap.to("#whitePattern",{ duration:.5, x:xwhite });
+    gsap.to("#bripplSVG",{duration:2.25, 'fill-opacity':1.5*x });
+    gsap.to("#wripplSVG",{duration:2.25, 'fill-opacity':-x });
 //     TweenMax.to("#wripplSVG", .25, { skewX:xskew });
 //     TweenMax.to("#bripplSVG", .25, { skewX:xskew });
     }
@@ -245,6 +249,7 @@ function loaded() {
     document.getElementById("startButton").style.color = '#000000';
     document.getElementById("startButton").addEventListener("click", onClick);
     document.getElementById("startButton").addEventListener("click", removeOverlay);
+    document.getElementById("startButton").addEventListener("click", startAnimation);
 }
 
 function removeOverlay() {
