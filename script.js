@@ -5,8 +5,8 @@ function main() {
 //     }, 50000); 
 //   overlay.style.opacity = 0;
 //   overlay.remove();
-  let xval = document.getElementById("xval");
-  let yval = document.getElementById("yval");
+//   let xval = document.getElementById("xval");
+//   let yval = document.getElementById("yval");
   let x, y, lastX, lastY;
   lastX = 0.0;
   lastY = 0.0;
@@ -199,7 +199,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     
     if (Math.abs(lastX-x) >= 0.05) {
     lastX = x;
-    xval.innerText = xwhite;
+//     xval.innerText = xwhite;
     TweenMax.to(material.uniforms.tweak_c, 1.5, { value: x });
     TweenMax.to("#blackPattern", .5, { x:xblack });
     TweenMax.to("#whitePattern", .5, { x:xwhite });
@@ -211,7 +211,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 //     console.log(x,y);
     if (Math.abs(lastY-y) >= 0.05) {
     lastY = y;
-    yval.innerText = y;
+//     yval.innerText = y;
     TweenMax.to(material.uniforms.tweak_p, 1, { value: y });
     }
     
