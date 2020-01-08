@@ -204,11 +204,11 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 //     TweenMax.to("#bripplSVG", .25, { skewX:xskew });
     }
 //     console.log(x,y);
-//     if (Math.abs(lastY-y) >= 0.01) {
-//     lastY = y;
-//     yval.innerText = y;
+    if (Math.abs(lastY-y) >= 0.05) {
+    lastY = y;
+    yval.innerText = y;
 //     TweenMax.to(material.uniforms.tweak_p, 1, { value: y });
-//     }
+    }
     
     // let z = Math.abs(event.accelerationIncludingGravity.z *.09);
     // let z = event.accelerationIncludingGravity.z.toFixed(2);
