@@ -62,7 +62,7 @@ vec3 hue2rgb(float hue){
 }
 
 float perlin(vec2 p, int res){
-    float persistance = tweak_p; //og .4
+    float persistance = .4; //og .4 (good for y might need to scale some tho)
     float n = .3; //.9 makes it mostly dark minus highlight (og.4)(last .1)(not good for y)
     float normK = 0.;
     float f = 5.; //<< from flat to form 5 is solid target idk what difference between this and persistance is 
@@ -127,7 +127,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 //     color = mix(color, -1.0*tweak_color, f);//-
     color = mix(color, vec3(0.9, 0.6, 0.4), f);
     
-    color *= (0.5/0.8); //(og 1.0/0.8)
+    color *= (tweak_p/0.8); //(og 1.0/0.8) (last o.5)
     
     //color = mix(vec3(0.6, 0.4, 0.2), vec3(0.1, 0.1, 0.3), f);
     //color = mix(vec3(0.6, 0.4, 0.2), vec3(0.1, 0.1, 0.3), dot(q,q));
