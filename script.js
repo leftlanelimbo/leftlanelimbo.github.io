@@ -117,7 +117,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 //     vec3 tmp = -1.0*tweak_color * dot(s,s);//-
 //     vec3 tmp = vec3(0.9,0.2,0.9) * dot(s,s);//-
 //     vec3 tmp = vec3(0.6,0.3,0.6) * dot(s,s);
-    vec3 tmp = 0.8*tweak_pColor * dot(s,s);
+    vec3 tmp = 0.6*tweak_pColor * dot(s,s); //i like 0.5
     
     tmp = tmp*tmp;
     color += tmp;
