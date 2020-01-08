@@ -62,8 +62,8 @@ vec3 hue2rgb(float hue){
 }
 
 float perlin(vec2 p, int res){
-    float persistance = .4; //og .4
-    float n = tweak_p; //.9 makes it mostly dark minus highlight (og.4)(last .1)
+    float persistance = tweak_p; //og .4
+    float n = .3; //.9 makes it mostly dark minus highlight (og.4)(last .1)(not good for y)
     float normK = 0.;
     float f = 5.; //<< from flat to form 5 is solid target idk what difference between this and persistance is 
     float amp = 1.;
