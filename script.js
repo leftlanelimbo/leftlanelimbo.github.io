@@ -34,6 +34,7 @@ function main() {
   uniform float iTime;
   uniform float tweak_c;
   uniform float tweak_p;
+  uniform float tweak_k;
 
 float noise(vec2 p, float freq ){
     //float unit = iResolution.x/freq;
@@ -63,10 +64,11 @@ vec3 hue2rgb(float hue){
 
 float perlin(vec2 p, int res){
 //     float persistance = 0.4*tweak_p+.2; //og .4 (good for y might need to scale some tho)
-    float persistance = .4; //og .4 (good for y might need to scale some tho)
+    float persistance = .35; //og .4 (good for y might need to scale some tho)
     float n = .2; //.9 makes it mostly dark minus highlight (og.4)(last .1)(not good for y)
 //     float normK = 0.;
-    float normK = -1.1;
+//     float normK = -1.1;
+    float normK = tweak_k;
     float f = 5.; //<< from flat to form 5 is solid target idk what difference between this and persistance is 
     float amp = 1.;
     int iCount = 0;
@@ -95,8 +97,8 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     float f = perlin(p+q, res);
     fragColor.rgb = vec3(f, f, f);
 #else
-//     float t = iTime * 0.02; //(og 0.2)(target.5)
-    float t = iTime * 0.2*tweak_p; //(og 0.2)(target.5)
+//     float t = iTime * 0.005; //(og 0.2)(target.5)
+    float t = iTime * tweak_p; //(og 0.2)(target.5)
     vec2 p = fragCoord.xy;
     vec2 q = vec2(
         perlin(p, res),
@@ -152,7 +154,8 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     iTime: { value: 0 },
     iResolution:  { value: new THREE.Vector3() },
     tweak_c: { type: "f", value: 0.1},
-    tweak_p: { type: "f", value: 0.5}
+    tweak_p: { type: "f", value: 0.0},
+    tweak_k: { type: "f", value: -1.1}
   };
   const material = new THREE.ShaderMaterial({
     fragmentShader,
@@ -186,6 +189,9 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
   }
 
   requestAnimationFrame(render);
+  
+  TweenMax.to(material.uniforms.tweak_p, 95, {ease: Expo.easeInOut, value: .6 });
+  TweenMax.to(material.uniforms.tweak_k, 95, {ease: Expo.easeInOut, value: 0.0 });
 
   function handleMotionEvent(event) {
 //     x = Math.abs(event.accelerationIncludingGravity.x * 0.1);
@@ -212,11 +218,11 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 //     TweenMax.to("#bripplSVG", .25, { skewX:xskew });
     }
 //     console.log(x,y);
-    if (Math.abs(lastY-y) >= 0.05) {
-    lastY = y;
+//     if (Math.abs(lastY-y) >= 0.05) {
+//     lastY = y;
 //     yval.innerText = y;
-    TweenMax.to(material.uniforms.tweak_p, 1, { value: y });
-    }
+//     TweenMax.to(material.uniforms.tweak_p, 1, { value: y });
+//     }
     
     // let z = Math.abs(event.accelerationIncludingGravity.z *.09);
     // let z = event.accelerationIncludingGravity.z.toFixed(2);
