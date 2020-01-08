@@ -62,8 +62,8 @@ vec3 hue2rgb(float hue){
 }
 
 float perlin(vec2 p, int res){
-    float persistance = 0.4*tweak_p+.2; //og .4 (good for y might need to scale some tho)
-//     float persistance = .1; //og .4 (good for y might need to scale some tho)
+//     float persistance = 0.4*tweak_p+.2; //og .4 (good for y might need to scale some tho)
+    float persistance = .4; //og .4 (good for y might need to scale some tho)
     float n = .2; //.9 makes it mostly dark minus highlight (og.4)(last .1)(not good for y)
 //     float normK = 0.;
     float normK = -1.1;
@@ -95,7 +95,8 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     float f = perlin(p+q, res);
     fragColor.rgb = vec3(f, f, f);
 #else
-    float t = iTime * 0.02; //(og 0.2)(target.5)
+//     float t = iTime * 0.02; //(og 0.2)(target.5)
+    float t = iTime * 0.2*tweak_p; //(og 0.2)(target.5)
     vec2 p = fragCoord.xy;
     vec2 q = vec2(
         perlin(p, res),
