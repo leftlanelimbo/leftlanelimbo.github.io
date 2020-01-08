@@ -126,7 +126,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     
 //     color = mix(color, -1.0*tweak_color, f);//-
 //     color = mix(color, vec3(0.9, 0.6, 0.4), f);
-    color = mix(color, -1.0*tweak_pColor, f);
+    color = mix(color, -.25*tweak_pColor, f);
     
     color *= (0.5/0.8); //(og 1.0/0.8) (last o.5)
     
