@@ -122,8 +122,8 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     color += tmp;
     
 //     color += tweak_color * dot(q,q);//-
-//     color += vec3(0.2,0.3,0.7) * dot(q,q);
-    color += -0.80*tweak_pColor * dot(q,q);
+    color += vec3(0.2,0.3,0.7) * dot(q,q);
+//     color += -0.80*tweak_pColor * dot(q,q); // using yval
     
 //     color = mix(color, -1.0*tweak_color, f);//-
     color = mix(color, vec3(0.9, 0.6, 0.4), f);
