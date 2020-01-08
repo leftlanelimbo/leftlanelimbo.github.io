@@ -63,7 +63,7 @@ vec3 hue2rgb(float hue){
 
 float perlin(vec2 p, int res){
     float persistance = .4; //og .4
-    float n = .1; //.9 makes it mostly dark minus highlight (og.4)
+    float n = tweak_p; //.9 makes it mostly dark minus highlight (og.4)(last .1)
     float normK = 0.;
     float f = 5.; //<< from flat to form 5 is solid target idk what difference between this and persistance is 
     float amp = 1.;
@@ -93,7 +93,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     float f = perlin(p+q, res);
     fragColor.rgb = vec3(f, f, f);
 #else
-    float t = iTime * tweak_p; //(og 0.2)
+    float t = iTime * 0.2; //(og 0.2)(target.5)
     vec2 p = fragCoord.xy;
     vec2 q = vec2(
         perlin(p, res),
@@ -109,6 +109,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
     vec3 color = vec3(0.0,0.0,0.0);
     vec3 tweak_color = hue2rgb(tweak_c);
+    vec3 tweak_pColor = hue2rgb(tweak_p);
     
     color = mix(color, tweak_color, dot(r,r));//-
 //     color = mix(color, vec3(0.5,0.9,0.5), dot(r,r));
@@ -208,7 +209,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     if (Math.abs(lastY-y) >= 0.05) {
     lastY = y;
     yval.innerText = y;
-//     TweenMax.to(material.uniforms.tweak_p, 1, { value: y });
+    TweenMax.to(material.uniforms.tweak_p, 1, { value: y });
     }
     
     // let z = Math.abs(event.accelerationIncludingGravity.z *.09);
