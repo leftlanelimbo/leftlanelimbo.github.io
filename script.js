@@ -189,7 +189,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     xskew = x*10;
 //     console.log(xwhite);
 //     y = Math.abs(event.accelerationIncludingGravity.y * .05 +.2);
-    y = event.accelerationIncludingGravity.y * .005;
+    y = event.accelerationIncludingGravity.y * 0.1;
 //     xval.innerText = x;
 //     TweenMax.to(material.uniforms.tweak_c, 1, { value: x });
     
