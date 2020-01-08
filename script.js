@@ -111,7 +111,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     vec3 tweak_color = hue2rgb(tweak_c);
     vec3 tweak_pColor = hue2rgb(tweak_p);
     
-    color = mix(color, tweak_color, dot(r,r));//-
+    color = mix(color, 0.5*tweak_color, dot(r,r));//-
 //     color = mix(color, vec3(0.5,0.9,0.5), dot(r,r));
     
 //     vec3 tmp = -1.0*tweak_color * dot(s,s);
