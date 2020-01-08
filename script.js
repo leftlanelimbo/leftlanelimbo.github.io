@@ -7,7 +7,7 @@ function main() {
 //   overlay.remove();
 //   let xval = document.getElementById("xval");
 //   let yval = document.getElementById("yval");
-  let x, y, lastX, lastY;
+  let x, y, lastX, lastY, pan;
   lastX = 0.0;
   lastY = 0.0;
   let bsvg = document.getElementById("blackPattern");
@@ -192,8 +192,8 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
   
   function startAnimation() {
 //     gsap.to(material.uniforms.tweak_p,{duration:93,ease: "circ.inOut", value: .5});
-    gsap.to(material.uniforms.tweak_p,{duration:93,ease: "slow(0.1, 1, false)", value: .4});
-    gsap.to(material.uniforms.tweak_k,{duration:93, ease: "expo.in", value: 0.0});
+    gsap.to(material.uniforms.tweak_p,{duration:96,ease: "slow(0.1, 1, false)", value: .4});
+    gsap.to(material.uniforms.tweak_k,{duration:96, ease: "expo.in", value: 0.0});
 
   }
 
@@ -204,6 +204,9 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     xwhite = x* 100;
     xblack = -xwhite;
     xskew = x*10;
+    
+    pan = -x*2;
+    
 //     console.log(xwhite);
 //     y = Math.abs(event.accelerationIncludingGravity.y * .05 +.2);
     y = event.accelerationIncludingGravity.y * 0.1;
@@ -218,6 +221,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     gsap.to("#whitePattern",{ duration:.5, x:xwhite });
     gsap.to("#bripplSVG",{duration:2.25, 'fill-opacity':1.5*x });
     gsap.to("#wripplSVG",{duration:2.25, 'fill-opacity':-x });
+    gsap.to(stereoPanner,{duration:1, pan : `${pan}`});
 //     TweenMax.to("#wripplSVG", .25, { skewX:xskew });
 //     TweenMax.to("#bripplSVG", .25, { skewX:xskew });
     }
@@ -250,6 +254,7 @@ function loaded() {
     document.getElementById("startButton").addEventListener("click", onClick);
     document.getElementById("startButton").addEventListener("click", removeOverlay);
     document.getElementById("startButton").addEventListener("click", startAnimation);
+    document.getElementById("startButton").addEventListener("click", playMusic);
 }
 
 function removeOverlay() {
@@ -268,6 +273,7 @@ function removeOverlay() {
 
 function onClick() {
     // feature detect
+    Pizzicato.context.resume();
     if (typeof DeviceMotionEvent.requestPermission === 'function') {
       DeviceMotionEvent.requestPermission()
         .then(permissionState => {
@@ -283,7 +289,18 @@ function onClick() {
       console.log('cry to your fruit overlords');
     }
 }
-  
+
+var stereoPanner = new Pizzicato.Effects.StereoPanner({
+    pan: 0.0
+});
+function playMusic(){
+    Pizzicato.context.resume();
+    var acousticGuitar = new Pizzicato.Sound('irene.mp3', function () {
+    // Sound loaded!
+    acousticGuitar.addEffect(stereoPanner);
+    acousticGuitar.play();
+});
+}
 window.addEventListener('load', loaded);
 
     
