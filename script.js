@@ -192,8 +192,8 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
   
   function startAnimation() {
 //     gsap.to(material.uniforms.tweak_p,{duration:93,ease: "circ.inOut", value: .5});
-    gsap.to(material.uniforms.tweak_p,{duration:96,ease: "slow(0.1, 1, false)", value: .4});
-    gsap.to(material.uniforms.tweak_k,{duration:96, ease: "expo.in", value: 0.0});
+    gsap.to(material.uniforms.tweak_p,{duration:94.3,ease: "slow(0.1, 1, false)", value: .4});
+    gsap.to(material.uniforms.tweak_k,{duration:94.3, ease: "expo.in", value: 0.0});
 
   }
 
