@@ -196,7 +196,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 //     gsap.to(material.uniforms.tweak_p,{duration:94.3,ease: "slow(0.1, 1, false)", value: .4});
 //     gsap.to(material.uniforms.tweak_k,{duration:94.3, ease: "expo.in", value: 0.0});
 
-    TweenMax.to(material.uniforms.tweak_p,94.3,{ease: SlowMo.ease.config(0.1, 1, false), value: .4});
+    TweenMax.to(material.uniforms.tweak_p,94.3,{ease: SlowMo.ease.config(0.1, .7, false), value: .4});
     TweenMax.to(material.uniforms.tweak_k,94.3,{ease: Expo.easeIn, value: 0.0});
 
   }
