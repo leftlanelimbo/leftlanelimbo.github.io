@@ -68,7 +68,7 @@ float perlin(vec2 p, int res){
     float n = .2; //.9 makes it mostly dark minus highlight (og.4)(last .1)(not good for y)
 //     float normK = 0.;
 //     float normK = -1.1;
-    float normK = tweak_k;
+    float normK = tweak_k; //starting at -1 makes it super dark
     float f = 5.; //<< from flat to form 5 is solid target idk what difference between this and persistance is 
     float amp = 1.;
     int iCount = 0;
@@ -154,8 +154,10 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     iTime: { value: 0 },
     iResolution:  { value: new THREE.Vector3() },
     tweak_c: { type: "f", value: 0.1},
-    tweak_p: { type: "f", value: 0.0},
-    tweak_k: { type: "f", value: -1.1}
+    tweak_p: { type: "f", value: 0.20},
+    // tweak_p: { type: "f", value: 0.0},
+    tweak_k: { type: "f", value: 1.0}
+    // tweak_k: { type: "f", value: -1.1}
   };
   const material = new THREE.ShaderMaterial({
     fragmentShader,
