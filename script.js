@@ -200,26 +200,55 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
             depthWrite: false,
             // wireframe: guiData.fillShapesWireframe
           });
-        }
-        // var material = new THREE.MeshBasicMaterial({
-        //   color: new THREE.Color(0xffffff),
-        //   // color: path.color,
-        //   // side: THREE.DoubleSide,
-        //   // depthWrite: false
-        // });
 
-        var shapes = path.toShapes(true);
+          var shapes = path.toShapes(true);
 
-        for (var j = 0; j < shapes.length; j++) {
+          for (var j = 0; j < shapes.length; j++) {
 
-          var shape = shapes[j];
-          var geometry = new THREE.ShapeBufferGeometry(shape);
-          var mesh = new THREE.Mesh(geometry, material);
-          group.add(mesh);
+            var shape = shapes[j];
+
+            var geometry = new THREE.ShapeBufferGeometry(shape);
+            var mesh = new THREE.Mesh(geometry, material);
+
+            group.add(mesh);
+
+          }
 
         }
 
-      }
+        var strokeColor = path.userData.style.stroke;
+
+        if (strokeColor !== undefined && strokeColor !== 'none') {
+
+          var material = new THREE.MeshBasicMaterial({
+            color: new THREE.Color().setStyle(strokeColor),
+            opacity: path.userData.style.strokeOpacity,
+            transparent: path.userData.style.strokeOpacity < 1,
+            side: THREE.DoubleSide,
+            depthWrite: false,
+            // wireframe: guiData.strokesWireframe
+          });
+
+          for (var j = 0, jl = path.subPaths.length; j < jl; j++) {
+
+            var subPath = path.subPaths[j];
+
+            var geometry = SVGLoader.pointsToStroke(subPath.getPoints(), path.userData.style);
+
+            if (geometry) {
+
+              var mesh = new THREE.Mesh(geometry, material);
+
+              group.add(mesh);
+
+            }
+
+          }
+
+        }
+
+        }
+
 
       scene.add(group);
 
