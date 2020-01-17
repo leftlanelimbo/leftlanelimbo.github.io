@@ -171,7 +171,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
   // load a SVG resource
   loader.load(
     // resource URL
-    'rippls_black.svg',
+    'rippls_blue.svg',
     // called when the resource is loaded
     function (data) {
 
