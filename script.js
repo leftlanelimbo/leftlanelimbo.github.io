@@ -183,7 +183,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
       var group = new THREE.Group();
       group.scale.multiplyScalar(0.15);
       group.position.x = - 70;
-      group.position.y = 70;
+      group.position.y = 50;
       group.scale.y *= - 1;
 
       for (var i = 0; i < paths.length; i++) {
