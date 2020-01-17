@@ -189,13 +189,24 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
       for (var i = 0; i < paths.length; i++) {
 
         var path = paths[i];
+        var fillColor = path.userData.style.fill;
+        if (fillColor !== undefined && fillColor !== 'none') {
 
-        var material = new THREE.MeshBasicMaterial({
-          color: new THREE.Color(0xffffff),
-          // color: path.color,
-          // side: THREE.DoubleSide,
-          depthWrite: false
-        });
+          var material = new THREE.MeshBasicMaterial({
+            color: new THREE.Color().setStyle(fillColor),
+            opacity: path.userData.style.fillOpacity,
+            transparent: path.userData.style.fillOpacity < 1,
+            side: THREE.DoubleSide,
+            depthWrite: false,
+            // wireframe: guiData.fillShapesWireframe
+          });
+        }
+        // var material = new THREE.MeshBasicMaterial({
+        //   color: new THREE.Color(0xffffff),
+        //   // color: path.color,
+        //   // side: THREE.DoubleSide,
+        //   // depthWrite: false
+        // });
 
         var shapes = path.toShapes(true);
 
