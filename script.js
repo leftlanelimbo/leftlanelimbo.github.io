@@ -196,8 +196,8 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 //     gsap.to(material.uniforms.tweak_p,{duration:94.3,ease: "slow(0.1, 1, false)", value: .4});
 //     gsap.to(material.uniforms.tweak_k,{duration:94.3, ease: "expo.in", value: 0.0});
 
-    TweenMax.to(material.uniforms.tweak_p,94.3,{ease: SlowMo.ease.config(0.1, .7, false), value: .4});
-    TweenMax.to(material.uniforms.tweak_k,94.3,{ease: Expo.easeIn, value: 0.0});
+    // TweenMax.to(material.uniforms.tweak_p,94.3,{ease: SlowMo.ease.config(0.1, .7, false), value: .4});
+    // TweenMax.to(material.uniforms.tweak_k,94.3,{ease: Expo.easeIn, value: 0.0});
 
   }
 
@@ -233,7 +233,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     TweenMax.to("#whitePattern",.5,{x:xwhite });
     TweenMax.to("#bripplSVG",2.25,{'fill-opacity':1.5*x });
     TweenMax.to("#wripplSVG",2.25,{'fill-opacity':-x });
-    TweenMax.to(stereoPanner,1,{ pan : `${pan}`});
+    // TweenMax.to(stereoPanner,1,{ pan : `${pan}`});
     
     
 //     TweenMax.to("#wripplSVG", .25, { skewX:xskew });
@@ -267,8 +267,8 @@ function loaded() {
     document.getElementById("startButton").style.color = '#000000';
     document.getElementById("startButton").addEventListener("click", onClick);
     document.getElementById("startButton").addEventListener("click", removeOverlay);
-    document.getElementById("startButton").addEventListener("click", startAnimation);
-    document.getElementById("startButton").addEventListener("click", playMusic);
+    // document.getElementById("startButton").addEventListener("click", startAnimation);
+    // document.getElementById("startButton").addEventListener("click", playMusic);
 }
 
 function removeOverlay() {
