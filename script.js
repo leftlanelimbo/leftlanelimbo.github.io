@@ -25,6 +25,7 @@ function main() {
      1, // far
   );
   const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0xb0b0b0);
   const plane = new THREE.PlaneBufferGeometry(2, 2);
 
   const fragmentShader = `
