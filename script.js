@@ -192,7 +192,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
         var material = new THREE.MeshBasicMaterial({
           color: path.color,
-          side: THREE.DoubleSide,
+          // side: THREE.DoubleSide,
           depthWrite: false
         });
 
