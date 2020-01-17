@@ -163,7 +163,61 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     fragmentShader,
     uniforms,
   });
-  scene.add(new THREE.Mesh(plane, material));
+  // scene.add(new THREE.Mesh(plane, material));
+
+  //import svg
+  const loader = new THREE.SVGLoader();
+
+  // load a SVG resource
+  loader.load(
+    // resource URL
+    'rippls_black.svg',
+    // called when the resource is loaded
+    function (data) {
+
+      var paths = data.paths;
+      var group = new THREE.Group();
+
+      for (var i = 0; i < paths.length; i++) {
+
+        var path = paths[i];
+
+        var material = new THREE.MeshBasicMaterial({
+          color: path.color,
+          side: THREE.DoubleSide,
+          depthWrite: false
+        });
+
+        var shapes = path.toShapes(true);
+
+        for (var j = 0; j < shapes.length; j++) {
+
+          var shape = shapes[j];
+          var geometry = new THREE.ShapeBufferGeometry(shape);
+          var mesh = new THREE.Mesh(geometry, material);
+          group.add(mesh);
+
+        }
+
+      }
+
+      scene.add(group);
+
+    },
+    // called when loading is in progresses
+    function (xhr) {
+
+      console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+
+    },
+    // called when loading has errors
+    function (error) {
+
+      console.log('An error happened');
+
+    }
+  );
+
 
   function resizeRendererToDisplaySize(renderer) {
     const canvas = renderer.domElement;
