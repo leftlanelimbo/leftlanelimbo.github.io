@@ -26,7 +26,7 @@ function main() {
   // );
   const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 1000);
   camera.position.set(0, 0, 200);
-  
+
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0xb0b0b0);
   const plane = new THREE.PlaneBufferGeometry(2, 2);
@@ -181,7 +181,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
       var paths = data.paths;
       var group = new THREE.Group();
-      group.scale.multiplyScalar(0.25);
+      group.scale.multiplyScalar(0.15);
       group.position.x = - 70;
       group.position.y = 70;
       group.scale.y *= - 1;
