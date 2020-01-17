@@ -16,14 +16,17 @@ function main() {
   const renderer = new THREE.WebGLRenderer({canvas});
   renderer.autoClearColor = false;
 
-  const camera = new THREE.OrthographicCamera(
-    -1, // left
-     1, // right
-     1, // top
-    -1, // bottom
-    -1, // near,
-     1, // far
-  );
+  // const camera = new THREE.OrthographicCamera(
+  //   -1, // left
+  //    1, // right
+  //    1, // top
+  //   -1, // bottom
+  //   -1, // near,
+  //    1, // far
+  // );
+  const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 1000);
+  camera.position.set(0, 0, 200);
+  
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0xb0b0b0);
   const plane = new THREE.PlaneBufferGeometry(2, 2);
@@ -178,6 +181,10 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
       var paths = data.paths;
       var group = new THREE.Group();
+      group.scale.multiplyScalar(0.25);
+      group.position.x = - 70;
+      group.position.y = 70;
+      group.scale.y *= - 1;
 
       for (var i = 0; i < paths.length; i++) {
 
