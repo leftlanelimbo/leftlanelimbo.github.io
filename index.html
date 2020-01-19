@@ -73,6 +73,36 @@
         display:block;
         color: white;
         }
+        #alpha {
+        position: absolute;
+        top: 70px;
+        /* width: 100vw; */
+        /* height: 80vh; */
+        text-align: left;
+        z-index: 150;
+        display:block;
+        color: white;
+        }
+        #beta {
+        position: absolute;
+        top: 90px;
+        /* width: 100vw; */
+        /* height: 80vh; */
+        text-align: left;
+        z-index: 150;
+        display:block;
+        color: white;
+        }
+        #gamma {
+        position: absolute;
+        top: 110px;
+        /* width: 100vw; */
+        /* height: 80vh; */
+        text-align: left;
+        z-index: 150;
+        display:block;
+        color: white;
+        }
         #enter{
         z-index:200;
         }
@@ -91,6 +121,10 @@
     <p id='xval'>xval</p>
     <p id='yval'>yval</p>
     <p id='zval'>zval</p>
+
+    <p id='alpha'>alpha</p>
+    <p id='beta'>beta</p>
+    <p id='gamma'>gamma</p>
     <button id=enter>Click me</button>
 
 
@@ -118,15 +152,25 @@
         function handleMotionEvent(event) {
                     // x = Math.abs(event.accelerationIncludingGravity.x * 0.1);
                 t = event.acceleration
-                x = event.accelerationIncludingGravity.x //* 0.1;
-                y = event.accelerationIncludingGravity.y //* 0.1;
-                z = event.accelerationIncludingGravity.z //* 0.1;
+                x = event.accelerationIncludingGravity.x; //* 0.1;
+                y = event.accelerationIncludingGravity.y; //* 0.1;
+                z = event.accelerationIncludingGravity.z; //* 0.1;
+
+                a = event.rotationRate.alpha; //* 0.1;
+                b = event.rotationRate.beta; //* 0.1;
+                g = event.rotationRate.gamma; //* 0.1;
+
 
                 console.log(t);
                 //     y = Math.abs(event.accelerationIncludingGravity.y * .05 +.2);
                 xval.innerText = `handle motion event xval ${x}`;
                 yval.innerText = `handle motion event yval ${y}`;
                 zval.innerText = `handle motion event zval ${z}`;
+
+                alpha.innerText = `handle motion event alpha ${a}`;
+                beta.innerText = `handle motion event beta ${b}`;
+                gamma.innerText = `handle motion event gamma ${g}`;
+
         }
 
 
