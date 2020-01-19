@@ -125,6 +125,13 @@
     <p id='alpha'>alpha</p>
     <p id='beta'>beta</p>
     <p id='gamma'>gamma</p>
+
+    <p id='Oalpha'>oalpha</p>
+    <p id='Obeta'>obeta</p>
+    <p id='Ogamma'>ogamma</p>
+
+
+
     <button id=enter>Click me</button>
 
 
@@ -163,18 +170,33 @@
 
                 console.log(t);
                 //     y = Math.abs(event.accelerationIncludingGravity.y * .05 +.2);
-                xval.innerText = `handle motion event xval ${x}`;
-                yval.innerText = `handle motion event yval ${y}`;
-                zval.innerText = `handle motion event zval ${z}`;
+                xval.innerText = `handle motion event acceleration xval ${x}`;
+                yval.innerText = `handle motion event acceleration yval ${y}`;
+                zval.innerText = `handle motion event acceleration zval ${z}`;
 
-                alpha.innerText = `handle motion event alpha ${a}`;
-                beta.innerText = `handle motion event beta ${b}`;
-                gamma.innerText = `handle motion event gamma ${g}`;
+                alpha.innerText = `handle motion event rotationRate alpha ${a}`;
+                beta.innerText = `handle motion event rotationRate beta ${b}`;
+                gamma.innerText = `handle motion event rotationRate gamma ${g}`;
+
+        }
+
+        function handleOrientationEvent(event) {
+            oA = event.alpha; //* 0.1;
+            oB = event.beta; //* 0.1;
+            oG = event.gamma; //* 0.1;
+
+
+            
+            //     y = Math.abs(event.accelerationIncludingGravity.y * .05 +.2);
+            Oalpha.innerText = `handle orientation event alpha ${oA}`;
+            Obeta.innerText = `handle orientation event beta ${oB}`;
+            Ogamma.innerText = `handle orientation event gamma ${oG}`;
 
         }
 
 
-        function onClick() {
+        //https://developer.mozilla.org/en-US/docs/Web/API/DeviceMotionEvent
+        function onClickDeviceMotion() {
                 // feature detect
                 if (typeof DeviceMotionEvent.requestPermission === 'function') {
                     DeviceMotionEvent.requestPermission()
@@ -191,8 +213,28 @@
                     console.log(console.error);
                 }
             }
+
+        function onClickDeviceOrientation() {
+            // feature detect
+            if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+                DeviceOrientationEvent.requestPermission()
+                    .then(permissionState => {
+                        if (permissionState === 'granted') {
+                            window.addEventListener('deviceorientation', handleOrientationEvent, true);
+
+                        }
+                    })
+                    .catch(console.error);
+            } else {
+                // handle regular non iOS 13+ devices
+                window.addEventListener('deviceorientation', handleOrientationEvent, true);
+                console.log(console.error);
+            }
+        }
+
         
-        document.getElementById('enter').addEventListener("click",onClick);
+        document.getElementById('enter').addEventListener("click",onClickDeviceMotion);
+        document.getElementById('enter').addEventListener("click",onClickDeviceOrientation);
 
         
     </script>    
