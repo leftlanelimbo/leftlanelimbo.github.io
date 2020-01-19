@@ -3,45 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>zune_todo</title>
+    <title>perspective_tilt</title>
     <style>
-        :root{
-            --focus-today: 7fr 3fr;
-            --focus-notoday: 3fr 7fr;
-        }
         body{
+            background-color: black;
             /* margin: 0; */
             /* overflow: hidden; */
-        }
-        #wrapper {
-            display:grid;
-            grid-template-columns: var(--focus-notoday);
-            /* grid-template-columns: repeat(10, 1fr); */
-            grid-gap: 10px;
-            height: 100vh;
-            transition: 1s;
-        }
-        .item {
-            /* transition: 1s; */
-            font-size:1.5em;
-            padding:10%;
-            opacity: 60%;
-            
-        }
-        #today {
-            background: red;
-            /* grid-column: 1 / 7;
-            grid-row:1; */
-        
-        }
-        #notoday {
-            background: blue;
-            /* grid-column: 7 / -1;
-            grid-row:1; */
-
-        }
-        #today >p{
-            /* color:white; */
         }
         #xval {
         position: absolute;
@@ -134,6 +101,7 @@
         display:block;
         color: white;
         }
+        
         #enter{
         z-index:200;
         }
@@ -141,14 +109,6 @@
     </style>
 </head>
 <body>
-    <div id='wrapper'>
-        <div class='item' id='today'>
-            <p>Aliquip exercitation ad sint ad amet incididunt proident nostrud. Veniam anim aute id sit anim dolore aliquip cillum ullamco. Duis est eu sint adipisicing Lorem irure culpa. Ullamco quis non incididunt cillum. Eu qui commodo quis aute exercitation cillum aliquip Lorem mollit anim. Voluptate enim veniam aliqua aliqua excepteur cupidatat nulla qui consectetur in elit.</p>
-        </div>
-        <div class='item' id='notoday'>
-            <p>Exercitation esse minim cupidatat fugiat. Adipisicing duis laboris culpa magna quis incididunt aliquip esse occaecat ea fugiat. Esse ex anim duis anim officia. Et dolor aliqua reprehenderit laboris consequat.</p>
-        </div>
-    </div>
     <p id='xval'>xval</p>
     <p id='yval'>yval</p>
     <p id='zval'>zval</p>
