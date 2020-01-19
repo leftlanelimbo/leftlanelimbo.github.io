@@ -7,9 +7,27 @@
     <style>
         body{
             background-color: black;
+            perspective: 1000px;
+            perspective-origin: 50% 50%;
             /* margin: 0; */
-            /* overflow: hidden; */
+            overflow: hidden;
         }
+        img{
+            max-width: 100%;
+        }
+        #wrapper{
+        position:absolute;
+        display:block;
+        margin-left:auto;
+        margin-right:auto;
+        transform: rotateY(0deg);
+        top: 10vh; 
+        left: 8vh;
+        width:30%;
+        }
+        /* #wrapper:hover{
+        transform: rotateY(20deg);
+        } */
         #xval {
         position: absolute;
         top: 10px;
@@ -101,10 +119,11 @@
         display:block;
         color: white;
         }
-        
+
         #enter{
-        z-index:200;
+        z-index:150;
         }
+
 
     </style>
 </head>
@@ -121,7 +140,9 @@
     <p id='Obeta'>obeta</p>
     <p id='Ogamma'>ogamma</p>
 
-
+    <div id="wrapper">
+        <img src='https://images.unsplash.com/photo-1579225922986-3f8226580045?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2134&q=80'>
+    </div>
 
     <button id=enter>Click me</button>
 
@@ -157,9 +178,9 @@
         }
 
         function handleOrientationEvent(event) {
-            oA = event.alpha* 0.01;
-            oB = event.beta* 0.01;
-            oG = event.gamma* 0.01;
+            oA = event.alpha;//* 0.01;
+            oB = event.beta;//* 0.01;
+            oG = event.gamma;//* 0.01;
 
 
             
@@ -167,6 +188,8 @@
             Oalpha.innerText = `orientation event alpha ${oA}`;
             Obeta.innerText = `orientation event beta ${oB}`;
             Ogamma.innerText = `orientation event gamma ${oG}`;
+
+            gsap.to('#wrapper',{duration:1, rotateY: `${oG}deg`})
 
         }
 
