@@ -156,7 +156,8 @@
         wrapped = document.getElementById('wrapper');
 
         function merge_vals(){
-            wrapped.style.transform = `rotateY(${x_merge}deg) rotateX(${y_merge-90}deg)`;
+            // wrapped.style.transform = `rotateY(${x_merge}deg) rotateX(${y_merge}deg)`;
+            gsap.to('#wrapper',{duration:.25, transform: `rotateY(${x_merge}deg) rotateX(${y_merge}deg)`})
         }
 
         function handleMotionEvent(event) {
