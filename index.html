@@ -179,8 +179,7 @@
                     // x = Math.abs(event.accelerationIncludingGravity.x * 0.1);
                 t = event.acceleration
                 x = event.accelerationIncludingGravity.x; //* 0.1;
-                // y = event.accelerationIncludingGravity.y; //* 0.1;
-                y = event.acceleration.y; //* 0.1;
+                y = event.accelerationIncludingGravity.y; //* 0.1;
                 z = event.accelerationIncludingGravity.z; //* 0.1;
 
                 a = event.rotationRate.alpha; //* 0.1;
@@ -222,7 +221,7 @@
                 // wrapped.style.width = `${width}%`;
 
                 //size using yval
-                wrapped.style.width = `${sY}%`;
+                wrapped.style.width = `${sY+10}%`;
 
                 // left_position += b*100; 
                 // left_position = parseInt(left_position);
