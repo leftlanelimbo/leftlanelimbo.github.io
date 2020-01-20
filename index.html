@@ -179,7 +179,8 @@
                     // x = Math.abs(event.accelerationIncludingGravity.x * 0.1);
                 t = event.acceleration
                 x = event.accelerationIncludingGravity.x; //* 0.1;
-                y = event.accelerationIncludingGravity.y; //* 0.1;
+                // y = event.accelerationIncludingGravity.y; //* 0.1;
+                y = event.acceleration.y; //* 0.1;
                 z = event.accelerationIncludingGravity.z; //* 0.1;
 
                 a = event.rotationRate.alpha; //* 0.1;
