@@ -157,7 +157,7 @@
         let sY = 0.0;
         let sB = 0.0;
         let smoothing_factor = 0.8;
-        let left_position = 0.0;
+        let left_position = 15.0;
 
         wrapped = document.getElementById('wrapper');
 
@@ -207,7 +207,7 @@
 
                 left_position += sB;
                 // wrapped.style.left = '30vw';
-                left_space = float2int(left_position*0.0125);
+                left_space = float2int(left_position*0.04);
                 
                 wrapped.style.left = `${left_space}vw` 
                 // left_position += b*100; 
