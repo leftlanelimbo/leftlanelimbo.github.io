@@ -156,6 +156,7 @@
         let sX = 0.0;
         let sY = 0.0;
         let smoothing_factor = 0.8;
+        let left_position = 0.0;
 
         wrapped = document.getElementById('wrapper');
 
@@ -196,6 +197,10 @@
                 // merge_vals();
 
                 wrapped.style.transform = `rotateY(${-sX*10}deg) rotateX(${-sY*10-20}deg)`;
+                
+                left_position = parseFloat(wrapped.style.left)
+                left_positoin += b; 
+                wrapped.style.left = toString(left_position)+' px';
                 // wrapped.style.transform = `rotateY(${x*10}deg)`;
         }
         
