@@ -153,6 +153,10 @@
 
     <script>
         let x_merge, y_merge;
+        let sX_last = 0.0;
+        let sY_last = 0.0;
+        let smoothing_factor = 0.2;
+
         wrapped = document.getElementById('wrapper');
 
         function merge_vals(){
@@ -161,6 +165,10 @@
             gsap.to('#wrapper',{duration:.25, rotateY: `${x_merge}deg`})
             gsap.to('#wrapper',{duration:.25, rotateX: `${y_merge}deg`})
         }
+
+        x = 0
+        if x = 0 
+        else
 
         function handleMotionEvent(event) {
                     // x = Math.abs(event.accelerationIncludingGravity.x * 0.1);
@@ -175,18 +183,20 @@
 
                 x_merge = x*10;
 
+                sX = x + smoothing_factor * (sX - x);//,  with 0 <= s <= 1;
+                sY = y + smoothing_factor * (sY - y);
 
                 // console.log(t);
                 //     y = Math.abs(event.accelerationIncludingGravity.y * .05 +.2);
-                xval.innerText = `motion event acceleration xval ${x}`;
-                yval.innerText = `motion event acceleration yval ${y}`;
+                xval.innerText = `motion event acceleration xval ${sX}`;
+                yval.innerText = `motion event acceleration yval ${sY}`;
                 zval.innerText = `motion event acceleration zval ${z}`;
 
                 alpha.innerText = `motion event rotationRate alpha ${a}`;
                 beta.innerText = `motion event rotationRate beta ${b}`;
                 gamma.innerText = `motion event rotationRate gamma ${g}`;
                 
-                merge_vals();
+                // merge_vals();
 
                 // wrapped.style.transform = `rotateY(${x*10}deg) rotateX(${y*10-90}deg)`;
                 // wrapped.style.transform = `rotateY(${x*10}deg)`;
