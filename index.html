@@ -152,6 +152,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.0.4/gsap.min.js"></script>
 
     <script>
+        let x_merge, y_merge;
+        wrapped = document.getElementById('wrapper');
+
+        function merge_vals(){
+            wrapped.style.transform = `rotateY(${x_merge}deg) rotateX(${y_merge}deg)`;
+        }
 
         function handleMotionEvent(event) {
                     // x = Math.abs(event.accelerationIncludingGravity.x * 0.1);
@@ -164,8 +170,10 @@
                 b = event.rotationRate.beta; //* 0.1;
                 g = event.rotationRate.gamma; //* 0.1;
 
+                x_merge = x*10;
 
-                console.log(t);
+
+                // console.log(t);
                 //     y = Math.abs(event.accelerationIncludingGravity.y * .05 +.2);
                 xval.innerText = `motion event acceleration xval ${x}`;
                 yval.innerText = `motion event acceleration yval ${y}`;
@@ -175,17 +183,18 @@
                 beta.innerText = `motion event rotationRate beta ${b}`;
                 gamma.innerText = `motion event rotationRate gamma ${g}`;
                 
+                merge_vals();
 
                 // wrapped.style.transform = `rotateY(${x*10}deg) rotateX(${y*10-90}deg)`;
-                wrapped.style.transform = `rotateY(${x*10}deg)`;
+                // wrapped.style.transform = `rotateY(${x*10}deg)`;
         }
-        wrapped = document.getElementById('wrapper');
+        
         function handleOrientationEvent(event) {
             oA = event.alpha;//* 0.01;
             oB = event.beta;//* 0.01;
             oG = event.gamma;//* 0.01;
 
-
+            y_merge = oB;
             
             //     y = Math.abs(event.accelerationIncludingGravity.y * .05 +.2);
             Oalpha.innerText = `orientation event alpha ${oA}`;
@@ -194,7 +203,8 @@
 
             // gsap.to('#wrapper',{duration:.25, rotateY: `${-oG}deg`})
             // wrapped.style.transform = `rotateY(${-oG}deg) rotateX(${-oB+90}deg)`;
-            wrapped.style.transform = `rotateX(${-oB+90}deg)`;
+
+            // wrapped.style.transform = `rotateX(${-oB+90}deg)`;
             
 
         }
