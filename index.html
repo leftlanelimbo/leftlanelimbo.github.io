@@ -155,6 +155,7 @@
         let x_merge, y_merge;
         let sX = 0.0;
         let sY = 0.0;
+        let sB = 0.0;
         let smoothing_factor = 0.8;
         let left_position = 0.0;
 
@@ -187,6 +188,7 @@
 
                 sX = x + smoothing_factor * (sX - x);//,  with 0 <= s <= 1;
                 sY = y + smoothing_factor * (sY - y);
+                sB = b + smoothing_factor * (sB - b);
 
                 // console.log(t);
                 //     y = Math.abs(event.accelerationIncludingGravity.y * .05 +.2);
@@ -203,7 +205,7 @@
                 wrapped.style.transform = `rotateY(${-sX*10}deg) rotateX(${-sY*10+20}deg)`;
                 
                 // wrapped.style.left = '30vw';
-                left_space = float2int(b*0.25);
+                left_space = float2int(sB*0.25);
                 
                 wrapped.style.left = `${left_space}vw` 
                 // left_position += b*100; 
