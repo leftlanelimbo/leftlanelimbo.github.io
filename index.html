@@ -155,7 +155,7 @@
         let x_merge, y_merge;
         let sX = 0.0;
         let sY = 0.0;
-        let smoothing_factor = 0.8;
+        let smoothing_factor = 0.99;
 
         wrapped = document.getElementById('wrapper');
 
@@ -195,7 +195,7 @@
                 
                 // merge_vals();
 
-                wrapped.style.transform = `rotateY(${sX*10}deg) rotateX(${sY*10}deg)`;
+                wrapped.style.transform = `rotateY(${-sX*10}deg) rotateX(${-sY*10}deg)`;
                 // wrapped.style.transform = `rotateY(${x*10}deg)`;
         }
         
