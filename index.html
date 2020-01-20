@@ -209,11 +209,15 @@
                 // wrapped.style.transform = `rotateY(${-sX*10}deg) rotateX(${-sY*10+20}deg)`;
                 wrapped.style.transform = `rotateY(${sB*0.5}deg) rotateX(${-sA*.5}deg)`;
                 
-
+                //left_position using rotation rate
                 left_position += sB;
                 // wrapped.style.left = '30vw';
                 left_space = float2int(left_position*0.04);                
                 wrapped.style.left = `${left_space}vw`;
+                
+                //left_position using x_val
+                wrapped.style.width = `${sX+10}vw`;
+
 
                 // //size using rotation
                 // width += sA*.05;
