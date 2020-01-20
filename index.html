@@ -192,7 +192,7 @@
                 sY = y + smoothing_factor * (sY - y);
 
                 sB = b + smoothing_factor * (sB - b);
-                sA = a + smoothing_factor * (sA - a);
+                sA = (a + smoothing_factor * (sA - a))*.1;
                 // console.log(t);
                 //     y = Math.abs(event.accelerationIncludingGravity.y * .05 +.2);
                 xval.innerText = `motion event acceleration xval ${sX}`;
