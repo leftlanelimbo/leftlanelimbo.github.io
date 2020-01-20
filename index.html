@@ -167,6 +167,10 @@
             gsap.to('#wrapper',{duration:.25, rotateX: `${y_merge}deg`})
         }
 
+        //https://stackoverflow.com/questions/596467/how-do-i-convert-a-float-number-to-a-whole-number-in-javascript
+        function float2int(value) {
+                return value | 0;
+        }
 
         function handleMotionEvent(event) {
                     // x = Math.abs(event.accelerationIncludingGravity.x * 0.1);
@@ -198,9 +202,13 @@
 
                 wrapped.style.transform = `rotateY(${-sX*10}deg) rotateX(${-sY*10+20}deg)`;
                 
-                left_position = parseFloat(wrapped.style.left)
-                left_positoin += b; 
-                wrapped.style.left = toString(left_position)+' px';
+                // wrapped.style.left = '30vw';
+                left_space = float2int(b*2);
+                
+                wrapped.style.left = `${left_space}vw` 
+                // left_position += b*100; 
+                // left_position = parseInt(left_position);
+                // wrapped.style.left = toString(left_position)+'px';
                 // wrapped.style.transform = `rotateY(${x*10}deg)`;
         }
         
