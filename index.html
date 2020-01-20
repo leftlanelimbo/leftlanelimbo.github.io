@@ -212,13 +212,17 @@
 
                 left_position += sB;
                 // wrapped.style.left = '30vw';
-                left_space = float2int(left_position*0.04);
-                
+                left_space = float2int(left_position*0.04);                
                 wrapped.style.left = `${left_space}vw`;
 
-                width += sA*.05;
-                // full_width = float2int(width);
-                wrapped.style.width = `${width}%`;
+                // //size using rotation
+                // width += sA*.05;
+                // // full_width = float2int(width);
+                // wrapped.style.width = `${width}%`;
+
+                //size using yval
+                wrapped.style.width = `${sY}%`;
+
                 // left_position += b*100; 
                 // left_position = parseInt(left_position);
                 // wrapped.style.left = toString(left_position)+'px';
