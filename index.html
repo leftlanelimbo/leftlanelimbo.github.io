@@ -156,8 +156,10 @@
         let sX = 0.0;
         let sY = 0.0;
         let sB = 20.0; // need to intialize to value you want it to start close to 
+        let sA = 50.0;
         let smoothing_factor = 0.8;
         let left_position = 20.0;
+        let width = 50.0;
 
         wrapped = document.getElementById('wrapper');
 
@@ -188,8 +190,9 @@
 
                 sX = x + smoothing_factor * (sX - x);//,  with 0 <= s <= 1;
                 sY = y + smoothing_factor * (sY - y);
-                sB = b + smoothing_factor * (sB - b);
 
+                sB = b + smoothing_factor * (sB - b);
+                sA = a + smoothing_factor * (sA - a);
                 // console.log(t);
                 //     y = Math.abs(event.accelerationIncludingGravity.y * .05 +.2);
                 xval.innerText = `motion event acceleration xval ${sX}`;
@@ -209,7 +212,11 @@
                 // wrapped.style.left = '30vw';
                 left_space = float2int(left_position*0.04);
                 
-                wrapped.style.left = `${left_space}vw` 
+                wrapped.style.left = `${left_space}vw`;
+
+                width += sA;
+                full_width = float2int(width);
+                wrapped.style.width = `${full_width}%`;
                 // left_position += b*100; 
                 // left_position = parseInt(left_position);
                 // wrapped.style.left = toString(left_position)+'px';
