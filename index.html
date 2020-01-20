@@ -174,7 +174,9 @@
                 alpha.innerText = `motion event rotationRate alpha ${a}`;
                 beta.innerText = `motion event rotationRate beta ${b}`;
                 gamma.innerText = `motion event rotationRate gamma ${g}`;
+                
 
+                wrapped.style.transform = `rotateY(${y*10}deg) rotateX(${x*10}deg)`;
         }
         wrapped = document.getElementById('wrapper');
         function handleOrientationEvent(event) {
@@ -190,8 +192,8 @@
             Ogamma.innerText = `orientation event gamma ${oG}`;
 
             // gsap.to('#wrapper',{duration:.25, rotateY: `${-oG}deg`})
-            wrapped.style.transform = `rotateY(${-oG}deg) rotateX(${-oB+90}deg)`;
-            // wrapped.style.transform = `rotateX(${-oB}deg)`;
+            // wrapped.style.transform = `rotateY(${-oG}deg) rotateX(${-oB+90}deg)`;
+            
 
         }
 
