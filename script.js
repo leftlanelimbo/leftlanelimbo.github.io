@@ -36,7 +36,7 @@ function main() {
       vec2 uv = fragCoord/iResolution.xy;
 
       //self rolled derivative function
-      dssA = (ssA_last-ssA)/500.0;
+      dssA = (ssA_last-ssA)/200.0;
       ssA_last = ssA;
 
       //deviceMotion tweaks
