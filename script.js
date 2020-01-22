@@ -37,7 +37,7 @@ function main() {
       // Time varying pixel color
       // vec3 col = 0.5 + 0.5*cos(iTime+uv.xyx+vec3(0,2,4));
       // vec3 col = 0.5 + 0.5*cos(vec3(ssB*-.02,ssA*.02,0.0)+uv.xyx+vec3(0,2,4)); //no time
-      vec3 col = 0.5 + 0.5*cos(iTime+ssB*0.05+uv.xyx+vec3(1,5,9));
+      vec3 col = 0.5 + 0.5*cos(iTime+abs(ssB*0.02+ssA*0.02)+uv.xyx+vec3(1,5,9));
       
 
       // Output to screen
