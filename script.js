@@ -36,7 +36,9 @@ function main() {
       // uv.y = ssX;
       // Time varying pixel color
       // vec3 col = 0.5 + 0.5*cos(iTime+uv.xyx+vec3(0,2,4));
-      vec3 col = 0.5 + 0.5*cos(vec3(ssB*-.02,ssA*.02,0.0)+uv.xyx+vec3(0,2,4)); //no time
+      // vec3 col = 0.5 + 0.5*cos(vec3(ssB*-.02,ssA*.02,0.0)+uv.xyx+vec3(0,2,4)); //no time
+      vec3 col = 0.5 + 0.5*cos(iTime+ssB*0.2+vec3(ssB*-.02,ssA*.02,0.0)+uv.xyx+vec3(1,5,9));
+      
 
       // Output to screen
       fragColor = vec4(col,1.0);
