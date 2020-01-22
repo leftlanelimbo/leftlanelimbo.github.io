@@ -40,7 +40,7 @@ function main() {
       vec2 uv = fragCoord/iResolution.xy;
 
       //self rolled derivative function
-      dssA = (ssA_last-ssA)/10.0;
+      dssA = (ssA-ssA_last)/10.0;
       ssA_last = ssA;
 
       //self rolled double derivative funciton
@@ -54,8 +54,8 @@ function main() {
       // vec3 col = 0.5 + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time
       // vec3 col = 0.8 + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel
 
-      vec3 col = 0.03*ssA + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel+direct
-      // vec3 col = dssA + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel+derivative?
+      // vec3 col = 0.03*ssA + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel+direct
+      vec3 col = dssA + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel+derivative?
       // vec3 col = ddssA + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel+doublederivative?
       
       
