@@ -36,7 +36,8 @@ function main() {
       // uv.y = ssX;
       // Time varying pixel color
       // vec3 col = 0.5 + 0.5*cos(iTime+uv.xyx+vec3(0,2,4));
-      vec3 col = 0.9 + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time
+      // vec3 col = 0.5 + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time
+      vec3 col = 0.8 + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel
       
       
 
@@ -97,7 +98,7 @@ function main() {
   let sY = 0.0;
   let sB = 0.0; // need to intialize to value you want it to start close to 
   let sA = 0.0;
-  let smoothing_factor = 0.99;
+  let smoothing_factor = 0.9;
 
   function handleMotionEvent(event) {
     // t = event.acceleration;
