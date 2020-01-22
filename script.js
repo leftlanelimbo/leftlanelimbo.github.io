@@ -28,7 +28,7 @@ function main() {
   float ssA_last = 0.0;
   float dssA = 0.0;
 
-  dssA_last = 0.0;
+  float dssA_last = 0.0;
   float ddssA = 0.0;
 
 
