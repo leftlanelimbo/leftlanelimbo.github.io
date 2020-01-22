@@ -45,7 +45,7 @@ function main() {
 
       //self rolled double derivative funciton
       ddssA = (dssA_last-dssA);
-      ddssA_last = ddssA;
+      dssA_last = dssA;
 
       //deviceMotion tweaks
       // uv.y = ssX;
