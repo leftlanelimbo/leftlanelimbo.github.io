@@ -40,7 +40,7 @@ function main() {
       vec2 uv = fragCoord/iResolution.xy;
 
       //self rolled derivative function
-      dssA = (ssA-ssA_last)/10.0;
+      dssA = (ssA-ssA_last)/0.90;
       ssA_last = ssA;
 
       //self rolled double derivative funciton
