@@ -38,7 +38,7 @@ function main() {
       vec2 uv = fragCoord/iResolution.xy;
 
       //self rolled derivative function
-      dssB = (ssB-ssB_last);
+      dssB = ssB-ssB_last;
       ssB_last = ssB;
 
       // //self rolled double derivative funciton
@@ -54,10 +54,19 @@ function main() {
 
       // vec3 col = 0.03*ssA + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel+direct
       // vec3 col = dssA + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel+derivative?
-      // vec3 col = 0.0 + 0.5*cos(vec3(ssA*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel+derivative?
       // vec3 col = ddssA + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel+doublederivative?
-      vec3 col = sign(vec3(dssB));
-      // vec3 col = sign(vec3(dB));
+      // vec3 col = sign(vec3(dssB)); //try to color black or white based on shader derivative calc
+      // vec3 col = sign(vec3(dB)); //color black or white based on passed in derivative calc
+
+      vec3 col = vec3(0.0,0.0,0.0);
+      if(dB >= 1.0){
+        vec3 col = vec3(1.0,0.0,0.0);
+      } else if (dB < 1.0){
+        vec3 col = vec3(0.0,1.0,0.0);
+      }else {
+        vec3 col = vec3(0.0,0.0,0.0);
+      }
+
       
       
 
@@ -147,6 +156,7 @@ function main() {
     //attempt to do derivative outside of shader
     dB = sB - sB_last;
     sB_last = sB;
+    // console.log(dB.toFixed(2));
 
 
     //passing to material uniforms
