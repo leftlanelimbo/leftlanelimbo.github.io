@@ -168,6 +168,8 @@
         let sX = 0.0;
         let sY = 0.0;
         let sB = 0.0; // need to intialize to value you want it to start close to 
+        let sB_last = 0.0
+
         let sA = 50.0;
         let dB = 0.0
         let smoothing_factor = 0.9;
@@ -207,8 +209,10 @@
                 sB = b + smoothing_factor * (sB - b);
                 sA = a + smoothing_factor * (sA - a);
 
-                console.log(sB.toFixed(2),dB.toFixed(2))
-                dB = sB-dB
+                console.log(sB.toFixed(2),sB_last.toFixed(2));
+                dB = sB-sB_last;
+                sB_last = sB;
+                console.log(dB.toFixed(2));
                 
                 
                 xval.innerText = `motion event acceleration xval ${sX.toFixed(2)}`;
