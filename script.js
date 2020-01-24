@@ -56,8 +56,8 @@ function main() {
       // vec3 col = dssA + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel+derivative?
       // vec3 col = 0.0 + 0.5*cos(vec3(ssA*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel+derivative?
       // vec3 col = ddssA + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel+doublederivative?
-      // vec3 col = sign(vec3(dssB));
-      vec3 col = sign(vec3(dB));
+      vec3 col = sign(vec3(dssB));
+      // vec3 col = sign(vec3(dB));
       
       
 
