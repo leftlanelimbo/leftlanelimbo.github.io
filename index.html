@@ -167,7 +167,7 @@
         
         let sX = 0.0;
         let sY = 0.0;
-        let sB = 20.0; // need to intialize to value you want it to start close to 
+        let sB = 0.0; // need to intialize to value you want it to start close to 
         let sA = 50.0;
         let dB = 0.0
         let smoothing_factor = 0.9;
@@ -207,7 +207,8 @@
                 sB = b + smoothing_factor * (sB - b);
                 sA = a + smoothing_factor * (sA - a);
 
-                dB = Math.sign(sB-dB)
+                console.log(sB.toFixed(2),dB.toFixed(2))
+                dB = sB-dB
                 
                 
                 xval.innerText = `motion event acceleration xval ${sX.toFixed(2)}`;
@@ -218,7 +219,8 @@
                 beta.innerText = `rotationRate beta ${sB.toFixed(2)}`;
                 // gamma.innerText = `motion event rotationRate gamma ${g}`;
                 
-                dbeta.innerText = `derivative of beta ${dB}`;
+                
+                dbeta.innerText = `derivative of beta ${Math.sign(dB)}`;
 
                 // merge_vals();
 
