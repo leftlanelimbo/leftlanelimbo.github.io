@@ -25,11 +25,8 @@ function main() {
   uniform float ssA;
   uniform float ssB;
 
-  float ssA_last = 0.0;
-  float dssA = 0.0;
-
-  float dssA_last = 0.0;
-  float ddssA = 0.0;
+  float ssB_last = 0.0;
+  float dssB = 0.0;
 
 
   // By iq: https://www.shadertoy.com/user/iq  
@@ -40,12 +37,12 @@ function main() {
       vec2 uv = fragCoord/iResolution.xy;
 
       //self rolled derivative function
-      dssA = (ssA-ssA_last);
-      ssA_last = ssA;
+      dssB = (ssB-ssB_last);
+      ssB_last = ssB;
 
-      //self rolled double derivative funciton
-      ddssA = (dssA_last-dssA);
-      dssA_last = dssA;
+      // //self rolled double derivative funciton
+      // ddssA = (dssA_last-dssA);
+      // dssA_last = dssA;
 
       //deviceMotion tweaks
       // uv.y = ssX;
@@ -56,8 +53,9 @@ function main() {
 
       // vec3 col = 0.03*ssA + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel+direct
       // vec3 col = dssA + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel+derivative?
-      vec3 col = dssA + 0.5*cos(vec3(ssB*-.03,ssB*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel+derivative?
+      // vec3 col = 0.0 + 0.5*cos(vec3(ssA*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel+derivative?
       // vec3 col = ddssA + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel+doublederivative?
+      vec3 col = sign(vec3(dssB));
       
       
 
