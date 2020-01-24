@@ -24,6 +24,7 @@ function main() {
   uniform float ssY;
   uniform float ssA;
   uniform float ssB;
+  uniform float dB;
 
   float ssB_last = 0.0;
   float dssB = 0.0;
@@ -55,7 +56,8 @@ function main() {
       // vec3 col = dssA + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel+derivative?
       // vec3 col = 0.0 + 0.5*cos(vec3(ssA*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel+derivative?
       // vec3 col = ddssA + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel+doublederivative?
-      vec3 col = sign(vec3(dssB));
+      // vec3 col = sign(vec3(dssB));
+      vec3 col = sign(vec3(dB));
       
       
 
@@ -73,7 +75,8 @@ function main() {
     ssX: { type: "f", value: 0.0 },
     ssY: { type: "f", value: 0.0 },
     ssA: { type: "f", value: 0.0 },
-    ssB: { type: "f", value: 0.0 }
+    ssB: { type: "f", value: 0.0 },
+    dB: { type: "f", value: 0.0 }
   };
   const material = new THREE.ShaderMaterial({
     fragmentShader,
@@ -116,6 +119,10 @@ function main() {
   let sY = 0.0;
   let sB = 0.0; // need to intialize to value you want it to start close to 
   let sA = 0.0;
+  
+  let sB_last = 0.0;
+  let dB = 0.0;
+
   let smoothing_factor = 0.9;
 
   function handleMotionEvent(event) {
@@ -137,11 +144,17 @@ function main() {
     sA = a + smoothing_factor * (sA - a);
     // console.log(sX,sY,sB,sA);
 
+    //attempt to do derivative outside of shader
+    dB = sB - sB_last;
+    sB_last = sB;
+
+
     //passing to material uniforms
     material.uniforms.ssX.value = sX;
     material.uniforms.ssY.value = sY;
     material.uniforms.ssA.value = sA;
     material.uniforms.ssB.value = sB;
+    material.uniforms.dB.value = dB;
   }
 
 
