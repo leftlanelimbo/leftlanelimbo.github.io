@@ -16,8 +16,8 @@ function main() {
   const plane = new THREE.PlaneBufferGeometry(2, 2);
 
   const fragmentShader = `
+  //https://www.shadertoy.com/view/4lsGWj
   #include <common>
-
   uniform vec3 iResolution;
   uniform float iTime;
   uniform sampler2D iChannel0; //need this line to pass in texture from three and label it like shadertoy
@@ -41,7 +41,7 @@ function main() {
     vec2 uv = (fragCoord.xy-.5*iResolution.xy) * 7.2 / iResolution.y;
 
       float r = 0.91;
-      float a = iTime*.02+(abs(ssX)*0.1);
+      float a = iTime*.04+(abs(ssX)*0.1);
       float c = cos(a)*r;
       float s = sin(a)*r;
       for ( int i=0; i<32; i++ )
