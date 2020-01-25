@@ -170,6 +170,20 @@ function main() {
     document.getElementById("startButton").addEventListener("click", removeOverlay);
   }
 
+  function removeOverlay() {
+    var overlay = document.getElementById('overlay');
+    var hide = function () {
+      window.setTimeout(function () {
+        overlay.style.opacity = '0';
+      }, 1.5);
+      window.setTimeout(function () {
+        overlay.remove();
+      }, 450);
+    };
+
+    hide();
+  }
+
   //request device motion and call handlers
   //https://developer.mozilla.org/en-US/docs/Web/API/DeviceMotionEvent
   function onClickDeviceMotion() {
