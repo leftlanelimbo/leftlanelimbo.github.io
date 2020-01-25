@@ -41,7 +41,7 @@ function main() {
     vec2 uv = (fragCoord.xy-.5*iResolution.xy) * 7.2 / iResolution.y;
 
       float r = 0.91;
-      float a = iTime*.02+(ssB*0.01);
+      float a = iTime*.02+(abs(ssX)*0.1);
       float c = cos(a)*r;
       float s = sin(a)*r;
       for ( int i=0; i<32; i++ )
@@ -138,6 +138,7 @@ function main() {
 
 
     sX = x + smoothing_factor * (sX - x);
+    // console.log(sX.toFixed(2));
     sY = y + smoothing_factor * (sY - y);
 
     sB = b + smoothing_factor * (sB - b);
@@ -147,7 +148,7 @@ function main() {
     //attempt to do derivative outside of shader # should probably move the jerk calculation to here
     dB = sB - sB_last;
     sB_last = sB;
-    console.log(dB.toFixed(2));
+    // console.log(dB.toFixed(2));
 
 
     //passing to material uniforms
