@@ -7,10 +7,6 @@ function main() {
 
   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
   const scene = new THREE.Scene();
-  const listener = new THREE.AudioListener();
-  camera.add(listener);
-
-  const audioLoader = new THREE.AudioLoader();
 
   const geometry = new THREE.BoxGeometry(1, 1, 1);
   const material = new THREE.MeshNormalMaterial();
@@ -18,6 +14,11 @@ function main() {
   scene.add(cube);
 
   function playSound(){
+    const listener = new THREE.AudioListener();
+    camera.add(listener);
+
+    const audioLoader = new THREE.AudioLoader();
+
     const sound1 = new THREE.PositionalAudio(listener);
     audioLoader.load('_audio_antenna.mp3', function (buffer) {
 
