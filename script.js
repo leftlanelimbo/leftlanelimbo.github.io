@@ -41,7 +41,7 @@ function main() {
     vec2 uv = (fragCoord.xy-.5*iResolution.xy) * 7.2 / iResolution.y;
 
       float r = 0.91;
-      float a = iTime*.04+(ssX*0.1+1);
+      float a = iTime*.04+(ssX*0.1+1.0);
       float c = cos(a)*r;
       float s = sin(a)*r;
       for ( int i=0; i<32; i++ )
