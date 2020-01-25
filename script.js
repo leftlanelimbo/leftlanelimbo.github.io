@@ -20,6 +20,7 @@ function main() {
 
   uniform vec3 iResolution;
   uniform float iTime;
+  uniform sampler2D iChannel0; //need this line to pass in texture from three and label it like shadertoy
   uniform float ssX;
   uniform float ssY;
   uniform float ssA;
@@ -37,42 +38,36 @@ function main() {
   // license: Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
   void mainImage( out vec4 fragColor, in vec2 fragCoord )
   {
-      // Normalized pixel coordinates (from 0 to 1)
-      vec2 uv = fragCoord/iResolution.xy;
+    vec2 uv = (fragCoord.xy-.5*iResolution.xy) * 7.2 / iResolution.y;
 
-      //self rolled derivative function > no work
-      // dssB = ssB-ssB_last;
-      // ssB_last = ssB;
-
-      //deviceMotion tweaks
-      // uv.y = ssX;
-      // Time varying pixel color
-      // vec3 col = 0.5 + 0.5*cos(iTime+uv.xyx+vec3(0,2,4));
-      // vec3 col = 0.5 + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time
-      vec3 col = 0.8 + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel
-
-      // vec3 col = 0.03*ssA + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel+direct
-      // vec3 col = dssA + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel+derivative?
-      // vec3 col = ddssA + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel+doublederivative?
-      // vec3 col = sign(vec3(dssB)); //try to color black or white based on shader derivative calc
-      // vec3 col = sign(vec3(dB)); //color black or white based on passed in derivative calc
-
-      // should move this jerk calculation to outside of the shader
-      // if(dB >= 2.0){
-      //   col = vec3(1.0,0.0,0.0);
-      // } else if (dB <= -2.0){
-      //   col = vec3(0.0,1.0,0.0);
-      // }     
-      
-
-      // Output to screen
-      fragColor = vec4(col,1.0);
+      float r = 0.91;
+      float a = iTime*.02+(ssB*0.01);
+      float c = cos(a)*r;
+      float s = sin(a)*r;
+      for ( int i=0; i<32; i++ )
+      {
+        uv = abs(uv);
+          uv -= .25;
+          uv = uv*c + s*uv.yx*vec2(1,-1);
+      }
+          
+      fragColor = .75+.5*sin(iTime*1.0+vec4(13,47,93,1)*texture2D(iChannel0, uv*vec2(1,-1)+.5, -1.0 ));
   }
 
   void main() {
     mainImage(gl_FragColor, gl_FragCoord.xy);
   }
   `;
+
+
+  //load texture
+  const loader = new THREE.TextureLoader();
+  const texture = loader.load('texture.jpg');
+  // texture.minFilter = THREE.NearestFilter;
+  // texture.magFilter = THREE.NearestFilter;
+  // texture.wrapS = THREE.RepeatWrapping;
+  // texture.wrapT = THREE.RepeatWrapping;
+
   const uniforms = {
     iTime: { value: 0 },
     iResolution:  { value: new THREE.Vector3() },
@@ -80,7 +75,8 @@ function main() {
     ssY: { type: "f", value: 0.0 },
     ssA: { type: "f", value: 0.0 },
     ssB: { type: "f", value: 0.0 },
-    dB: { type: "f", value: 0.0 }
+    dB: { type: "f", value: 0.0 },
+    iChannel0: { value: texture } //pass texture to shader
   };
   const material = new THREE.ShaderMaterial({
     fragmentShader,
