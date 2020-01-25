@@ -28,6 +28,7 @@ function main() {
 
   float ssB_last = 0.0;
   float dssB = 0.0;
+  vec3 col = vec3(0.0,0.0,0.0);
 
 
   // By iq: https://www.shadertoy.com/user/iq  
@@ -58,14 +59,14 @@ function main() {
       // vec3 col = sign(vec3(dssB)); //try to color black or white based on shader derivative calc
       // vec3 col = sign(vec3(dB)); //color black or white based on passed in derivative calc
 
-      vec3 col = vec3(0.0,0.0,0.0);
+      
       if(dB >= 1.0){
-        vec3 col = vec3(1.0,0.0,0.0);
-      } else if (dB < 1.0){
-        vec3 col = vec3(0.0,1.0,0.0);
-      }else {
-        vec3 col = vec3(0.0,0.0,0.0);
+        col = vec3(1.0,0.0,0.0);
+      } else if (dB <= -1.0){
+        col = vec3(0.0,1.0,0.0);
       }
+
+      // vec3 col = vec3(0.0,1.0,0.0);
 
       
       
@@ -156,7 +157,7 @@ function main() {
     //attempt to do derivative outside of shader
     dB = sB - sB_last;
     sB_last = sB;
-    // console.log(dB.toFixed(2));
+    console.log(dB.toFixed(2));
 
 
     //passing to material uniforms
