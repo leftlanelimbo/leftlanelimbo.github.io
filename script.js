@@ -4,86 +4,30 @@ function main() {
   const renderer = new THREE.WebGLRenderer({canvas});
   renderer.autoClearColor = false;
 
-  const camera = new THREE.OrthographicCamera(
-    -1, // left
-     1, // right
-     1, // top
-    -1, // bottom
-    -1, // near,
-     1, // far
-  );
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
   const scene = new THREE.Scene();
-  const plane = new THREE.PlaneBufferGeometry(2, 2);
+  const listener = new THREE.AudioListener();
+  camera.add(listener);
 
-  const fragmentShader = `
-  //https://www.shadertoy.com/view/4lsGWj
-  #include <common>
-  uniform vec3 iResolution;
-  uniform float iTime;
-  uniform sampler2D iChannel0; //need this line to pass in texture from three and label it like shadertoy
-  uniform float ssX;
-  uniform float ssY;
-  uniform float ssA;
-  uniform float ssB;
-  uniform float dB; //passed in derivative
+  const audioLoader = new THREE.AudioLoader();
 
-  // shader derivative caluclate > no work
-  // float ssB_last = 0.0;
-  // float dssB = 0.0;
-  //should probably move this jerk assignment to outside of shader
-  // vec3 col = vec3(0.0,0.0,1.0);
+  const geometry = new THREE.BoxGeometry(1, 1, 1);
+  const material = new THREE.MeshNormalMaterial();
+  const cube = new THREE.Mesh(geometry, material);
+  scene.add(cube);
 
+  const sound1 = new THREE.PositionalAudio(listener);
+  audioLoader.load('_audio_antenna.mp3', function (buffer) {
 
-  // By iq: https://www.shadertoy.com/user/iq  
-  // license: Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
-  void mainImage( out vec4 fragColor, in vec2 fragCoord )
-  {
-    vec2 uv = (fragCoord.xy-.5*iResolution.xy) * 7.2 / iResolution.y;
+    sound1.setBuffer(buffer);
+    sound1.setRefDistance(20);
+    sound1.play();
 
-      float r = 0.91;
-      float a = iTime*.07+((ssX+2.0)*0.1);
-      float c = cos(a)*r;
-      float s = sin(a)*r;
-      for ( int i=0; i<32; i++ )
-      {
-        uv = abs(uv);
-          uv -= .25;
-          uv = uv*c + s*uv.yx*vec2(1,-1);
-      }
-          
-      fragColor = 0.3+(ssY*0.07)+.5*sin(iTime+vec4(13,47,93,1)*texture2D(iChannel0, uv*vec2(1,-1)+.5, -1.0 ));
-      // fragColor = .6+.5*sin(iTime+(ssY*0.05)+vec4(13,47,93,1)*texture2D(iChannel0, uv*vec2(1,-1)+.5, -1.0 ));
-  }
-
-  void main() {
-    mainImage(gl_FragColor, gl_FragCoord.xy);
-  }
-  `;
-
-
-  //load texture
-  const loader = new THREE.TextureLoader();
-  const texture = loader.load('texture.jpg');
-  // texture.minFilter = THREE.NearestFilter;
-  // texture.magFilter = THREE.NearestFilter;
-  // texture.wrapS = THREE.RepeatWrapping;
-  // texture.wrapT = THREE.RepeatWrapping;
-
-  const uniforms = {
-    iTime: { value: 0 },
-    iResolution:  { value: new THREE.Vector3() },
-    ssX: { type: "f", value: 0.0 },
-    ssY: { type: "f", value: 0.0 },
-    ssA: { type: "f", value: 0.0 },
-    ssB: { type: "f", value: 0.0 },
-    dB: { type: "f", value: 0.0 },
-    iChannel0: { value: texture } //pass texture to shader
-  };
-  const material = new THREE.ShaderMaterial({
-    fragmentShader,
-    uniforms,
   });
-  scene.add(new THREE.Mesh(plane, material));
+  cube.add(sound1);
+
+
+  camera.position.z = 5;
 
   function resizeRendererToDisplaySize(renderer) {
     const canvas = renderer.domElement;
@@ -102,8 +46,12 @@ function main() {
     resizeRendererToDisplaySize(renderer);
 
     const canvas = renderer.domElement;
-    uniforms.iResolution.value.set(canvas.width, canvas.height, 1);
-    uniforms.iTime.value = time;
+    // uniforms.iResolution.value.set(canvas.width, canvas.height, 1);
+    // uniforms.iTime.value = time;
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+    cube.position.x += 0.01;
+
 
     renderer.render(scene, camera);
 
@@ -150,14 +98,10 @@ function main() {
     dB = sB - sB_last;
     sB_last = sB;
     // console.log(dB.toFixed(2));
+    cube.position.x = -sX;
 
 
-    //passing to material uniforms
-    material.uniforms.ssX.value = sX;
-    material.uniforms.ssY.value = sY;
-    material.uniforms.ssA.value = sA;
-    material.uniforms.ssB.value = sB;
-    material.uniforms.dB.value = dB;
+
   }
 
   //on load change colors of overlay, and add eventlisteners for devicemotion callbacks
