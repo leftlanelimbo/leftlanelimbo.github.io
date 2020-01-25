@@ -24,11 +24,13 @@ function main() {
   uniform float ssY;
   uniform float ssA;
   uniform float ssB;
-  uniform float dB;
+  uniform float dB; //passed in derivative
 
-  float ssB_last = 0.0;
-  float dssB = 0.0;
-  vec3 col = vec3(0.0,0.0,1.0);
+  // shader derivative caluclate > no work
+  // float ssB_last = 0.0;
+  // float dssB = 0.0;
+  //should probably move this jerk assignment to outside of shader
+  // vec3 col = vec3(0.0,0.0,1.0);
 
 
   // By iq: https://www.shadertoy.com/user/iq  
@@ -38,20 +40,16 @@ function main() {
       // Normalized pixel coordinates (from 0 to 1)
       vec2 uv = fragCoord/iResolution.xy;
 
-      //self rolled derivative function
-      dssB = ssB-ssB_last;
-      ssB_last = ssB;
-
-      // //self rolled double derivative funciton
-      // ddssA = (dssA_last-dssA);
-      // dssA_last = dssA;
+      //self rolled derivative function > no work
+      // dssB = ssB-ssB_last;
+      // ssB_last = ssB;
 
       //deviceMotion tweaks
       // uv.y = ssX;
       // Time varying pixel color
       // vec3 col = 0.5 + 0.5*cos(iTime+uv.xyx+vec3(0,2,4));
       // vec3 col = 0.5 + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time
-      // vec3 col = 0.8 + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel
+      vec3 col = 0.8 + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel
 
       // vec3 col = 0.03*ssA + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel+direct
       // vec3 col = dssA + 0.5*cos(vec3(ssB*-.03,ssA*.03,0.0)+uv.xyx+vec3(0,2,4)); //no time+pastel+derivative?
@@ -59,16 +57,12 @@ function main() {
       // vec3 col = sign(vec3(dssB)); //try to color black or white based on shader derivative calc
       // vec3 col = sign(vec3(dB)); //color black or white based on passed in derivative calc
 
-      
-      if(dB >= 2.0){
-        col = vec3(1.0,0.0,0.0);
-      } else if (dB <= -2.0){
-        col = vec3(0.0,1.0,0.0);
-      }
-
-      // vec3 col = vec3(0.0,1.0,0.0);
-
-      
+      // should move this jerk calculation to outside of the shader
+      // if(dB >= 2.0){
+      //   col = vec3(1.0,0.0,0.0);
+      // } else if (dB <= -2.0){
+      //   col = vec3(0.0,1.0,0.0);
+      // }     
       
 
       // Output to screen
@@ -154,7 +148,7 @@ function main() {
     sA = a + smoothing_factor * (sA - a);
     // console.log(sX,sY,sB,sA);
 
-    //attempt to do derivative outside of shader
+    //attempt to do derivative outside of shader # should probably move the jerk calculation to here
     dB = sB - sB_last;
     sB_last = sB;
     console.log(dB.toFixed(2));
