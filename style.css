@@ -6,7 +6,7 @@ body {
   height: 100vh;
   display: block;
 }
-/* #overlay {
+#overlay {
   position: absolute;
   z-index: 200;
   top: 0;
@@ -34,13 +34,3 @@ body {
   cursor: pointer;
   transition: 1s;
 }
-#overlay > div > button:hover {
-}
-background: white;
-color: black;
-font-size: 18px;
-#overlay > div > p {
-  color: #777777;
-  font-family: Sans-Serif;
-  font-size: 18px;
-} */

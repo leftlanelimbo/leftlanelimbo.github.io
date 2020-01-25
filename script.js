@@ -41,7 +41,7 @@ function main() {
     vec2 uv = (fragCoord.xy-.5*iResolution.xy) * 7.2 / iResolution.y;
 
       float r = 0.91;
-      float a = iTime*.04+((ssX+2.0)*0.1);
+      float a = iTime*.07+((ssX+2.0)*0.1);
       float c = cos(a)*r;
       float s = sin(a)*r;
       for ( int i=0; i<32; i++ )
@@ -160,6 +160,15 @@ function main() {
     material.uniforms.dB.value = dB;
   }
 
+  //on load change colors of overlay, and add eventlisteners for devicemotion callbacks
+  function loaded() {
+    document.getElementById("startButton").innerText = 'E N T E R';
+    document.getElementById("overlay").style.backgroundColor = '#111111';
+    document.getElementById("startButton").style.background = '#ffffff';
+    document.getElementById("startButton").style.color = '#000000';
+    document.getElementById("startButton").addEventListener("click", onClickDeviceMotion);
+    document.getElementById("startButton").addEventListener("click", removeOverlay);
+  }
 
   //request device motion and call handlers
   //https://developer.mozilla.org/en-US/docs/Web/API/DeviceMotionEvent
@@ -182,7 +191,8 @@ function main() {
   }
 
 
-  document.getElementById('motion').addEventListener("click", onClickDeviceMotion);
+  // document.getElementById('motion').addEventListener("click", onClickDeviceMotion);
+  window.addEventListener('load', loaded);
 
 }
 
