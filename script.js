@@ -2,7 +2,7 @@ function main() {
   //:::::: three scene 
   loaded();
   const canvas = document.querySelector('#c');
-  const renderer = new THREE.WebGLRenderer({canvas});
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true});
   renderer.autoClearColor = false;
 
   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -17,7 +17,7 @@ function main() {
   const cube = new THREE.Mesh(geometry, material);
   scene.add(cube);
 
-  function setAudio(){
+  function playSound(){
     const sound1 = new THREE.PositionalAudio(listener);
     audioLoader.load('_audio_antenna.mp3', function (buffer) {
 
@@ -28,7 +28,23 @@ function main() {
     });
     cube.add(sound1);
 
+    var source = listener.context.createBufferSource();
+    source.connect(listener.context.destination);
+    source.start();
+
+
   }
+  // function playSound() {
+  //   audioLoader.load("clips/theme_80.mp3", function (buffer) {
+  //     sound.setBuffer(buffer);
+  //     sound.setRefDistance(20);
+  //     sound.play();
+  //   });
+
+  //   var source = listener.context.createBufferSource();
+  //   source.connect(listener.context.destination);
+  //   source.start();
+  // }
   // const sound1 = new THREE.PositionalAudio(listener);
   // audioLoader.load('_audio_antenna.mp3', function (buffer) {
 
@@ -125,7 +141,7 @@ function main() {
     document.getElementById("startButton").style.color = '#000000';
     document.getElementById("startButton").addEventListener("click", onClickDeviceMotion);
     document.getElementById("startButton").addEventListener("click", removeOverlay);
-    document.getElementById("startButton").addEventListener("click", setAudio);
+    document.getElementById("startButton").addEventListener("click", playSound);
   }
 
   function removeOverlay() {
