@@ -51,7 +51,7 @@ function main() {
           uv = uv*c + s*uv.yx*vec2(1,-1);
       }
           
-      fragColor = 0.3+(ssY*0.07)+.5*sin(iTime+(ssY*0.05)+vec4(13,47,93,1)*texture2D(iChannel0, uv*vec2(1,-1)+.5, -1.0 ));
+      fragColor = 0.3+(ssY*0.07)+.5*sin(iTime+vec4(13,47,93,1)*texture2D(iChannel0, uv*vec2(1,-1)+.5, -1.0 ));
       // fragColor = .6+.5*sin(iTime+(ssY*0.05)+vec4(13,47,93,1)*texture2D(iChannel0, uv*vec2(1,-1)+.5, -1.0 ));
   }
 
