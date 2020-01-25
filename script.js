@@ -60,9 +60,9 @@ function main() {
       // vec3 col = sign(vec3(dB)); //color black or white based on passed in derivative calc
 
       
-      if(dB >= 1.0){
+      if(dB >= 2.0){
         col = vec3(1.0,0.0,0.0);
-      } else if (dB <= -1.0){
+      } else if (dB <= -2.0){
         col = vec3(0.0,1.0,0.0);
       }
 
