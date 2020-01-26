@@ -13,6 +13,7 @@ function main() {
   const cube = new THREE.Mesh(geometry, material);
   scene.add(cube);
 
+  //load audio callback
   function playSound(){
     // instantiate a listener
     var audioListener = new THREE.AudioListener();
@@ -32,7 +33,7 @@ function main() {
     // load a resource
     loader.load(
       // resource URL
-      'audio_antenna.mp3',
+      'bloom.mp3',
 
       // onLoad callback
       function (audioBuffer) {
