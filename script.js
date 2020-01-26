@@ -54,6 +54,7 @@ function main() {
         oceanAmbientSound.setRefDistance(20);
         // play the audio
         // oceanAmbientSound.play();
+        fullAudioLoad();
       },
       
       // onProgress callback
