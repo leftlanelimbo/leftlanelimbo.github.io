@@ -24,7 +24,7 @@ function main() {
     var oceanAmbientSound = new THREE.Audio(audioListener);
 
     // add the audio object to the scene
-    scene.add(oceanAmbientSound);
+    cube.add(oceanAmbientSound);
 
     // instantiate a loader
     var loader = new THREE.AudioLoader();
