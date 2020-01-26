@@ -4,12 +4,16 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>base_treejs_w_shader_import</title>
+	<title>webAudio</title>
 	<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 	<canvas id="c"></canvas>
+	<audio loop id="music" preload="auto" style="display: none">
+		<source src="_audio_antenna.mp3" type="audio/mpeg">
+	</audio>
+
 	<div id="overlay">
 		<div>
 			<button id="startButton">L O A D I N G</button>

@@ -14,24 +14,32 @@ function main() {
   scene.add(cube);
 
   function playSound(){
-    const listener = new THREE.AudioListener();
+    var listener = new THREE.AudioListener();
     camera.add(listener);
 
-    const audioLoader = new THREE.AudioLoader();
+    // const audioLoader = new THREE.AudioLoader();
+    var audioElement = document.getElementById('music');
+    audioElement.play();
 
-    const sound1 = new THREE.PositionalAudio(listener);
-    audioLoader.load('_audio_antenna.mp3', function (buffer) {
+    var positionalAudio = new THREE.PositionalAudio(listener);
+    positionalAudio.setMediaElementSource(audioElement);
+    positionalAudio.setRefDistance(20);
 
-      sound1.setBuffer(buffer);
-      sound1.setRefDistance(20);
-      sound1.play();
+    cube.add(positionalAudio);
 
-    });
-    cube.add(sound1);
+    // const sound1 = new THREE.PositionalAudio(listener);
+    // audioLoader.load('_audio_antenna.mp3', function (buffer) {
 
-    var source = listener.context.createBufferSource();
-    source.connect(listener.context.destination);
-    source.start();
+    //   sound1.setBuffer(buffer);
+    //   sound1.setRefDistance(20);
+    //   sound1.play();
+
+    // });
+    // cube.add(sound1);
+
+    // var source = listener.context.createBufferSource();
+    // source.connect(listener.context.destination);
+    // source.start();
 
 
   }
