@@ -174,8 +174,8 @@ function main() {
     // console.log(sX.toFixed(2));
     sY = y + smoothing_factor * (sY - y);
 
-    sB = b + smoothing_factor * (sB - b);
     sA = a + smoothing_factor * (sA - a);
+    sB = b + smoothing_factor * (sB - b);
     // console.log(sX,sY,sB,sA);
 
     //attempt to do derivative outside of shader # should probably move the jerk calculation to here
@@ -184,6 +184,9 @@ function main() {
     // console.log(dB.toFixed(2));
     cube.position.x += (-sX*.2);
     cube2.position.x -= (-sX*.2);
+
+    cube.position.y += (sA*.02);
+    cube2.position.y -= (sA*.02);
 
 
 
