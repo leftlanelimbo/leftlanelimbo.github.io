@@ -19,22 +19,18 @@ function main() {
   cube2.position.x = -4;
   cube2.position.z = -20;
   scene.add(cube2);
-  var audioListener = new THREE.AudioListener();
-  camera.add(audioListener);
-  var oceanAmbientSound = new THREE.PositionalAudio(audioListener);
-  var oceanAmbientSound2 = new THREE.PositionalAudio(audioListener);
 
   //load audio callback
   function playSound(){
     // instantiate a listener
-    // var audioListener = new THREE.AudioListener();
+    var audioListener = new THREE.AudioListener();
 
     // add the listener to the camera
-    // camera.add(audioListener);
+    camera.add(audioListener);
 
     //cube 1
     // instantiate audio object
-    // var oceanAmbientSound = new THREE.PositionalAudio(audioListener);
+    var oceanAmbientSound = new THREE.PositionalAudio(audioListener);
 
     // add the audio object to the scene
     cube.add(oceanAmbientSound);
@@ -51,10 +47,10 @@ function main() {
       function (audioBuffer) {
         // set the audio object buffer to the loaded object
         oceanAmbientSound.setBuffer(audioBuffer);
-        oceanAmbientSound.setRefDistance(20);
+        oceanAmbientSound.setRefDistance(25);
         // play the audio
         // oceanAmbientSound.play();
-        fullAudioLoad();
+        
       },
       
       // onProgress callback
@@ -70,16 +66,16 @@ function main() {
 
     //cube 2
     // instantiate audio object
-    // var oceanAmbientSound2 = new THREE.PositionalAudio(audioListener);
+    var oceanAmbientSound2 = new THREE.PositionalAudio(audioListener);
 
     // add the audio object to the scene
     cube2.add(oceanAmbientSound2);
     
     // instantiate a loader
-    var loader = new THREE.AudioLoader();
+    var loader2 = new THREE.AudioLoader();
 
     // load a resource
-    loader.load(
+    loader2.load(
       // resource URL
       'bloomLf.mp3',
 
@@ -87,10 +83,10 @@ function main() {
       function (audioBuffer) {
         // set the audio object buffer to the loaded object
         oceanAmbientSound2.setBuffer(audioBuffer);
-        oceanAmbientSound2.setRefDistance(20);
+        oceanAmbientSound2.setRefDistance(25);
         // play the audio
         // oceanAmbientSound2.play();
-        fullAudioLoad();
+        playAll();
       },
       
       // onProgress callback
@@ -103,15 +99,13 @@ function main() {
         console.log('An error happened');
       }
       );
-      // oceanAmbientSound.play();
-      // oceanAmbientSound2.play();
+
+      function playAll(){
+        oceanAmbientSound.play();
+        oceanAmbientSound2.play();
+
+      }
       
-  }
-
-  function fullAudioLoad(){
-    oceanAmbientSound.play();
-    oceanAmbientSound2.play();
-
   }
 
 
@@ -156,7 +150,6 @@ function main() {
   //initialize smoothing variables
   let sX = 0.0;
   let sY = 0.0;
-  let sZ = 0.0;
   let sB = 0.0; // need to intialize to value you want it to start close to 
   let sA = 0.0;
   
@@ -170,7 +163,7 @@ function main() {
     // console.log(t);
     x = event.accelerationIncludingGravity.x; //left-right tilt (0@ table plane)
     y = event.accelerationIncludingGravity.y; //front-back tilt (0@ table plane)
-    z = event.accelerationIncludingGravity.z; //compliement to y (0 @ wall plane)
+    // z = event.accelerationIncludingGravity.z; //compliement to y (0 @ wall plane)
 
     a = event.rotationRate.alpha; //front-back accel (on table plane)
     b = event.rotationRate.beta; //left-right accel (on table plane)
@@ -180,8 +173,6 @@ function main() {
     sX = x + smoothing_factor * (sX - x);
     // console.log(sX.toFixed(2));
     sY = y + smoothing_factor * (sY - y);
-    sZ = z + smoothing_factor * (sZ - z);
-    // console.log(sY.toFixed(2));
 
     sB = b + smoothing_factor * (sB - b);
     sA = a + smoothing_factor * (sA - a);
@@ -193,9 +184,6 @@ function main() {
     // console.log(dB.toFixed(2));
     cube.position.x += (-sX*.2);
     cube2.position.x -= (-sX*.2);
-
-    // cube.position.x += (-sZ*.2);
-    // cube2.position.x -= (-sZ*.2);
 
 
 
