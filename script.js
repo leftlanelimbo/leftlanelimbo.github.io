@@ -50,9 +50,9 @@ function main() {
 
     var listener = new THREE.AudioListener();
     camera.add(listener);
-    
+
     const sound = new THREE.PositionalAudio(listener);
-    audioLoader.load("_audio_antenna.mp3", function (buffer) {
+    audioLoader.load("audio_antenna.mp3", function (buffer) {
       sound.setBuffer(buffer);
       sound.setRefDistance(20);
       sound.play();
