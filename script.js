@@ -38,7 +38,7 @@ function main() {
       function (audioBuffer) {
         // set the audio object buffer to the loaded object
         oceanAmbientSound.setBuffer(audioBuffer);
-
+        oceanAmbientSound.setRefDistance(20);
         // play the audio
         oceanAmbientSound.play();
       },
