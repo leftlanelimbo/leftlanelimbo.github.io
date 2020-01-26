@@ -53,7 +53,7 @@ function main() {
         oceanAmbientSound.setBuffer(audioBuffer);
         oceanAmbientSound.setRefDistance(25);
         // play the audio
-        oceanAmbientSound.play();
+        // oceanAmbientSound.play();
       },
       
       // onProgress callback
@@ -88,8 +88,8 @@ function main() {
         oceanAmbientSound2.setBuffer(audioBuffer);
         oceanAmbientSound2.setRefDistance(25);
         // play the audio
-        oceanAmbientSound2.play();
-        // fullAudioLoad();
+        // oceanAmbientSound2.play();
+        fullAudioLoad();
       },
       
       // onProgress callback
