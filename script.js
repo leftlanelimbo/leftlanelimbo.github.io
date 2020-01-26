@@ -58,10 +58,10 @@ function main() {
       sound.play();
     });
 
-    cube.add(sound);
     var source = listener.context.createBufferSource();
     source.connect(listener.context.destination);
     source.start();
+    cube.add(sound);
   }
   // const sound1 = new THREE.PositionalAudio(listener);
   // audioLoader.load('_audio_antenna.mp3', function (buffer) {
@@ -159,7 +159,7 @@ function main() {
     document.getElementById("startButton").style.color = '#000000';
     document.getElementById("startButton").addEventListener("click", onClickDeviceMotion);
     document.getElementById("startButton").addEventListener("click", removeOverlay);
-    window.addEventListener('touchstart', playSound);
+    // window.addEventListener('touchstart', playSound);
     document.getElementById("startButton").addEventListener("click", playSound);
   }
 
