@@ -21,7 +21,7 @@ function main() {
     camera.add(audioListener);
 
     // instantiate audio object
-    var oceanAmbientSound = new THREE.Audio(audioListener);
+    var oceanAmbientSound = new THREE.PositionalAudio(audioListener);
 
     // add the audio object to the scene
     cube.add(oceanAmbientSound);
