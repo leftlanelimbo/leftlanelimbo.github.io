@@ -19,18 +19,22 @@ function main() {
   cube2.position.x = -4;
   cube2.position.z = -20;
   scene.add(cube2);
+  var audioListener = new THREE.AudioListener();
+  camera.add(audioListener);
+  var oceanAmbientSound = new THREE.PositionalAudio(audioListener);
+  var oceanAmbientSound2 = new THREE.PositionalAudio(audioListener);
 
   //load audio callback
   function playSound(){
     // instantiate a listener
-    var audioListener = new THREE.AudioListener();
+    // var audioListener = new THREE.AudioListener();
 
     // add the listener to the camera
-    camera.add(audioListener);
+    // camera.add(audioListener);
 
     //cube 1
     // instantiate audio object
-    var oceanAmbientSound = new THREE.PositionalAudio(audioListener);
+    // var oceanAmbientSound = new THREE.PositionalAudio(audioListener);
 
     // add the audio object to the scene
     cube.add(oceanAmbientSound);
@@ -65,7 +69,7 @@ function main() {
 
     //cube 2
     // instantiate audio object
-    var oceanAmbientSound2 = new THREE.PositionalAudio(audioListener);
+    // var oceanAmbientSound2 = new THREE.PositionalAudio(audioListener);
 
     // add the audio object to the scene
     cube2.add(oceanAmbientSound2);
@@ -85,6 +89,7 @@ function main() {
         oceanAmbientSound2.setRefDistance(25);
         // play the audio
         oceanAmbientSound2.play();
+        // fullAudioLoad();
       },
       
       // onProgress callback
@@ -100,6 +105,12 @@ function main() {
       // oceanAmbientSound.play();
       // oceanAmbientSound2.play();
       
+  }
+
+  function fullAudioLoad(){
+    oceanAmbientSound.play();
+    oceanAmbientSound2.play();
+
   }
 
 
