@@ -56,66 +56,6 @@ function main() {
     );
   }
 
-  // function playSound(){
-  //   // var context = new AudioContext();
-  //   var listener = new THREE.AudioListener();
-  //   camera.add(listener);
-
-  //   // const audioLoader = new THREE.AudioLoader();
-  //   var audioElement = document.getElementById('music');
-  //   // audioElement.play();
-
-  //   var positionalAudio = new THREE.PositionalAudio(listener);
-  //   positionalAudio.setMediaElementSource(audioElement);
-  //   positionalAudio.setRefDistance(20);
-
-  //   cube.add(positionalAudio);
-  //   listener.context.resume();
-    
-  //   // const sound1 = new THREE.PositionalAudio(listener);
-  //   // audioLoader.load('_audio_antenna.mp3', function (buffer) {
-
-  //   //   sound1.setBuffer(buffer);
-  //   //   sound1.setRefDistance(20);
-  //   //   sound1.play();
-
-  //   // });
-  //   // cube.add(sound1);
-
-  //   // var source = listener.context.createBufferSource();
-  //   // source.connect(listener.context.destination);
-  //   // source.start();
-
-
-  // }
-  // function playSound() {
-  //   var audioLoader = new THREE.AudioLoader();
-
-  //   var listener = new THREE.AudioListener();
-  //   camera.add(listener);
-
-  //   const sound = new THREE.PositionalAudio(listener);
-  //   audioLoader.load("audio_antenna.mp3", function (buffer) {
-  //     sound.setBuffer(buffer);
-  //     sound.setRefDistance(20);
-  //     sound.play();
-  //   });
-
-  //   var source = listener.context.createBufferSource();
-  //   source.connect(listener.context.destination);
-  //   source.start();
-  //   cube.add(sound);
-  // }
-  // const sound1 = new THREE.PositionalAudio(listener);
-  // audioLoader.load('_audio_antenna.mp3', function (buffer) {
-
-  //   sound1.setBuffer(buffer);
-  //   sound1.setRefDistance(20);
-  //   sound1.play();
-
-  // });
-  // cube.add(sound1);
-
 
   camera.position.z = 5;
 
@@ -140,7 +80,7 @@ function main() {
     // uniforms.iTime.value = time;
     cube.rotation.x += 0.01;
     cube.rotation.y += 0.01;
-    cube.position.x += 0.01;
+    // cube.position.x += 0.01;
 
 
     renderer.render(scene, camera);
