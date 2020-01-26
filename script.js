@@ -58,7 +58,7 @@ function main() {
       sound.play();
     });
 
-
+    cube.add(sound);
     var source = listener.context.createBufferSource();
     source.connect(listener.context.destination);
     source.start();
