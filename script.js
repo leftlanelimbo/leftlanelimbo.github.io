@@ -200,8 +200,16 @@ function main() {
     document.getElementById("startButton").style.color = '#000000';
     document.getElementById("startButton").addEventListener("click", onClickDeviceMotion);
     document.getElementById("startButton").addEventListener("click", removeOverlay);
-    // window.addEventListener('touchstart', playSound);
+    document.getElementById("startButton").addEventListener("click", fullscreen);
     document.getElementById("startButton").addEventListener("click", playSound);
+  }
+
+  function fullscreen() {
+    var el = document.getElementById('c');
+
+    if (el.requestFullscreen) {
+      el.requestFullscreen();
+    }
   }
 
   function removeOverlay() {
