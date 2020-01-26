@@ -182,11 +182,11 @@ function main() {
     dB = sB - sB_last;
     sB_last = sB;
     // console.log(dB.toFixed(2));
-    cube.position.x += (-sX*.2);
-    cube2.position.x -= (-sX*.2);
+    cube.position.x += (-sX*.1);
+    cube2.position.x -= (-sX*.1);
 
-    cube.position.y += (sA*.02);
-    cube2.position.y -= (sA*.02);
+    cube.position.y += (sA*.01);
+    cube2.position.y -= (sA*.01);
 
 
 
