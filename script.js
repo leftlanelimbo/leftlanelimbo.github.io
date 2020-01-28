@@ -122,8 +122,8 @@ function main() {
     // console.log(analysers)
     try{
       // console.log(analysers);
-      light.intensity = Math.pow((analysers[0].getAverageFrequency()/2000)+1,60);
-      light2.intensity = Math.pow((analysers[1].getAverageFrequency()/2000)+1,60);
+      light.intensity = Math.pow((analysers[0].getAverageFrequency()/2000)+1,80);
+      light2.intensity = Math.pow((analysers[1].getAverageFrequency()/2000)+1,80);
     }catch(err){
       // console.log('nada');
     }
