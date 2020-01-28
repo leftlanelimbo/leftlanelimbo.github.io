@@ -54,7 +54,7 @@ function main() {
 
     async function loadAndPlay(){
       //parallel promise define
-      let promises = [loadSound('atArmsLengthMLS.mp3', light), loadSound('atArmsLengthMRS.mp3', light2)];
+      let promises = [loadSound('bloomS2MLM.mp3', light), loadSound('bloomS2MRM.mp3', light2)];
       //parallel process load
       Promise.all(promises).then((results)=>{
         for(let i = 0;i<results.length;i++){
@@ -191,7 +191,7 @@ function main() {
     light2.position.x -= (-sB*.01);
 
     light.position.y += (sA*.01);
-    light2.position.y += (sA*.01);
+    light2.position.y -= (sA*.01);
 
 
 
