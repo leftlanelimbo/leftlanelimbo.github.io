@@ -54,7 +54,7 @@ function main() {
 
     async function loadAndPlay(){
       //parallel promise define
-      let promises = [loadSound('atArmsLengthLM.mp3', light), loadSound('atArmsLengthRM.mp3', light2)];
+      let promises = [loadSound('atArmsLengthLJS.mp3', light), loadSound('atArmsLengthRJS.mp3', light2)];
       //parallel process load
       Promise.all(promises).then((results)=>{
         for(let i = 0;i<results.length;i++){
