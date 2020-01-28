@@ -19,12 +19,12 @@ function main() {
 
   // var light = new THREE.PointLight({color:0x00ff00, intensity:0.2, distance:0, decay:1.0});
   var light = new THREE.PointLight(0x000066, 1, 20, 10 );
-  light.position.set(-4, 0, -29);
+  light.position.set(-6, 0, -29);
   light.intensity = 0;
   scene.add(light);
 
-  var light2 = new THREE.PointLight(0x99AAAA, 1, 20, 10);
-  light2.position.set(4, 0, -29);
+  var light2 = new THREE.PointLight(0x226666, 1, 20, 10);
+  light2.position.set(6, 0, -29);
   light2.intensity = 0;
   scene.add(light2);
 
