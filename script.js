@@ -20,14 +20,17 @@ function main() {
   // var light = new THREE.PointLight({color:0x00ff00, intensity:0.2, distance:0, decay:1.0});
   var light = new THREE.PointLight(0xffffff, 1, 20, 10 );
   light.position.set(-4, 0, -29);
+  light.intensity = 0;
   scene.add(light);
 
   var light2 = new THREE.PointLight(0xffffff, 1, 20, 10);
   light2.position.set(4, 0, -29);
-  // light2.intensity = 10;
+  light2.intensity = 0;
   scene.add(light2);
 
-  let pA1, pA2, analyser1, analyser2
+  // let analyser1, analyser2
+  // let analysers = [analyser1, analyser2]
+  let analysers = []
 
   // const geometry = new THREE.BoxGeometry(1, 1, 1);
   // const material = new THREE.MeshNormalMaterial();
@@ -51,11 +54,14 @@ function main() {
 
     async function loadAndPlay(){
       //parallel promise define
-      let promises = [loadSound('pastL.mp3', light, pA1, analyser1), loadSound('bloomRf.mp3', light2, pA2, analyser2)];
+      let promises = [loadSound('shftL.mp3', light), loadSound('shftR.mp3', light2)];
       //parallel process load
       Promise.all(promises).then((results)=>{
         for(let i = 0;i<results.length;i++){
           results[i].play();
+          console.log(analysers)
+          // analysers[i] = new THREE.AudioAnalyser(results[i], 32);
+          
         }
 
       }).catch((err)=>(console.log(err)))
@@ -63,7 +69,7 @@ function main() {
     loadAndPlay();
   
 
-    function loadSound(fileName, objectAttach, ambientSound, analyser){
+    function loadSound(fileName, objectAttach){
       return new Promise((resolve,reject)=>{
         var ambientSound = new THREE.PositionalAudio(audioListener);
         objectAttach.add(ambientSound);
@@ -73,8 +79,9 @@ function main() {
           // onLoad callback
           function (audioBuffer) {
             ambientSound.setBuffer(audioBuffer);
-            ambientSound.setRefDistance(25);
+            ambientSound.setRefDistance(30);
             analyser = new THREE.AudioAnalyser(ambientSound, 32);
+            analysers.push(analyser)
             resolve(ambientSound);
           },
           // onProgress callback
@@ -111,11 +118,14 @@ function main() {
     resizeRendererToDisplaySize(renderer);
 
     const canvas = renderer.domElement;
-    // try{
-    //   console.log(analyser1.getAverageFrequency());
-    // }catch{
-    //   console.log('nada');
-    // }
+    // console.log(analysers)
+    try{
+      // console.log(analysers);
+      light.intensity = Math.pow((analysers[0].getAverageFrequency()/300)+1,40);
+      light2.intensity = Math.pow((analysers[1].getAverageFrequency()/300)+1,40);
+    }catch(err){
+      // console.log('nada');
+    }
     // uniforms.iResolution.value.set(canvas.width, canvas.height, 1);
     // uniforms.iTime.value = time;
     // cube.rotation.x += 0.01;
