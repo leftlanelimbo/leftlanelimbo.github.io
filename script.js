@@ -20,91 +20,51 @@ function main() {
   cube2.position.z = -20;
   scene.add(cube2);
 
+  // instantiate a listener & add to camera
+  var audioListener = new THREE.AudioListener();
+  camera.add(audioListener);
+
+
   //load audio callback
-  function playSound(){
-    // instantiate a listener
-    var audioListener = new THREE.AudioListener();
+  function loadAllSounds(){
 
-    // add the listener to the camera
-    camera.add(audioListener);
+    async function loadAndPlay(){
+      //parallel promise define
+      let promises = [loadSound('pastL.mp3', cube), loadSound('pastR.mp3', cube2)];
+      //parallel process load
+      Promise.all(promises).then((results)=>{
+        for(let i = 0;i<results.length;i++){
+          results[i].play();
+        }
+      }).catch((err)=>(console.log(err)))
+    }
+    loadAndPlay();
+  
 
-    //cube 1
-    // instantiate audio object
-    var oceanAmbientSound = new THREE.PositionalAudio(audioListener);
-
-    // add the audio object to the scene
-    cube.add(oceanAmbientSound);
-
-    // instantiate a loader
-    var loader = new THREE.AudioLoader();
-
-    // load a resource
-    loader.load(
-      // resource URL
-      'bloomRf.mp3',
-
-      // onLoad callback
-      function (audioBuffer) {
-        // set the audio object buffer to the loaded object
-        oceanAmbientSound.setBuffer(audioBuffer);
-        oceanAmbientSound.setRefDistance(25);
-        // play the audio
-        // oceanAmbientSound.play();
-        
-      },
-      
-      // onProgress callback
-      function (xhr) {
-        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-      },
-
-      // onError callback
-      function (err) {
-        console.log('An error happened');
-      }
-    );
-
-    //cube 2
-    // instantiate audio object
-    var oceanAmbientSound2 = new THREE.PositionalAudio(audioListener);
-
-    // add the audio object to the scene
-    cube2.add(oceanAmbientSound2);
-    
-    // instantiate a loader
-    var loader2 = new THREE.AudioLoader();
-
-    // load a resource
-    loader2.load(
-      // resource URL
-      'bloomLf.mp3',
-
-      // onLoad callback
-      function (audioBuffer) {
-        // set the audio object buffer to the loaded object
-        oceanAmbientSound2.setBuffer(audioBuffer);
-        oceanAmbientSound2.setRefDistance(25);
-        // play the audio
-        // oceanAmbientSound2.play();
-        playAll();
-      },
-      
-      // onProgress callback
-      function (xhr) {
-        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-      },
-      
-      // onError callback
-      function (err) {
-        console.log('An error happened');
-      }
-      );
-
-      function playAll(){
-        oceanAmbientSound.play();
-        oceanAmbientSound2.play();
-
-      }
+    function loadSound(fileName, objectAttach){
+      return new Promise((resolve,reject)=>{
+        var oceanAmbientSound2 = new THREE.PositionalAudio(audioListener);
+        objectAttach.add(oceanAmbientSound2);
+        var loader2 = new THREE.AudioLoader();
+        loader2.load(
+          fileName,
+          // onLoad callback
+          function (audioBuffer) {
+            oceanAmbientSound2.setBuffer(audioBuffer);
+            oceanAmbientSound2.setRefDistance(25);
+            resolve(oceanAmbientSound2);
+          },
+          // onProgress callback
+          function (xhr) {
+            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+          },
+          // onError callback
+          function (err) {
+            console.log('An error happened');
+          }
+        );
+      })
+    }
       
   }
 
@@ -203,7 +163,7 @@ function main() {
     document.getElementById("startButton").addEventListener("click", onClickDeviceMotion);
     document.getElementById("startButton").addEventListener("click", removeOverlay);
     document.getElementById("startButton").addEventListener("click", fullscreen);
-    document.getElementById("startButton").addEventListener("click", playSound);
+    document.getElementById("startButton").addEventListener("click", loadAllSounds);
   }
 
   function fullscreen() {
