@@ -18,12 +18,12 @@ function main() {
   scene.add(plane);
 
   // var light = new THREE.PointLight({color:0x00ff00, intensity:0.2, distance:0, decay:1.0});
-  var light = new THREE.PointLight(0x000066, 1, 20, 10 );
+  var light = new THREE.PointLight(0x226666, 1, 20, 10 );
   light.position.set(-6, 0, -29);
   light.intensity = 0;
   scene.add(light);
 
-  var light2 = new THREE.PointLight(0x226666, 1, 20, 10);
+  var light2 = new THREE.PointLight(0x446644, 1, 20, 10);
   light2.position.set(6, 0, -29);
   light2.intensity = 0;
   scene.add(light2);
@@ -122,8 +122,8 @@ function main() {
     // console.log(analysers)
     try{
       // console.log(analysers);
-      light.intensity = Math.pow((analysers[0].getAverageFrequency()/2000)+1,40);
-      light2.intensity = Math.pow((analysers[1].getAverageFrequency()/2000)+1,40);
+      light.intensity = Math.pow((analysers[0].getAverageFrequency()/2000)+1,60);
+      light2.intensity = Math.pow((analysers[1].getAverageFrequency()/2000)+1,60);
     }catch(err){
       // console.log('nada');
     }
