@@ -54,7 +54,7 @@ function main() {
 
     async function loadAndPlay(){
       //parallel promise define
-      let promises = [loadSound('shftL.mp3', light), loadSound('shftR.mp3', light2)];
+      let promises = [loadSound('atArmsLengthLM.mp3', light), loadSound('atArmsLengthRM.mp3', light2)];
       //parallel process load
       Promise.all(promises).then((results)=>{
         for(let i = 0;i<results.length;i++){
@@ -79,7 +79,8 @@ function main() {
           // onLoad callback
           function (audioBuffer) {
             ambientSound.setBuffer(audioBuffer);
-            ambientSound.setRefDistance(30);
+            ambientSound.setRefDistance(15);
+            ambientSound.setVolume(0.7);
             analyser = new THREE.AudioAnalyser(ambientSound, 32);
             analysers.push(analyser)
             resolve(ambientSound);
@@ -121,8 +122,8 @@ function main() {
     // console.log(analysers)
     try{
       // console.log(analysers);
-      light.intensity = Math.pow((analysers[0].getAverageFrequency()/300)+1,40);
-      light2.intensity = Math.pow((analysers[1].getAverageFrequency()/300)+1,40);
+      light.intensity = Math.pow((analysers[0].getAverageFrequency()/1000)+1,40);
+      light2.intensity = Math.pow((analysers[1].getAverageFrequency()/1000)+1,40);
     }catch(err){
       // console.log('nada');
     }
