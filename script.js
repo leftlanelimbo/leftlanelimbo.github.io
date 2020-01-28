@@ -8,17 +8,38 @@ function main() {
   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
   const scene = new THREE.Scene();
 
-  const geometry = new THREE.BoxGeometry(1, 1, 1);
-  const material = new THREE.MeshNormalMaterial();
-  const cube = new THREE.Mesh(geometry, material);
-  cube.position.x = 4;
-  cube.position.z = -20;
-  scene.add(cube);
+  var light = new THREE.AmbientLight(0x404040); // soft white light
+  scene.add(light);
+
+  var planeGeometry = new THREE.PlaneBufferGeometry(50, 50);
+  var planeMaterial = new THREE.MeshPhongMaterial({ color: 0x0, specular: 0x666666});
+  var plane = new THREE.Mesh(planeGeometry, planeMaterial);
+  plane.position.z = -30;
+  scene.add(plane);
+
+  // var light = new THREE.PointLight({color:0x00ff00, intensity:0.2, distance:0, decay:1.0});
+  var light = new THREE.PointLight(0xffffff, 1, 20, 10 );
+  light.position.set(-4, 0, -29);
+  scene.add(light);
+
+  var light2 = new THREE.PointLight(0xffffff, 1, 20, 10);
+  light2.position.set(4, 0, -29);
+  // light2.intensity = 10;
+  scene.add(light2);
+
+  let pA1, pA2, analyser1, analyser2
+
+  // const geometry = new THREE.BoxGeometry(1, 1, 1);
+  // const material = new THREE.MeshNormalMaterial();
+  // const cube = new THREE.Mesh(geometry, material);
+  // cube.position.x = 4;
+  // cube.position.z = -20;
+  // scene.add(cube);
   
-  const cube2 = new THREE.Mesh(geometry, material);
-  cube2.position.x = -4;
-  cube2.position.z = -20;
-  scene.add(cube2);
+  // const cube2 = new THREE.Mesh(geometry, material);
+  // cube2.position.x = -4;
+  // cube2.position.z = -20;
+  // scene.add(cube2);
 
   // instantiate a listener & add to camera
   var audioListener = new THREE.AudioListener();
@@ -30,29 +51,31 @@ function main() {
 
     async function loadAndPlay(){
       //parallel promise define
-      let promises = [loadSound('pastL.mp3', cube), loadSound('pastR.mp3', cube2)];
+      let promises = [loadSound('pastL.mp3', light, pA1, analyser1), loadSound('bloomRf.mp3', light2, pA2, analyser2)];
       //parallel process load
       Promise.all(promises).then((results)=>{
         for(let i = 0;i<results.length;i++){
           results[i].play();
         }
+
       }).catch((err)=>(console.log(err)))
     }
     loadAndPlay();
   
 
-    function loadSound(fileName, objectAttach){
+    function loadSound(fileName, objectAttach, ambientSound, analyser){
       return new Promise((resolve,reject)=>{
-        var oceanAmbientSound2 = new THREE.PositionalAudio(audioListener);
-        objectAttach.add(oceanAmbientSound2);
+        var ambientSound = new THREE.PositionalAudio(audioListener);
+        objectAttach.add(ambientSound);
         var loader2 = new THREE.AudioLoader();
         loader2.load(
           fileName,
           // onLoad callback
           function (audioBuffer) {
-            oceanAmbientSound2.setBuffer(audioBuffer);
-            oceanAmbientSound2.setRefDistance(25);
-            resolve(oceanAmbientSound2);
+            ambientSound.setBuffer(audioBuffer);
+            ambientSound.setRefDistance(25);
+            analyser = new THREE.AudioAnalyser(ambientSound, 32);
+            resolve(ambientSound);
           },
           // onProgress callback
           function (xhr) {
@@ -88,12 +111,17 @@ function main() {
     resizeRendererToDisplaySize(renderer);
 
     const canvas = renderer.domElement;
+    // try{
+    //   console.log(analyser1.getAverageFrequency());
+    // }catch{
+    //   console.log('nada');
+    // }
     // uniforms.iResolution.value.set(canvas.width, canvas.height, 1);
     // uniforms.iTime.value = time;
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
-    cube2.rotation.x += 0.01;
-    cube2.rotation.y += 0.01;
+    // cube.rotation.x += 0.01;
+    // cube.rotation.y += 0.01;
+    // cube2.rotation.x += 0.01;
+    // cube2.rotation.y += 0.01;
     // cube.position.x += 0.01;
 
 
@@ -142,13 +170,17 @@ function main() {
     dB = sB - sB_last;
     sB_last = sB;
     // console.log(dB.toFixed(2));
-    cube.position.x += (-sB*.01);
-    cube2.position.x -= (-sB*.01);
-    // cube.position.x += (-sX*.1);
-    // cube2.position.x -= (-sX*.1);
+    // cube.position.x += (-sB*.01);
+    // cube2.position.x -= (-sB*.01);
 
-    cube.position.y += (sA*.01);
-    cube2.position.y -= (sA*.01);
+    // cube.position.y += (sA*.01);
+    // cube2.position.y -= (sA*.01);
+ 
+    light.position.x += (-sB*.01);
+    light2.position.x -= (-sB*.01);
+
+    light.position.y += (sA*.01);
+    light2.position.y -= (sA*.01);
 
 
 
