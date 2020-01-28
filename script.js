@@ -191,7 +191,7 @@ function main() {
     light2.position.x -= (-sB*.01);
 
     light.position.y += (sA*.01);
-    light2.position.y -= (sA*.01);
+    light2.position.y += (sA*.01);
 
 
 
