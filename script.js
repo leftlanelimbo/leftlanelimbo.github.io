@@ -281,7 +281,7 @@ function main() {
   let sB_last = 0.0;
   let dB = 0.0;
 
-  let smoothing_factor = 0.9;
+  let smoothing_factor = 0.95;
 
   function handleMotionEvent(event) {
     // t = event.acceleration;
