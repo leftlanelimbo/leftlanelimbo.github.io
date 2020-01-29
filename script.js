@@ -64,7 +64,7 @@ function main() {
             // set the audio object buffer to the loaded object
             oceanAmbientSound.setBuffer(audioBuffer);
             oceanAmbientSound.setRefDistance(20);
-            oceanAmbientSound.setVolume(0.7);
+            // oceanAmbientSound.setVolume(0.7);
             loadSound2(oceanAmbientSound);
             // play the audio
             // oceanAmbientSound.play();
@@ -106,7 +106,7 @@ function main() {
             // set the audio object buffer to the loaded object
             oceanAmbientSound2.setBuffer(audioBuffer);
             oceanAmbientSound2.setRefDistance(20);
-            oceanAmbientSound2.setVolume(0.7);
+            // oceanAmbientSound2.setVolume(0.7);
             // play the audio
             // oceanAmbientSound2.play();
             // playAll();
@@ -241,7 +241,7 @@ function main() {
     // light2.position.y -= (sA * .01);
     
     // camera.rotation.y = -sX;
-    cameraY += sB*.01;
+    cameraY = -sX*0.8;
 
 
 
