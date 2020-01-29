@@ -8,30 +8,6 @@ function main() {
   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
   const scene = new THREE.Scene();
 
-  var light = new THREE.AmbientLight(0x404040); // soft white light
-  scene.add(light);
-
-  var planeGeometry = new THREE.PlaneBufferGeometry(50, 50);
-  var planeMaterial = new THREE.MeshPhongMaterial({ color: 0x0, specular: 0x666666});
-  var plane = new THREE.Mesh(planeGeometry, planeMaterial);
-  plane.position.z = -30;
-  scene.add(plane);
-
-  // var light = new THREE.PointLight({color:0x00ff00, intensity:0.2, distance:0, decay:1.0});
-  var light = new THREE.PointLight(0x226666, 1, 20, 10 );
-  light.position.set(-6, 0, -29);
-  light.intensity = 0;
-  scene.add(light);
-
-  var light2 = new THREE.PointLight(0x446644, 1, 20, 10);
-  light2.position.set(6, 0, -29);
-  light2.intensity = 0;
-  scene.add(light2);
-
-  // let analyser1, analyser2
-  // let analysers = [analyser1, analyser2]
-  let analysers = []
-
   // const geometry = new THREE.BoxGeometry(1, 1, 1);
   // const material = new THREE.MeshNormalMaterial();
   // const cube = new THREE.Mesh(geometry, material);
@@ -43,59 +19,218 @@ function main() {
   // cube2.position.x = -4;
   // cube2.position.z = -20;
   // scene.add(cube2);
+  var light = new THREE.AmbientLight(0x404040); // soft white light
+  scene.add(light);
 
-  // instantiate a listener & add to camera
-  var audioListener = new THREE.AudioListener();
-  camera.add(audioListener);
+  var planeGeometry = new THREE.PlaneBufferGeometry(50, 50);
+  var planeMaterial = new THREE.MeshPhongMaterial({ color: 0x0, specular: 0x666666 });
+  var plane = new THREE.Mesh(planeGeometry, planeMaterial);
+  plane.position.z = -30;
+  scene.add(plane);
+
+  // var light = new THREE.PointLight({color:0x00ff00, intensity:0.2, distance:0, decay:1.0});
+  var light = new THREE.PointLight(0x226666, 1, 20, 10);
+  light.position.set(-6, 0, -29);
+  light.intensity = 0;
+  scene.add(light);
+
+  var light2 = new THREE.PointLight(0x446644, 1, 20, 10);
+  light2.position.set(6, 0, -29);
+  light2.intensity = 0;
+  scene.add(light2);
 
 
   //load audio callback
-  function loadAllSounds(){
+  function playSound(){
 
-    async function loadAndPlay(){
-      //parallel promise define
-      let promises = [loadSound('bloomSSLM.mp3', light), loadSound('bloomSSRM.mp3', light2)];
-      //parallel process load
-      Promise.all(promises).then((results)=>{
-        for(let i = 0;i<results.length;i++){
-          results[i].play();
-          console.log(analysers)
-          // analysers[i] = new THREE.AudioAnalyser(results[i], 32);
-          
-        }
+    function loadSounds(){
+      // instantiate a listener
+      var audioListener = new THREE.AudioListener();
+      // add the listener to the camera
+      light.add(audioListener);
+      loadSound1();
+      // loadSound2();
 
-      }).catch((err)=>(console.log(err)))
-    }
-    loadAndPlay();
-  
+      function loadSound1(){
+        // instantiate audio object
+        var oceanAmbientSound = new THREE.PositionalAudio(audioListener);
 
-    function loadSound(fileName, objectAttach){
-      return new Promise((resolve,reject)=>{
-        var ambientSound = new THREE.PositionalAudio(audioListener);
-        objectAttach.add(ambientSound);
-        var loader2 = new THREE.AudioLoader();
-        loader2.load(
-          fileName,
+        // add the audio object to the scene
+        cube.add(oceanAmbientSound);
+
+        // instantiate a loader
+        var loader = new THREE.AudioLoader();
+
+        // load a resource
+        loader.load(
+          // resource URL
+          'bloomRf.mp3',
+
           // onLoad callback
           function (audioBuffer) {
-            ambientSound.setBuffer(audioBuffer);
-            ambientSound.setRefDistance(15);
-            ambientSound.setVolume(0.7);
-            analyser = new THREE.AudioAnalyser(ambientSound, 32);
-            analysers.push(analyser)
-            resolve(ambientSound);
+            // set the audio object buffer to the loaded object
+            oceanAmbientSound.setBuffer(audioBuffer);
+            oceanAmbientSound.setRefDistance(15);
+            oceanAmbientSound.setVolume(0.7);
+            loadSound2(oceanAmbientSound);
+            // play the audio
+            // oceanAmbientSound.play();
+            // return oceanAmbientSound;
+
           },
+
           // onProgress callback
           function (xhr) {
             console.log((xhr.loaded / xhr.total * 100) + '% loaded');
           },
+
           // onError callback
           function (err) {
             console.log('An error happened');
           }
         );
-      })
+
+
+      }
+      function loadSound2(oceanAmbientSound){
+        //cube 2
+        // instantiate audio object
+        var oceanAmbientSound2 = new THREE.PositionalAudio(audioListener);
+
+        // add the audio object to the scene
+        light2.add(oceanAmbientSound2);
+
+        // instantiate a loader
+        var loader2 = new THREE.AudioLoader();
+
+        // load a resource
+        loader2.load(
+          // resource URL
+          'bloomLf.mp3',
+
+          // onLoad callback
+          function (audioBuffer) {
+            // set the audio object buffer to the loaded object
+            oceanAmbientSound2.setBuffer(audioBuffer);
+            oceanAmbientSound2.setRefDistance(15);
+            oceanAmbientSound2.setVolume(0.7);
+            // play the audio
+            // oceanAmbientSound2.play();
+            // playAll();
+            let analyser1 = new THREE.AudioAnalyser(oceanAmbientSound, 32);
+            let analyser2 = new THREE.AudioAnalyser(oceanAmbientSound2, 32);
+            oceanAmbientSound.play();
+            oceanAmbientSound2.play();
+             
+          },
+
+          // onProgress callback
+          function (xhr) {
+            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+          },
+
+          // onError callback
+          function (err) {
+            console.log('An error happened');
+          }
+        );
+
+
+      }
+      // function playAll() {
+      //   oceanAmbientSound.play();
+      //   oceanAmbientSound2.play();
+
+      // }
+
+
+
+
     }
+    loadSounds();
+    // // instantiate a listener
+    // var audioListener = new THREE.AudioListener();
+
+    // // add the listener to the camera
+    // camera.add(audioListener);
+
+    // //cube 1
+    // // instantiate audio object
+    // var oceanAmbientSound = new THREE.PositionalAudio(audioListener);
+
+    // // add the audio object to the scene
+    // cube.add(oceanAmbientSound);
+
+    // // instantiate a loader
+    // var loader = new THREE.AudioLoader();
+
+    // // load a resource
+    // loader.load(
+    //   // resource URL
+    //   'bloomRf.mp3',
+
+    //   // onLoad callback
+    //   function (audioBuffer) {
+    //     // set the audio object buffer to the loaded object
+    //     oceanAmbientSound.setBuffer(audioBuffer);
+    //     oceanAmbientSound.setRefDistance(25);
+    //     // play the audio
+    //     // oceanAmbientSound.play();
+        
+    //   },
+      
+    //   // onProgress callback
+    //   function (xhr) {
+    //     console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+    //   },
+
+    //   // onError callback
+    //   function (err) {
+    //     console.log('An error happened');
+    //   }
+    // );
+
+    // //cube 2
+    // // instantiate audio object
+    // var oceanAmbientSound2 = new THREE.PositionalAudio(audioListener);
+
+    // // add the audio object to the scene
+    // cube2.add(oceanAmbientSound2);
+    
+    // // instantiate a loader
+    // var loader2 = new THREE.AudioLoader();
+
+    // // load a resource
+    // loader2.load(
+    //   // resource URL
+    //   'bloomLf.mp3',
+
+    //   // onLoad callback
+    //   function (audioBuffer) {
+    //     // set the audio object buffer to the loaded object
+    //     oceanAmbientSound2.setBuffer(audioBuffer);
+    //     oceanAmbientSound2.setRefDistance(25);
+    //     // play the audio
+    //     // oceanAmbientSound2.play();
+    //     playAll();
+    //   },
+      
+    //   // onProgress callback
+    //   function (xhr) {
+    //     console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+    //   },
+      
+    //   // onError callback
+    //   function (err) {
+    //     console.log('An error happened');
+    //   }
+    //   );
+
+      // function playAll(){
+      //   oceanAmbientSound.play();
+      //   oceanAmbientSound2.play();
+
+      // }
       
   }
 
@@ -119,14 +254,6 @@ function main() {
     resizeRendererToDisplaySize(renderer);
 
     const canvas = renderer.domElement;
-    // console.log(analysers)
-    try{
-      // console.log(analysers);
-      light.intensity = Math.pow((analysers[0].getAverageFrequency()/2000)+1,80);
-      light2.intensity = Math.pow((analysers[1].getAverageFrequency()/2000)+1,80);
-    }catch(err){
-      // console.log('nada');
-    }
     // uniforms.iResolution.value.set(canvas.width, canvas.height, 1);
     // uniforms.iTime.value = time;
     // cube.rotation.x += 0.01;
@@ -134,6 +261,14 @@ function main() {
     // cube2.rotation.x += 0.01;
     // cube2.rotation.y += 0.01;
     // cube.position.x += 0.01;
+    try {
+      // console.log(analysers);
+      light.intensity = Math.pow((analyser1.getAverageFrequency() / 2000) + 1, 80);
+      light2.intensity = Math.pow((analyser2.getAverageFrequency() / 2000) + 1, 80);
+    } catch (err) {
+      // console.log('nada');
+    }
+
 
 
     renderer.render(scene, camera);
@@ -181,17 +316,13 @@ function main() {
     dB = sB - sB_last;
     sB_last = sB;
     // console.log(dB.toFixed(2));
-    // cube.position.x += (-sB*.01);
-    // cube2.position.x -= (-sB*.01);
+    cube.position.x += (-sB*.01);
+    cube2.position.x -= (-sB*.01);
+    // cube.position.x += (-sX*.1);
+    // cube2.position.x -= (-sX*.1);
 
-    // cube.position.y += (sA*.01);
-    // cube2.position.y -= (sA*.01);
- 
-    light.position.x += (-sB*.01);
-    light2.position.x -= (-sB*.01);
-
-    light.position.y += (sA*.01);
-    light2.position.y -= (sA*.01);
+    cube.position.y += (sA*.01);
+    cube2.position.y -= (sA*.01);
 
 
 
@@ -206,7 +337,7 @@ function main() {
     document.getElementById("startButton").addEventListener("click", onClickDeviceMotion);
     document.getElementById("startButton").addEventListener("click", removeOverlay);
     document.getElementById("startButton").addEventListener("click", fullscreen);
-    document.getElementById("startButton").addEventListener("click", loadAllSounds);
+    document.getElementById("startButton").addEventListener("click", playSound);
   }
 
   function fullscreen() {
