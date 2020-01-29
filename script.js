@@ -8,17 +8,6 @@ function main() {
   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
   const scene = new THREE.Scene();
 
-  // const geometry = new THREE.BoxGeometry(1, 1, 1);
-  // const material = new THREE.MeshNormalMaterial();
-  // const cube = new THREE.Mesh(geometry, material);
-  // cube.position.x = 4;
-  // cube.position.z = -20;
-  // scene.add(cube);
-  
-  // const cube2 = new THREE.Mesh(geometry, material);
-  // cube2.position.x = -4;
-  // cube2.position.z = -20;
-  // scene.add(cube2);
   var light = new THREE.AmbientLight(0x404040); // soft white light
   scene.add(light);
 
@@ -39,6 +28,7 @@ function main() {
   light2.intensity = 0;
   scene.add(light2);
 
+  var analyser1, analyser2
 
   //load audio callback
   function playSound(){
@@ -47,7 +37,7 @@ function main() {
       // instantiate a listener
       var audioListener = new THREE.AudioListener();
       // add the listener to the camera
-      light.add(audioListener);
+      camera.add(audioListener);
       loadSound1();
       // loadSound2();
 
@@ -56,7 +46,7 @@ function main() {
         var oceanAmbientSound = new THREE.PositionalAudio(audioListener);
 
         // add the audio object to the scene
-        cube.add(oceanAmbientSound);
+        light.add(oceanAmbientSound);
 
         // instantiate a loader
         var loader = new THREE.AudioLoader();
@@ -117,8 +107,8 @@ function main() {
             // play the audio
             // oceanAmbientSound2.play();
             // playAll();
-            let analyser1 = new THREE.AudioAnalyser(oceanAmbientSound, 32);
-            let analyser2 = new THREE.AudioAnalyser(oceanAmbientSound2, 32);
+            analyser1 = new THREE.AudioAnalyser(oceanAmbientSound, 32);
+            analyser2 = new THREE.AudioAnalyser(oceanAmbientSound2, 32);
             oceanAmbientSound.play();
             oceanAmbientSound2.play();
              
@@ -316,13 +306,20 @@ function main() {
     dB = sB - sB_last;
     sB_last = sB;
     // console.log(dB.toFixed(2));
-    cube.position.x += (-sB*.01);
-    cube2.position.x -= (-sB*.01);
     // cube.position.x += (-sX*.1);
     // cube2.position.x -= (-sX*.1);
 
-    cube.position.y += (sA*.01);
-    cube2.position.y -= (sA*.01);
+    // cube.position.x += (-sB*.01);
+    // cube2.position.x -= (-sB*.01);
+
+    // cube.position.y += (sA*.01);
+    // cube2.position.y -= (sA*.01);
+
+    light.position.x += (-sB * .01);
+    light2.position.x -= (-sB * .01);
+
+    light.position.y += (sA * .01);
+    light2.position.y -= (sA * .01);
 
 
 
