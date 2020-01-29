@@ -241,7 +241,7 @@ function main() {
     // light2.position.y -= (sA * .01);
     
     // camera.rotation.y = -sX;
-    cameraY = -sX;
+    cameraY = -sB*.01;
 
 
 
