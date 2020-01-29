@@ -1,7 +1,8 @@
 function main() {
   //:::::: three scene 
-  let cameraY, cameraSY;
-  let cameraSmoothingFactor = 0.9;
+  let cameraY = 0.0;
+  let cameraSY = 0.0;
+  let cameraSmoothingFactor = 0.95;
   loaded();
   const canvas = document.querySelector('#c');
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true});
@@ -164,8 +165,9 @@ function main() {
 
     const canvas = renderer.domElement;
     
-    // cameraSY = cameraY + cameraSmoothingFactor * (cameraSY - cameraY);
-    camera.rotation.y = -sX;
+    cameraSY = cameraY + cameraSmoothingFactor * (cameraSY - cameraY);
+    // camera.rotation.y = -sX;
+    camera.rotation.y = cameraSY;
 
     
     try {
@@ -239,7 +241,7 @@ function main() {
     // light2.position.y -= (sA * .01);
     
     // camera.rotation.y = -sX;
-    // cameraY = -sX;
+    cameraY = -sX;
 
 
 
