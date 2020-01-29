@@ -2,7 +2,7 @@ function main() {
   //:::::: three scene 
   let cameraY = 0.0;
   let cameraSY = 0.0;
-  let cameraSmoothingFactor = 0.95;
+  let cameraSmoothingFactor = 0.93;
   loaded();
   const canvas = document.querySelector('#c');
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true});
