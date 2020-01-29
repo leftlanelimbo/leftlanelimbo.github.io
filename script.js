@@ -281,7 +281,7 @@ function main() {
   let sB_last = 0.0;
   let dB = 0.0;
 
-  let smoothing_factor = 0.95;
+  let smoothing_factor = 0.93;
 
   function handleMotionEvent(event) {
     // t = event.acceleration;
@@ -321,7 +321,7 @@ function main() {
 
     // light.position.y += (sA * .01);
     // light2.position.y -= (sA * .01);
-    camera.rotation.y = sX;
+    camera.rotation.y = -sX;
 
 
 
