@@ -321,7 +321,7 @@ function main() {
 
     // light.position.y += (sA * .01);
     // light2.position.y -= (sA * .01);
-    camera.rotation.y = sB*0.1;
+    camera.rotation.y = sX;
 
 
 
