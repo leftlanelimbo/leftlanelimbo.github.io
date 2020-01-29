@@ -1,5 +1,7 @@
 function main() {
   //:::::: three scene 
+  let cameraY, cameraSY;
+  let cameraSmoothingFactor = 0.9;
   loaded();
   const canvas = document.querySelector('#c');
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true});
@@ -138,89 +140,6 @@ function main() {
 
     }
     loadSounds();
-    // // instantiate a listener
-    // var audioListener = new THREE.AudioListener();
-
-    // // add the listener to the camera
-    // camera.add(audioListener);
-
-    // //cube 1
-    // // instantiate audio object
-    // var oceanAmbientSound = new THREE.PositionalAudio(audioListener);
-
-    // // add the audio object to the scene
-    // cube.add(oceanAmbientSound);
-
-    // // instantiate a loader
-    // var loader = new THREE.AudioLoader();
-
-    // // load a resource
-    // loader.load(
-    //   // resource URL
-    //   'bloomRf.mp3',
-
-    //   // onLoad callback
-    //   function (audioBuffer) {
-    //     // set the audio object buffer to the loaded object
-    //     oceanAmbientSound.setBuffer(audioBuffer);
-    //     oceanAmbientSound.setRefDistance(25);
-    //     // play the audio
-    //     // oceanAmbientSound.play();
-        
-    //   },
-      
-    //   // onProgress callback
-    //   function (xhr) {
-    //     console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-    //   },
-
-    //   // onError callback
-    //   function (err) {
-    //     console.log('An error happened');
-    //   }
-    // );
-
-    // //cube 2
-    // // instantiate audio object
-    // var oceanAmbientSound2 = new THREE.PositionalAudio(audioListener);
-
-    // // add the audio object to the scene
-    // cube2.add(oceanAmbientSound2);
-    
-    // // instantiate a loader
-    // var loader2 = new THREE.AudioLoader();
-
-    // // load a resource
-    // loader2.load(
-    //   // resource URL
-    //   'bloomLf.mp3',
-
-    //   // onLoad callback
-    //   function (audioBuffer) {
-    //     // set the audio object buffer to the loaded object
-    //     oceanAmbientSound2.setBuffer(audioBuffer);
-    //     oceanAmbientSound2.setRefDistance(25);
-    //     // play the audio
-    //     // oceanAmbientSound2.play();
-    //     playAll();
-    //   },
-      
-    //   // onProgress callback
-    //   function (xhr) {
-    //     console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-    //   },
-      
-    //   // onError callback
-    //   function (err) {
-    //     console.log('An error happened');
-    //   }
-    //   );
-
-      // function playAll(){
-      //   oceanAmbientSound.play();
-      //   oceanAmbientSound2.play();
-
-      // }
       
   }
 
@@ -245,13 +164,10 @@ function main() {
 
     const canvas = renderer.domElement;
     
-    // uniforms.iResolution.value.set(canvas.width, canvas.height, 1);
-    // uniforms.iTime.value = time;
-    // cube.rotation.x += 0.01;
-    // cube.rotation.y += 0.01;
-    // cube2.rotation.x += 0.01;
-    // cube2.rotation.y += 0.01;
-    // cube.position.x += 0.01;
+    // cameraSY = cameraY + cameraSmoothingFactor * (cameraSY - cameraY);
+    camera.rotation.y = -sX;
+
+    
     try {
       // console.log(analysers);
       light.intensity = Math.pow((analyser1.getAverageFrequency() / 2000) + 1, 80);
@@ -321,7 +237,9 @@ function main() {
 
     // light.position.y += (sA * .01);
     // light2.position.y -= (sA * .01);
-    camera.rotation.y = -sX;
+    
+    // camera.rotation.y = -sX;
+    // cameraY = -sX;
 
 
 
