@@ -19,48 +19,48 @@ function main() {
   var plane = new THREE.Mesh(planeGeometry, planeMaterial);
   plane.position.z = -30;
   scene.add(plane);
-
+  // teal light color 0x226666
   // var light = new THREE.PointLight({color:0x00ff00, intensity:0.2, distance:0, decay:1.0});
-  var light1 = new THREE.PointLight(0x226666, 0, 20, 10);
+  var light1 = new THREE.PointLight(0xFFFFFF, 0, 20, 10);
   light1.position.set(-10, -10, -29);
   // light1.intensity = 1;
   scene.add(light1);
-  var light2 = new THREE.PointLight(0x226666, 0, 20, 10);
+  var light2 = new THREE.PointLight(0xFFFFFF, 0, 20, 10);
   light2.position.set(0, -10, -29);
   // light2.intensity = 1;
   scene.add(light2);
 
-  var light3 = new THREE.PointLight(0x226666, 0, 20, 10);
+  var light3 = new THREE.PointLight(0xFFFFFF, 0, 20, 10);
   light3.position.set(10, -10, -29);
   // light3.intensity = 1;
   scene.add(light3);
 
-  var light4 = new THREE.PointLight(0x226666, 0, 20, 10);
+  var light4 = new THREE.PointLight(0xFFFFFF, 0, 20, 10);
   light4.position.set(-10, 0, -29);
   // light4.intensity = 1;
   scene.add(light4);
 
-  var light5 = new THREE.PointLight(0x226666, 0, 20, 10);
+  var light5 = new THREE.PointLight(0xFFFFFF, 0, 20, 10);
   light5.position.set(0, 0, -29);
   // light5.intensity = 1;
   scene.add(light5);
 
-  var light6 = new THREE.PointLight(0x226666, 0, 20, 10);
+  var light6 = new THREE.PointLight(0xFFFFFF, 0, 20, 10);
   light6.position.set(10, 0, -29);
   // light6.intensity = 1;
   scene.add(light6);
 
-  var light7 = new THREE.PointLight(0x226666, 0, 20, 10);
+  var light7 = new THREE.PointLight(0xFFFFFF, 0, 20, 10);
   light7.position.set(-10, 10, -29);
   // light7.intensity = 1;
   scene.add(light7);
 
-  var light8 = new THREE.PointLight(0x226666, 0, 20, 10);
+  var light8 = new THREE.PointLight(0xFFFFFF, 0, 20, 10);
   light8.position.set(0, 10, -29);
   // light8.intensity = 1;
   scene.add(light8);
 
-  var light9 = new THREE.PointLight(0x226666, 0, 20, 10);
+  var light9 = new THREE.PointLight(0xFFFFFF, 0, 20, 10);
   light9.position.set(10, 10, -29);
   // light9.intensity = 1;
   scene.add(light9);
