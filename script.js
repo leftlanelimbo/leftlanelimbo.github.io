@@ -11,16 +11,14 @@ function main() {
   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
   const scene = new THREE.Scene();
 
-  var light = new THREE.AmbientLight(0x404040); // soft white light
-  scene.add(light);
-
+  //black plane
   var planeGeometry = new THREE.PlaneBufferGeometry(50, 50);
   var planeMaterial = new THREE.MeshPhongMaterial({ color: 0x0, specular: 0x666666 });
   var plane = new THREE.Mesh(planeGeometry, planeMaterial);
   plane.position.z = -30;
   scene.add(plane);
   // teal light color 0x226666
-  // var light = new THREE.PointLight({color:0x00ff00, intensity:0.2, distance:0, decay:1.0});
+
   var light1 = new THREE.PointLight(0xFFFFFF, 0, 20, 10);
   light1.position.set(-10, -10, -29);
   // light1.intensity = 1;
@@ -73,403 +71,86 @@ function main() {
   function playSound() {
 
     function loadSounds() {
-      // instantiate a listener
       var audioListener = new THREE.AudioListener();
-      // add the listener to the camera
       camera.add(audioListener);
-      loadSound1();
-      // loadSound2();
+      var loadCount = 0; //make this more dynamic by getting length of array or something
 
-      function loadSound1() {
-        // instantiate audio object
-        var oceanAmbientSound1 = new THREE.PositionalAudio(audioListener);
+      var sound1 = new THREE.PositionalAudio(audioListener);
+      var sound2 = new THREE.PositionalAudio(audioListener);
+      var sound3 = new THREE.PositionalAudio(audioListener);
+      var sound4 = new THREE.PositionalAudio(audioListener);
+      var sound5 = new THREE.PositionalAudio(audioListener);
+      var sound6 = new THREE.PositionalAudio(audioListener);
+      var sound7 = new THREE.PositionalAudio(audioListener);
+      var sound8 = new THREE.PositionalAudio(audioListener);
+      var sound9 = new THREE.PositionalAudio(audioListener);
 
-        // add the audio object to the scene
-        light1.add(oceanAmbientSound1);
+      light1.add(sound1);
+      light2.add(sound2);
+      light3.add(sound3);
+      light4.add(sound4);
+      light5.add(sound5);
+      light6.add(sound6);
+      light7.add(sound7);
+      light8.add(sound8);
+      light9.add(sound9);
 
-        // instantiate a loader
-        var loader1 = new THREE.AudioLoader();
+      function loadAllSounds(){
+        loadSound(sound1, light1, 'AHHHS.mp3');
+        loadSound(sound2, light2, 'BACKGROUND.mp3');
+        loadSound(sound3, light3, 'BASS.mp3');
+        loadSound(sound4, light4, 'DRUMS.mp3');
+        loadSound(sound5, light5, 'JUNO_SYNTH_MAIN.mp3');
+        loadSound(sound6, light6, 'MELODIC_INSTRUMENTATION.mp3');
+        loadSound(sound7, light7, 'VOX_LEAD_DRY.mp3');
+        loadSound(sound8, light8, 'VOX_LEAD_FX.mp3');
+        loadSound(sound9, light9, 'WHISTLE.mp3');
+      }
+      loadAllSounds();
 
-        // load a resource
-        loader1.load(
-          // resource URL
-          'AHHHS.mp3',
+      function play() {
+        analyser1 = new THREE.AudioAnalyser(sound1, 32);
+        analyser2 = new THREE.AudioAnalyser(sound2, 32);
+        analyser3 = new THREE.AudioAnalyser(sound3, 32);
+        analyser4 = new THREE.AudioAnalyser(sound4, 32);
+        analyser5 = new THREE.AudioAnalyser(sound5, 32);
+        analyser6 = new THREE.AudioAnalyser(sound6, 32);
+        analyser7 = new THREE.AudioAnalyser(sound7, 32);
+        analyser8 = new THREE.AudioAnalyser(sound8, 32);
+        analyser9 = new THREE.AudioAnalyser(sound9, 32);
 
-          // onLoad callback
+        sound1.play();
+        sound2.play();
+        sound3.play();
+        sound4.play();
+        sound5.play();
+        sound6.play();
+        sound7.play();
+        sound8.play();
+        sound9.play();
+      }
+
+      function loadSound(sound, light, file) {
+        var loader = new THREE.AudioLoader();
+        loader.load(file,
           function (audioBuffer) {
-            // set the audio object buffer to the loaded object
-            oceanAmbientSound1.setBuffer(audioBuffer);
-            oceanAmbientSound1.setRefDistance(20);
-            // oceanAmbientSound.setVolume(0.7);
-            light1.intensity = 1;
-            loadSound2(oceanAmbientSound1);
-            // play the audio
-            // oceanAmbientSound.play();
-            // return oceanAmbientSound;
-
+            sound.setBuffer(audioBuffer);
+            sound.setRefDistance(25);
+            light.intensity = 1;
+            loadCount += 1;
+            if (loadCount == 9) {
+              play();
+            }
           },
-
-          // onProgress callback
           function (xhr) {
-            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+            light.intensity = (xhr.loaded/xhr.total)*.5;
+            // console.log((xhr.loaded / xhr.total * 100) + '% loaded');
           },
-
-          // onError callback
           function (err) {
             console.log('An error happened');
           }
         );
       }
-      function loadSound2(oceanAmbientSound1) {
-        // instantiate audio object
-        var oceanAmbientSound2 = new THREE.PositionalAudio(audioListener);
-
-        // add the audio object to the scene
-        light2.add(oceanAmbientSound2);
-
-        // instantiate a loader
-        var loader2 = new THREE.AudioLoader();
-
-        // load a resource
-        loader2.load(
-          // resource URL
-          'BACKGROUND.mp3',
-
-          // onLoad callback
-          function (audioBuffer) {
-            // set the audio object buffer to the loaded object
-            oceanAmbientSound2.setBuffer(audioBuffer);
-            oceanAmbientSound2.setRefDistance(20);
-            // oceanAmbientSound2.setVolume(0.7);
-            light2.intensity = 1;
-            loadSound3(oceanAmbientSound1, oceanAmbientSound2);
-            // play the audio
-            // oceanAmbientSound2.play();
-            // return oceanAmbientSound2;
-
-          },
-
-          // onProgress callback
-          function (xhr) {
-            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-          },
-
-          // onError callback
-          function (err) {
-            console.log('An error happened');
-          }
-        );
-      }
-      function loadSound3(oceanAmbientSound1, oceanAmbientSound2) {
-        // instantiate audio object
-        var oceanAmbientSound3 = new THREE.PositionalAudio(audioListener);
-
-        // add the audio object to the scene
-        light3.add(oceanAmbientSound3);
-
-        // instantiate a loader
-        var loader3 = new THREE.AudioLoader();
-
-        // load a resource
-        loader3.load(
-          // resource URL
-          'BASS.mp3',
-
-          // onLoad callback
-          function (audioBuffer) {
-            // set the audio object buffer to the loaded object
-            oceanAmbientSound3.setBuffer(audioBuffer);
-            oceanAmbientSound3.setRefDistance(20);
-            // oceanAmbientSound3.setVolume(0.7);
-            light3.intensity = 1;
-            loadSound4(oceanAmbientSound1, oceanAmbientSound2, oceanAmbientSound3);
-            // play the audio
-            // oceanAmbientSound3.play();
-            // return oceanAmbientSound3;
-
-          },
-
-          // onProgress callback
-          function (xhr) {
-            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-          },
-
-          // onError callback
-          function (err) {
-            console.log('An error happened');
-          }
-        );
-      }
-      function loadSound4(oceanAmbientSound1, oceanAmbientSound2, oceanAmbientSound3) {
-        // instantiate audio object
-        var oceanAmbientSound4 = new THREE.PositionalAudio(audioListener);
-
-        // add the audio object to the scene
-        light4.add(oceanAmbientSound4);
-
-        // instantiate a loader
-        var loader4 = new THREE.AudioLoader();
-
-        // load a resource
-        loader4.load(
-          // resource URL
-          'DRUMS.mp3',
-
-          // onLoad callback
-          function (audioBuffer) {
-            // set the audio object buffer to the loaded object
-            oceanAmbientSound4.setBuffer(audioBuffer);
-            oceanAmbientSound4.setRefDistance(20);
-            // oceanAmbientSound4.setVolume(0.7);
-            light4.intensity = 1;
-            loadSound5(oceanAmbientSound1, oceanAmbientSound2, oceanAmbientSound3, oceanAmbientSound4);
-            // play the audio
-            // oceanAmbientSound4.play();
-            // return oceanAmbientSound4;
-
-          },
-
-          // onProgress callback
-          function (xhr) {
-            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-          },
-
-          // onError callback
-          function (err) {
-            console.log('An error happened');
-          }
-        );
-      }
-      function loadSound5(oceanAmbientSound1, oceanAmbientSound2, oceanAmbientSound3, oceanAmbientSound4) {
-        // instantiate audio object
-        var oceanAmbientSound5 = new THREE.PositionalAudio(audioListener);
-
-        // add the audio object to the scene
-        light5.add(oceanAmbientSound5);
-
-        // instantiate a loader
-        var loader5 = new THREE.AudioLoader();
-
-        // load a resource
-        loader5.load(
-          // resource URL
-          'JUNO_SYNTH_MAIN.mp3',
-
-          // onLoad callback
-          function (audioBuffer) {
-            // set the audio object buffer to the loaded object
-            oceanAmbientSound5.setBuffer(audioBuffer);
-            oceanAmbientSound5.setRefDistance(20);
-            // oceanAmbientSound5.setVolume(0.7);
-            light5.intensity = 1;
-            loadSound6(oceanAmbientSound1, oceanAmbientSound2, oceanAmbientSound3, oceanAmbientSound4, oceanAmbientSound5);
-            // play the audio
-            // oceanAmbientSound5.play();
-            // return oceanAmbientSound5;
-
-          },
-
-          // onProgress callback
-          function (xhr) {
-            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-          },
-
-          // onError callback
-          function (err) {
-            console.log('An error happened');
-          }
-        );
-      }
-      function loadSound6(oceanAmbientSound1, oceanAmbientSound2, oceanAmbientSound3, oceanAmbientSound4, oceanAmbientSound5) {
-        // instantiate audio object
-        var oceanAmbientSound6 = new THREE.PositionalAudio(audioListener);
-
-        // add the audio object to the scene
-        light6.add(oceanAmbientSound6);
-
-        // instantiate a loader
-        var loader6 = new THREE.AudioLoader();
-
-        // load a resource
-        loader6.load(
-          // resource URL
-          'MELODIC_INSTRUMENTATION.mp3',
-
-          // onLoad callback
-          function (audioBuffer) {
-            // set the audio object buffer to the loaded object
-            oceanAmbientSound6.setBuffer(audioBuffer);
-            oceanAmbientSound6.setRefDistance(20);
-            // oceanAmbientSound6.setVolume(0.7);
-            light6.intensity = 1;
-            loadSound7(oceanAmbientSound1, oceanAmbientSound2, oceanAmbientSound3, oceanAmbientSound4, oceanAmbientSound5, oceanAmbientSound6);
-            // play the audio
-            // oceanAmbientSound6.play();
-            // return oceanAmbientSound6;
-
-          },
-
-          // onProgress callback
-          function (xhr) {
-            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-          },
-
-          // onError callback
-          function (err) {
-            console.log('An error happened');
-          }
-        );
-      }
-      function loadSound7(oceanAmbientSound1, oceanAmbientSound2, oceanAmbientSound3, oceanAmbientSound4, oceanAmbientSound5, oceanAmbientSound6) {
-        // instantiate audio object
-        var oceanAmbientSound7 = new THREE.PositionalAudio(audioListener);
-
-        // add the audio object to the scene
-        light7.add(oceanAmbientSound7);
-
-        // instantiate a loader
-        var loader7 = new THREE.AudioLoader();
-
-        // load a resource
-        loader7.load(
-          // resource URL
-          'VOX_LEAD_DRY.mp3',
-
-          // onLoad callback
-          function (audioBuffer) {
-            // set the audio object buffer to the loaded object
-            oceanAmbientSound7.setBuffer(audioBuffer);
-            oceanAmbientSound7.setRefDistance(20);
-            // oceanAmbientSound7.setVolume(0.7);
-            light7.intensity = 1;
-            loadSound8(oceanAmbientSound1, oceanAmbientSound2, oceanAmbientSound3, oceanAmbientSound4, oceanAmbientSound5, oceanAmbientSound6, oceanAmbientSound7);
-            // play the audio
-            // oceanAmbientSound7.play();
-            // return oceanAmbientSound7;
-
-          },
-
-          // onProgress callback
-          function (xhr) {
-            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-          },
-
-          // onError callback
-          function (err) {
-            console.log('An error happened');
-          }
-        );
-      }
-      function loadSound8(oceanAmbientSound1, oceanAmbientSound2, oceanAmbientSound3, oceanAmbientSound4, oceanAmbientSound5, oceanAmbientSound6, oceanAmbientSound7) {
-        // instantiate audio object
-        var oceanAmbientSound8 = new THREE.PositionalAudio(audioListener);
-
-        // add the audio object to the scene
-        light8.add(oceanAmbientSound8);
-
-        // instantiate a loader
-        var loader8 = new THREE.AudioLoader();
-
-        // load a resource
-        loader8.load(
-          // resource URL
-          'VOX_LEAD_FX.mp3',
-
-          // onLoad callback
-          function (audioBuffer) {
-            // set the audio object buffer to the loaded object
-            oceanAmbientSound8.setBuffer(audioBuffer);
-            oceanAmbientSound8.setRefDistance(20);
-            // oceanAmbientSound8.setVolume(0.7);
-            light8.intensity = 1;
-            loadSound9(oceanAmbientSound1, oceanAmbientSound2, oceanAmbientSound3, oceanAmbientSound4, oceanAmbientSound5, oceanAmbientSound6, oceanAmbientSound7, oceanAmbientSound8);
-            // play the audio
-            // oceanAmbientSound8.play();
-            // return oceanAmbientSound8;
-
-          },
-
-          // onProgress callback
-          function (xhr) {
-            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-          },
-
-          // onError callback
-          function (err) {
-            console.log('An error happened');
-          }
-        );
-      }
-
-
-      function loadSound9(oceanAmbientSound1, oceanAmbientSound2, oceanAmbientSound3, oceanAmbientSound4, oceanAmbientSound5, oceanAmbientSound6, oceanAmbientSound7, oceanAmbientSound8) {
-        //cube 2
-        // instantiate audio object
-        var oceanAmbientSound9 = new THREE.PositionalAudio(audioListener);
-
-        // add the audio object to the scene
-        light9.add(oceanAmbientSound9);
-
-        // instantiate a loader
-        var loader9 = new THREE.AudioLoader();
-
-        // load a resource
-        loader9.load(
-          // resource URL
-          'WHISTLE.mp3',
-
-          // onLoad callback
-          function (audioBuffer) {
-            // set the audio object buffer to the loaded object
-            oceanAmbientSound9.setBuffer(audioBuffer);
-            oceanAmbientSound9.setRefDistance(20);
-            // oceanAmbientSound9.setVolume(0.7);
-            light9.intensity = 1;
-            // play the audio
-            // oceanAmbientSound9.play();
-            // playAll();
-            analyser1 = new THREE.AudioAnalyser(oceanAmbientSound1, 32);
-            analyser2 = new THREE.AudioAnalyser(oceanAmbientSound2, 32);
-            analyser3 = new THREE.AudioAnalyser(oceanAmbientSound3, 32);
-            analyser4 = new THREE.AudioAnalyser(oceanAmbientSound4, 32);
-            analyser5 = new THREE.AudioAnalyser(oceanAmbientSound5, 32);
-            analyser6 = new THREE.AudioAnalyser(oceanAmbientSound6, 32);
-            analyser7 = new THREE.AudioAnalyser(oceanAmbientSound7, 32);
-            analyser8 = new THREE.AudioAnalyser(oceanAmbientSound8, 32);
-            analyser9 = new THREE.AudioAnalyser(oceanAmbientSound9, 32);
-
-            oceanAmbientSound1.play();
-            oceanAmbientSound2.play();
-            oceanAmbientSound3.play();
-            oceanAmbientSound4.play();
-            oceanAmbientSound5.play();
-            oceanAmbientSound6.play();
-            oceanAmbientSound7.play();
-            oceanAmbientSound8.play();
-            oceanAmbientSound9.play();
-
-          },
-
-          // onProgress callback
-          function (xhr) {
-            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-          },
-
-          // onError callback
-          function (err) {
-            console.log('An error happened');
-          }
-        );
-      }
-      // function playAll() {
-      //   oceanAmbientSound.play();
-      //   oceanAmbientSound2.play();
-
-      // }
-
-
-
-
     }
     loadSounds();
 
