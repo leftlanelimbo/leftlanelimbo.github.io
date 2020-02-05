@@ -126,6 +126,7 @@ function main() {
 
   //box for lights
   var geometry = new THREE.BoxBufferGeometry(30, 30, 30);
+  // var geometry = new THREE.SphereGeometry(20, 32, 32);
 
   var material = new THREE.MeshPhongMaterial({
     color: 0xa0adaf,
@@ -271,7 +272,7 @@ function main() {
     light1.rotation.x = time;
     light1.rotation.z = time;
 
-    time += 1000;
+    time += 500;
     light2.position.x = Math.sin(time * 0.6) * 9;
     light2.position.y = Math.sin(time * 0.7) * 9 + 6;
     light2.position.z = Math.sin(time * 0.8) * 9;
@@ -279,7 +280,7 @@ function main() {
     light2.rotation.x = time;
     light2.rotation.z = time;
 
-    time += 1000;
+    time += 500;
     light3.position.x = Math.sin(time * 0.6) * 9;
     light3.position.y = Math.sin(time * 0.7) * 9 + 6;
     light3.position.z = Math.sin(time * 0.8) * 9;
@@ -287,7 +288,7 @@ function main() {
     light3.rotation.x = time;
     light3.rotation.z = time;
     
-    time += 1000;
+    time += 500;
     light4.position.x = Math.sin(time * 0.6) * 9;
     light4.position.y = Math.sin(time * 0.7) * 9 + 6;
     light4.position.z = Math.sin(time * 0.8) * 9;
@@ -295,7 +296,7 @@ function main() {
     light4.rotation.x = time;
     light4.rotation.z = time;
     
-    time += 1000;
+    time += 500;
     light5.position.x = Math.sin(time * 0.6) * 9;
     light5.position.y = Math.sin(time * 0.7) * 9 + 6;
     light5.position.z = Math.sin(time * 0.8) * 9;
@@ -303,7 +304,7 @@ function main() {
     light5.rotation.x = time;
     light5.rotation.z = time;
     
-    time += 1000;
+    time += 500;
     light6.position.x = Math.sin(time * 0.6) * 9;
     light6.position.y = Math.sin(time * 0.7) * 9 + 6;
     light6.position.z = Math.sin(time * 0.8) * 9;
@@ -311,7 +312,7 @@ function main() {
     light6.rotation.x = time;
     light6.rotation.z = time;
     
-    time += 1000;
+    time += 500;
     light7.position.x = Math.sin(time * 0.6) * 9;
     light7.position.y = Math.sin(time * 0.7) * 9 + 6;
     light7.position.z = Math.sin(time * 0.8) * 9;
@@ -319,7 +320,7 @@ function main() {
     light7.rotation.x = time;
     light7.rotation.z = time;
     
-    time += 1000;
+    time += 500;
     light8.position.x = Math.sin(time * 0.6) * 9;
     light8.position.y = Math.sin(time * 0.7) * 9 + 6;
     light8.position.z = Math.sin(time * 0.8) * 9;
@@ -327,7 +328,7 @@ function main() {
     light8.rotation.x = time;
     light8.rotation.z = time;
     
-    time += 1000;
+    time += 500;
     light9.position.x = Math.sin(time * 0.6) * 9;
     light9.position.y = Math.sin(time * 0.7) * 9 + 6;
     light9.position.z = Math.sin(time * 0.8) * 9;
