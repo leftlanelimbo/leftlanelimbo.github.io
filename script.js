@@ -28,9 +28,9 @@ function main() {
   const scene = new THREE.Scene();
   // scene.add(new THREE.AmbientLight(0x111122));
 
-  // var listenerOrigin = new THREE.Mesh();
-  // listenerOrigin.position.y = 10;
-  // scene.add(listenerOrigin);
+  var listenerOrigin = new THREE.Mesh();
+  listenerOrigin.position.y = 10;
+  scene.add(listenerOrigin);
 
 
 
@@ -100,33 +100,12 @@ function main() {
   // light1.position.set(-2, 0, 0); //(left|right,top|down,front|back)
   scene.add(light1);
     
-  light2 = createLight(0x0088ff);
+  light2 = createLight(0xff8888);
+  // light2.position.set(2, 0, 0); //(left|right,top|down,front|back)
   scene.add(light2);
-
-  light3 = createLight(0x0088ff);
-  scene.add(light3);
-
-  light4 = createLight(0x0088ff);
-  scene.add(light4);
-
-  light5 = createLight(0xff8888);
-  scene.add(light5);
-
-  light6 = createLight(0xff8888);
-  scene.add(light6);
-
-  light7 = createLight(0xff8888);
-  scene.add(light7);
-
-  light8 = createLight(0xff8888);
-  scene.add(light8);
-
-  light9 = createLight(0xff8888);
-  scene.add(light9);
 
   //box for lights
   var geometry = new THREE.BoxBufferGeometry(30, 30, 30);
-  // var geometry = new THREE.SphereGeometry(20, 32, 32);
 
   var material = new THREE.MeshPhongMaterial({
     color: 0xa0adaf,
@@ -159,70 +138,35 @@ function main() {
   // // light2.intensity = 1;
   // scene.add(light2);
 
-  var analyser1, analyser2, analyser3, analyser4, analyser5, analyser6, analyser7, analyser8, analyser9
+  var analyser1, analyser2
 
   //load audio callback
   function playSound() {
 
     function loadSounds() {
       var audioListener = new THREE.AudioListener();
-      camera.add(audioListener);
-      // listenerOrigin.add(audioListener);
+      // camera.add(audioListener);
+      listenerOrigin.add(audioListener);
       var loadCount = 0; //make this more dynamic by getting length of array or something
 
       var sound1 = new THREE.PositionalAudio(audioListener);
       var sound2 = new THREE.PositionalAudio(audioListener);
-      var sound3 = new THREE.PositionalAudio(audioListener);
-      var sound4 = new THREE.PositionalAudio(audioListener);
-      var sound5 = new THREE.PositionalAudio(audioListener);
-      var sound6 = new THREE.PositionalAudio(audioListener);
-      var sound7 = new THREE.PositionalAudio(audioListener);
-      var sound8 = new THREE.PositionalAudio(audioListener);
-      var sound9 = new THREE.PositionalAudio(audioListener);
 
       light1.add(sound1);
       light2.add(sound2);
-      light3.add(sound3);
-      light4.add(sound4);
-      light5.add(sound5);
-      light6.add(sound6);
-      light7.add(sound7);
-      light8.add(sound8);
-      light9.add(sound9);
 
       function loadAllSounds(){
-        loadSound(sound1, light1, 'AHHHS.mp3');
-        loadSound(sound2, light2, 'BACKGROUND.mp3');
-        loadSound(sound3, light3, 'BASS.mp3');
-        loadSound(sound4, light4, 'DRUMS.mp3');
-        loadSound(sound5, light5, 'JUNO_SYNTH_MAIN.mp3');
-        loadSound(sound6, light6, 'MELODIC_INSTRUMENTATION.mp3');
-        loadSound(sound7, light7, 'VOX_LEAD_DRY.mp3');
-        loadSound(sound8, light8, 'VOX_LEAD_FX.mp3');
-        loadSound(sound9, light9, 'WHISTLE.mp3');
+        loadSound(sound1, light1, 'bloomLf.mp3');
+        loadSound(sound2, light2, 'bloomRf.mp3');
       }
       loadAllSounds();
 
       function play() {
         analyser1 = new THREE.AudioAnalyser(sound1, 32);
         analyser2 = new THREE.AudioAnalyser(sound2, 32);
-        analyser3 = new THREE.AudioAnalyser(sound3, 32);
-        analyser4 = new THREE.AudioAnalyser(sound4, 32);
-        analyser5 = new THREE.AudioAnalyser(sound5, 32);
-        analyser6 = new THREE.AudioAnalyser(sound6, 32);
-        analyser7 = new THREE.AudioAnalyser(sound7, 32);
-        analyser8 = new THREE.AudioAnalyser(sound8, 32);
-        analyser9 = new THREE.AudioAnalyser(sound9, 32);
 
         sound1.play();
         sound2.play();
-        sound3.play();
-        sound4.play();
-        sound5.play();
-        sound6.play();
-        sound7.play();
-        sound8.play();
-        sound9.play();
       }
 
       function loadSound(sound, light, file) {
@@ -233,7 +177,7 @@ function main() {
             sound.setRefDistance(25);
             light.intensity = 0.07;
             loadCount += 1;
-            if (loadCount == 9) {
+            if (loadCount == 2) {
               play();
             }
           },
@@ -272,70 +216,14 @@ function main() {
     light1.rotation.x = time;
     light1.rotation.z = time;
 
-    time += 500;
+    time += 10000;
+
     light2.position.x = Math.sin(time * 0.6) * 9;
     light2.position.y = Math.sin(time * 0.7) * 9 + 6;
     light2.position.z = Math.sin(time * 0.8) * 9;
 
     light2.rotation.x = time;
     light2.rotation.z = time;
-
-    time += 500;
-    light3.position.x = Math.sin(time * 0.6) * 9;
-    light3.position.y = Math.sin(time * 0.7) * 9 + 6;
-    light3.position.z = Math.sin(time * 0.8) * 9;
-
-    light3.rotation.x = time;
-    light3.rotation.z = time;
-    
-    time += 500;
-    light4.position.x = Math.sin(time * 0.6) * 9;
-    light4.position.y = Math.sin(time * 0.7) * 9 + 6;
-    light4.position.z = Math.sin(time * 0.8) * 9;
-
-    light4.rotation.x = time;
-    light4.rotation.z = time;
-    
-    time += 500;
-    light5.position.x = Math.sin(time * 0.6) * 9;
-    light5.position.y = Math.sin(time * 0.7) * 9 + 6;
-    light5.position.z = Math.sin(time * 0.8) * 9;
-
-    light5.rotation.x = time;
-    light5.rotation.z = time;
-    
-    time += 500;
-    light6.position.x = Math.sin(time * 0.6) * 9;
-    light6.position.y = Math.sin(time * 0.7) * 9 + 6;
-    light6.position.z = Math.sin(time * 0.8) * 9;
-
-    light6.rotation.x = time;
-    light6.rotation.z = time;
-    
-    time += 500;
-    light7.position.x = Math.sin(time * 0.6) * 9;
-    light7.position.y = Math.sin(time * 0.7) * 9 + 6;
-    light7.position.z = Math.sin(time * 0.8) * 9;
-
-    light7.rotation.x = time;
-    light7.rotation.z = time;
-    
-    time += 500;
-    light8.position.x = Math.sin(time * 0.6) * 9;
-    light8.position.y = Math.sin(time * 0.7) * 9 + 6;
-    light8.position.z = Math.sin(time * 0.8) * 9;
-
-    light8.rotation.x = time;
-    light8.rotation.z = time;
-    
-    time += 500;
-    light9.position.x = Math.sin(time * 0.6) * 9;
-    light9.position.y = Math.sin(time * 0.7) * 9 + 6;
-    light9.position.z = Math.sin(time * 0.8) * 9;
-
-    light9.rotation.x = time;
-    light9.rotation.z = time;
-
 
 
     
@@ -344,13 +232,6 @@ function main() {
       // console.log(analysers);
       light1.intensity = Math.pow((analyser1.getAverageFrequency() / 2000) + 1, 80)*0.05;
       light2.intensity = Math.pow((analyser2.getAverageFrequency() / 2000) + 1, 80)*0.05;
-      light3.intensity = Math.pow((analyser3.getAverageFrequency() / 2000) + 1, 80)*0.05;
-      light4.intensity = Math.pow((analyser4.getAverageFrequency() / 2000) + 1, 80)*0.05;
-      light5.intensity = Math.pow((analyser5.getAverageFrequency() / 2000) + 1, 80)*0.05;
-      light6.intensity = Math.pow((analyser6.getAverageFrequency() / 2000) + 1, 80)*0.05;
-      light7.intensity = Math.pow((analyser7.getAverageFrequency() / 2000) + 1, 80)*0.05;
-      light8.intensity = Math.pow((analyser8.getAverageFrequency() / 2000) + 1, 80)*0.05;
-      light9.intensity = Math.pow((analyser9.getAverageFrequency() / 2000) + 1, 80)*0.05;
       
     } catch (err) {
       // console.log('nada');
