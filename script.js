@@ -6,167 +6,128 @@ function main() {
   loaded();
   const canvas = document.querySelector('#c');
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true});
-  renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.BasicShadowMap;
   renderer.autoClearColor = false;
-  window.addEventListener('resize', onWindowResize, false);
 
-  function onWindowResize() {
-
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-
-    renderer.setSize(window.innerWidth, window.innerHeight);
-
-  }
-
-
-  const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
-  camera.position.set(0,10,40);
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
   const scene = new THREE.Scene();
-  // scene.add(new THREE.AmbientLight(0x111122));
 
-  var listenerOrigin = new THREE.Mesh();
-  listenerOrigin.position.y = 10;
-  scene.add(listenerOrigin);
+  //black plane
+  var planeGeometry = new THREE.PlaneBufferGeometry(50, 50);
+  var planeMaterial = new THREE.MeshPhongMaterial({ color: 0x0, specular: 0x666666 });
+  var plane = new THREE.Mesh(planeGeometry, planeMaterial);
+  plane.position.z = -30;
+  scene.add(plane);
+  // teal light color 0x226666
 
-
-
-
-  function generateTexture() {
-
-    var canvas = document.createElement('canvas');
-    canvas.width = 2;
-    canvas.height = 2;
-
-    var context = canvas.getContext('2d');
-    context.fillStyle = 'white';
-    context.fillRect(0, 1, 2, 1);
-
-    return canvas;
-
-  }
-
-  // lights
-
-  function createLight(color) {
-
-    var intensity = 0.05;
-
-    var pointLight = new THREE.PointLight(color, intensity, 20);
-    pointLight.castShadow = true;
-    pointLight.shadow.camera.near = 1;
-    pointLight.shadow.camera.far = 60;
-    pointLight.shadow.bias = - 0.005; // reduces self-shadowing on double-sided objects
-
-    // var geometry = new THREE.SphereBufferGeometry(0.3, 12, 6);
-    // var material = new THREE.MeshBasicMaterial({ color: color });
-    // material.color.multiplyScalar(intensity);
-    // var sphere = new THREE.Mesh(geometry, material);
-    // pointLight.add(sphere);
-
-    var texture = new THREE.CanvasTexture(generateTexture());
-    texture.magFilter = THREE.NearestFilter;
-    texture.wrapT = THREE.RepeatWrapping;
-    texture.wrapS = THREE.RepeatWrapping;
-    texture.repeat.set(1, 4.5);
-
-    var geometry = new THREE.SphereBufferGeometry(2, 32, 8);
-    var material = new THREE.MeshPhongMaterial({
-      side: THREE.DoubleSide,
-      alphaMap: texture,
-      alphaTest: 0.5
-    });
-
-    var sphere = new THREE.Mesh(geometry, material);
-    sphere.castShadow = true;
-    sphere.receiveShadow = true;
-    pointLight.add(sphere);
-
-    // custom distance material
-    var distanceMaterial = new THREE.MeshDistanceMaterial({
-      alphaMap: material.alphaMap,
-      alphaTest: material.alphaTest
-    });
-    sphere.customDistanceMaterial = distanceMaterial;
-
-    return pointLight;
-
-  }
-
-  light1 = createLight(0x0088ff);
-  // light1.position.set(-2, 0, 0); //(left|right,top|down,front|back)
+  var light1 = new THREE.PointLight(0xFFFFFF, 0, 20, 10);
+  light1.position.set(-10, -10, -29);
+  // light1.intensity = 1;
   scene.add(light1);
-    
-  light2 = createLight(0xff8888);
-  // light2.position.set(2, 0, 0); //(left|right,top|down,front|back)
+  var light2 = new THREE.PointLight(0xFFFFFF, 0, 20, 10);
+  light2.position.set(0, -10, -29);
+  // light2.intensity = 1;
   scene.add(light2);
 
-  //box for lights
-  var geometry = new THREE.BoxBufferGeometry(30, 30, 30);
+  var light3 = new THREE.PointLight(0xFFFFFF, 0, 20, 10);
+  light3.position.set(10, -10, -29);
+  // light3.intensity = 1;
+  scene.add(light3);
 
-  var material = new THREE.MeshPhongMaterial({
-    color: 0xa0adaf,
-    shininess: 10,
-    specular: 0x111111,
-    side: THREE.BackSide
-  });
+  var light4 = new THREE.PointLight(0xFFFFFF, 0, 20, 10);
+  light4.position.set(-10, 0, -29);
+  // light4.intensity = 1;
+  scene.add(light4);
 
-  var mesh = new THREE.Mesh(geometry, material);
-  mesh.position.y = 10;
-  mesh.receiveShadow = true;
-  scene.add(mesh);
+  var light5 = new THREE.PointLight(0xFFFFFF, 0, 20, 10);
+  light5.position.set(0, 0, -29);
+  // light5.intensity = 1;
+  scene.add(light5);
+
+  var light6 = new THREE.PointLight(0xFFFFFF, 0, 20, 10);
+  light6.position.set(10, 0, -29);
+  // light6.intensity = 1;
+  scene.add(light6);
+
+  var light7 = new THREE.PointLight(0xFFFFFF, 0, 20, 10);
+  light7.position.set(-10, 10, -29);
+  // light7.intensity = 1;
+  scene.add(light7);
+
+  var light8 = new THREE.PointLight(0xFFFFFF, 0, 20, 10);
+  light8.position.set(0, 10, -29);
+  // light8.intensity = 1;
+  scene.add(light8);
+
+  var light9 = new THREE.PointLight(0xFFFFFF, 0, 20, 10);
+  light9.position.set(10, 10, -29);
+  // light9.intensity = 1;
+  scene.add(light9);
 
 
-  // //black plane
-  // var planeGeometry = new THREE.PlaneBufferGeometry(50, 50);
-  // var planeMaterial = new THREE.MeshPhongMaterial({ color: 0x0, specular: 0x666666 });
-  // var plane = new THREE.Mesh(planeGeometry, planeMaterial);
-  // plane.position.z = -30;
-  // scene.add(plane);
-  // // teal light color 0x226666
 
-  // var light1 = new THREE.PointLight(0xFFFFFF, 0, 20, 10);
-  // light1.position.set(-10, 0, -29); //(left|right,top|down,front|back)
-  // // light1.intensity = 1;
-  // scene.add(light1);
-
-  // var light2 = new THREE.PointLight(0xFFFFFF, 0, 20, 10);
-  // light2.position.set(10, 0, -29);
-  // // light2.intensity = 1;
-  // scene.add(light2);
-
-  var analyser1, analyser2
+  var analyser1, analyser2, analyser3, analyser4, analyser5, analyser6, analyser7, analyser8, analyser9
 
   //load audio callback
   function playSound() {
 
     function loadSounds() {
       var audioListener = new THREE.AudioListener();
-      // camera.add(audioListener);
-      listenerOrigin.add(audioListener);
+      camera.add(audioListener);
       var loadCount = 0; //make this more dynamic by getting length of array or something
 
       var sound1 = new THREE.PositionalAudio(audioListener);
       var sound2 = new THREE.PositionalAudio(audioListener);
+      var sound3 = new THREE.PositionalAudio(audioListener);
+      var sound4 = new THREE.PositionalAudio(audioListener);
+      var sound5 = new THREE.PositionalAudio(audioListener);
+      var sound6 = new THREE.PositionalAudio(audioListener);
+      var sound7 = new THREE.PositionalAudio(audioListener);
+      var sound8 = new THREE.PositionalAudio(audioListener);
+      var sound9 = new THREE.PositionalAudio(audioListener);
 
       light1.add(sound1);
       light2.add(sound2);
+      light3.add(sound3);
+      light4.add(sound4);
+      light5.add(sound5);
+      light6.add(sound6);
+      light7.add(sound7);
+      light8.add(sound8);
+      light9.add(sound9);
 
       function loadAllSounds(){
-        loadSound(sound1, light1, 'bloomLf.mp3');
-        loadSound(sound2, light2, 'bloomRf.mp3');
+        loadSound(sound1, light1, 'AHHHS.mp3');
+        loadSound(sound2, light2, 'BACKGROUND.mp3');
+        loadSound(sound3, light3, 'BASS.mp3');
+        loadSound(sound4, light4, 'DRUMS.mp3');
+        loadSound(sound5, light5, 'JUNO_SYNTH_MAIN.mp3');
+        loadSound(sound6, light6, 'MELODIC_INSTRUMENTATION.mp3');
+        loadSound(sound7, light7, 'VOX_LEAD_DRY.mp3');
+        loadSound(sound8, light8, 'VOX_LEAD_FX.mp3');
+        loadSound(sound9, light9, 'WHISTLE.mp3');
       }
       loadAllSounds();
 
       function play() {
         analyser1 = new THREE.AudioAnalyser(sound1, 32);
         analyser2 = new THREE.AudioAnalyser(sound2, 32);
+        analyser3 = new THREE.AudioAnalyser(sound3, 32);
+        analyser4 = new THREE.AudioAnalyser(sound4, 32);
+        analyser5 = new THREE.AudioAnalyser(sound5, 32);
+        analyser6 = new THREE.AudioAnalyser(sound6, 32);
+        analyser7 = new THREE.AudioAnalyser(sound7, 32);
+        analyser8 = new THREE.AudioAnalyser(sound8, 32);
+        analyser9 = new THREE.AudioAnalyser(sound9, 32);
 
         sound1.play();
         sound2.play();
+        sound3.play();
+        sound4.play();
+        sound5.play();
+        sound6.play();
+        sound7.play();
+        sound8.play();
+        sound9.play();
       }
 
       function loadSound(sound, light, file) {
@@ -175,14 +136,14 @@ function main() {
           function (audioBuffer) {
             sound.setBuffer(audioBuffer);
             sound.setRefDistance(25);
-            light.intensity = 0.07;
+            light.intensity = 1;
             loadCount += 1;
-            if (loadCount == 2) {
+            if (loadCount == 9) {
               play();
             }
           },
           function (xhr) {
-            light.intensity = (xhr.loaded/xhr.total)*.3;
+            light.intensity = (xhr.loaded/xhr.total)*.5;
             // console.log((xhr.loaded / xhr.total * 100) + '% loaded');
           },
           function (err) {
@@ -198,40 +159,40 @@ function main() {
 
   // camera.position.z = 5;
 
-
+  function resizeRendererToDisplaySize(renderer) {
+    const canvas = renderer.domElement;
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+    const needResize = canvas.width !== width || canvas.height !== height;
+    if (needResize) {
+      renderer.setSize(width, height, false);
+    }
+    return needResize;
+  }
 
   function render(time) {
-    // time *= 0.001;  // convert to seconds
-    time *= 0.0005;  // convert to seconds> halfspeed
-    // var time = performance.now() * 0.001;
+    time *= 0.001;  // convert to seconds
+
+    resizeRendererToDisplaySize(renderer);
+
+    const canvas = renderer.domElement;
     
-    // cameraSY = cameraY + cameraSmoothingFactor * (cameraSY - cameraY);
-    // // camera.rotation.y = -sX;
-    // camera.rotation.y = cameraSY;
-
-    light1.position.x = Math.sin(time * 0.6) * 9;
-    light1.position.y = Math.sin(time * 0.7) * 9 + 6;
-    light1.position.z = Math.sin(time * 0.8) * 9;
-
-    light1.rotation.x = time;
-    light1.rotation.z = time;
-
-    time += 10000;
-
-    light2.position.x = Math.sin(time * 0.6) * 9;
-    light2.position.y = Math.sin(time * 0.7) * 9 + 6;
-    light2.position.z = Math.sin(time * 0.8) * 9;
-
-    light2.rotation.x = time;
-    light2.rotation.z = time;
-
+    cameraSY = cameraY + cameraSmoothingFactor * (cameraSY - cameraY);
+    // camera.rotation.y = -sX;
+    camera.rotation.y = cameraSY;
 
     
     try {
-
       // console.log(analysers);
-      light1.intensity = Math.pow((analyser1.getAverageFrequency() / 2000) + 1, 80)*0.05;
-      light2.intensity = Math.pow((analyser2.getAverageFrequency() / 2000) + 1, 80)*0.05;
+      light1.intensity = Math.pow((analyser1.getAverageFrequency() / 2000) + 1, 80);
+      light2.intensity = Math.pow((analyser2.getAverageFrequency() / 2000) + 1, 80);
+      light3.intensity = Math.pow((analyser3.getAverageFrequency() / 2000) + 1, 80);
+      light4.intensity = Math.pow((analyser4.getAverageFrequency() / 2000) + 1, 80);
+      light5.intensity = Math.pow((analyser5.getAverageFrequency() / 2000) + 1, 80);
+      light6.intensity = Math.pow((analyser6.getAverageFrequency() / 2000) + 1, 80);
+      light7.intensity = Math.pow((analyser7.getAverageFrequency() / 2000) + 1, 80);
+      light8.intensity = Math.pow((analyser8.getAverageFrequency() / 2000) + 1, 80);
+      light9.intensity = Math.pow((analyser9.getAverageFrequency() / 2000) + 1, 80);
       
     } catch (err) {
       // console.log('nada');
