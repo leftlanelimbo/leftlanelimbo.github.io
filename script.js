@@ -446,8 +446,8 @@ function main() {
     // camera.rotation.y = -sX;
     // cameraY = -sX;
     // cameraX = sY;
-    camera.rotation.y += sB*0.01;
-    camera.rotation.x += sA*0.01;
+    camera.rotation.y += sB*0.001;
+    camera.rotation.x += sA*0.001;
 
 
 
