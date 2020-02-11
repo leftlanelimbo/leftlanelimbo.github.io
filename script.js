@@ -18,7 +18,16 @@ function main() {
   plane.position.z = -30;
   scene.add(plane);
   // teal light color 0x226666
-  var stream_url = 'https://rawcdn.githack.com/leftlanelimbo/leftlanelimbo.github.io/d870b99e4a84edea6d61a206415fc6026cf65a7b/VOX_LEAD_DRY.m4a'
+  var AHHHS = 'https://rawcdn.githack.com/leftlanelimbo/leftlanelimbo.github.io/245803a967b998b6430d2009ecac4d91d099817e/AHHHS.m4a'
+  var BACKGROUND = 'https://rawcdn.githack.com/leftlanelimbo/leftlanelimbo.github.io/245803a967b998b6430d2009ecac4d91d099817e/BACKGROUND.m4a'
+  var BASS = 'https://rawcdn.githack.com/leftlanelimbo/leftlanelimbo.github.io/245803a967b998b6430d2009ecac4d91d099817e/BASS.m4a'
+  var DRUMS = 'https://github.com/leftlanelimbo/leftlanelimbo.github.io/blob/master/DRUMS.m4a'
+  var JUNO_SYNTH_MAIN = 'https://github.com/leftlanelimbo/leftlanelimbo.github.io/blob/master/JUNO_SYNTH_MAIN.m4a'
+  var MELODIC_INSTRUMENTATION = 'https://rawcdn.githack.com/leftlanelimbo/leftlanelimbo.github.io/245803a967b998b6430d2009ecac4d91d099817e/MELODIC_INSTRUMENTATION.m4a'
+  var VOX_LEAD_DRY = 'https://rawcdn.githack.com/leftlanelimbo/leftlanelimbo.github.io/d870b99e4a84edea6d61a206415fc6026cf65a7b/VOX_LEAD_DRY.m4a'
+  var VOX_LEAD_FX = 'https://rawcdn.githack.com/leftlanelimbo/leftlanelimbo.github.io/245803a967b998b6430d2009ecac4d91d099817e/VOX_LEAD_FX.m4a'
+  var WHISTLE = 'https://github.com/leftlanelimbo/leftlanelimbo.github.io/blob/master/WHISTLE.m4a'
+
 
   var light1 = new THREE.PointLight(0xFFFFFF, 0, 20, 10);
   light1.position.set(-10, -10, -29);
@@ -97,15 +106,15 @@ function main() {
       light9.add(sound9);
 
       function loadAllSounds(){
-        loadSound(sound1, light1, 'AHHHS.mp3');
-        loadSound(sound2, light2, 'BACKGROUND.mp3');
-        loadSound(sound3, light3, 'BASS.mp3');
-        loadSound(sound4, light4, 'DRUMS.mp3');
-        loadSound(sound5, light5, 'JUNO_SYNTH_MAIN.mp3');
-        loadSound(sound6, light6, 'MELODIC_INSTRUMENTATION.mp3');
-        loadSound(sound7, light7, stream_url);
-        loadSound(sound8, light8, 'VOX_LEAD_FX.mp3');
-        loadSound(sound9, light9, 'WHISTLE.mp3');
+        loadSound(sound1, light1, AHHHS);
+        loadSound(sound2, light2, BACKGROUND);
+        loadSound(sound3, light3, BASS);
+        loadSound(sound4, light4, DRUMS);
+        loadSound(sound5, light5, JUNO_SYNTH_MAIN);
+        loadSound(sound6, light6, MELODIC_INSTRUMENTATION);
+        loadSound(sound7, light7, VOX_LEAD_DRY);
+        loadSound(sound8, light8, VOX_LEAD_FX);
+        loadSound(sound9, light9, WHISTLE);
       }
       loadAllSounds();
 
