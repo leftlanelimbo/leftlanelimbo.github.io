@@ -1,9 +1,9 @@
 function main() {
   //:::::: three scene 
-  let cameraY = 0.0;
-  let cameraSY = 0.0;
-  let cameraX = 0.0;
-  let cameraSX = 0.0;
+  // let cameraY = 0.0;
+  // let cameraSY = 0.0;
+  // let cameraX = 0.0;
+  // let cameraSX = 0.0;
   let cameraSmoothingFactor = 0.93;
   loaded();
   const canvas = document.querySelector('#c');
@@ -329,11 +329,11 @@ function main() {
 
     const canvas = renderer.domElement;
     
-    cameraSY = cameraY + cameraSmoothingFactor * (cameraSY - cameraY);
-    cameraSX = cameraX + cameraSmoothingFactor * (cameraSX - cameraX);
-    // camera.rotation.y = -sX;
-    camera.rotation.y = cameraSY;
-    camera.rotation.x = cameraSX;
+    // cameraSY = cameraY + cameraSmoothingFactor * (cameraSY - cameraY);
+    // cameraSX = cameraX + cameraSmoothingFactor * (cameraSX - cameraX);
+    // // camera.rotation.y = -sX;
+    // camera.rotation.y = cameraSY;
+    // camera.rotation.x = cameraSX;
 
 
     ///////cube rotation
@@ -444,8 +444,10 @@ function main() {
     // light2.position.y -= (sA * .01);
     
     // camera.rotation.y = -sX;
-    cameraY = -sX;
-    cameraX = sY;
+    // cameraY = -sX;
+    // cameraX = sY;
+    camera.rotation.y += sB*0.01;
+    camera.rotation.x += sA*0.01;
 
 
 
