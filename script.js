@@ -18,6 +18,7 @@ function main() {
   plane.position.z = -30;
   scene.add(plane);
   // teal light color 0x226666
+  var stream_url = 'https://rawcdn.githack.com/leftlanelimbo/leftlanelimbo.github.io/d870b99e4a84edea6d61a206415fc6026cf65a7b/VOX_LEAD_DRY.m4a'
 
   var light1 = new THREE.PointLight(0xFFFFFF, 0, 20, 10);
   light1.position.set(-10, -10, -29);
@@ -102,7 +103,7 @@ function main() {
         loadSound(sound4, light4, 'DRUMS.mp3');
         loadSound(sound5, light5, 'JUNO_SYNTH_MAIN.mp3');
         loadSound(sound6, light6, 'MELODIC_INSTRUMENTATION.mp3');
-        loadSound(sound7, light7, 'VOX_LEAD_DRY.mp3');
+        loadSound(sound7, light7, stream_url);
         loadSound(sound8, light8, 'VOX_LEAD_FX.mp3');
         loadSound(sound9, light9, 'WHISTLE.mp3');
       }
