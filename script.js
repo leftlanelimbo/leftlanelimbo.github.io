@@ -51,11 +51,11 @@ function main() {
   void mainImage( out vec4 O,  vec2 U )
   {
       // float time=iTime*0.15;
-      float time=iTime*0.0315;
+      float time=iTime*0.40315;
       vec3 k1=noiseq(time)*vec3(0.1,0.19,0.3)+vec3(1.3,0.8,.63);
       vec3 k2=noiseq(time+1000.0)*vec3(0.2,0.2,0.05)+vec3(0.9,0.9,.05);
       //float k3=clamp(texture(iChannel0,vec2(0.01,0.)).x,0.8,1.0); float k4=clamp(texture(iChannel0,vec2(0.2,0.)).x,0.5,1.0); k2+=vec3((k3-0.8)*0.05); k1+=vec3((k4-0.5)*0.01);
-      float g=pow(abs(sin(time*0.8+9000.0)),4.0);
+      float g=pow(abs(sin(time*0.8+9000.0)*0.15+0.3),40.0);
       
     vec2 R = iResolution.xy;
       
@@ -63,14 +63,16 @@ function main() {
       vec2 r1=(U / R.y-vec2(0.05*R.x/R.y,0.5));
       float l = length(r1);
       // vec2 rotate=vec2(cos(time),sin(time));
-      vec2 rotate=vec2(-0.5*ssY,0.5*ssX);
+      // vec2 rotate=vec2(-0.5*ssY,0.5*ssX);
+      vec2 rotate=vec2(cos(-1.0*time),sin(1.0*time));
       r1=vec2(r1.x*rotate.x+r1.y*rotate.y,r1.y*rotate.x-r1.x*rotate.y);
       vec2 c3 = abs(r1.xy/l);
     if (c3.x>0.5) c3=abs(c3*0.5+vec2(-c3.y,c3.x)*0.86602540);
-      c3=normalize(vec2(c3.x*2.0,(c3.y-0.8660254037)*7.4641016151377545870));
+      // c3=normalize(vec2(c3.x*2.0,(c3.y-0.8660254037)*7.4641016151377545870));//2.0 map
+      c3=normalize(vec2(c3.x*ssY,(c3.y-0.8660254037)*7.4641016151377545870));//2.0 map
       
-      O = vec4(c3*l*70.0*(g+0.12), .5,0);
-      for (int i = 0; i < 128; i++) {
+      O = vec4(c3*l*70.0*(g+0.012), 2.5,0);
+      for (int i = 0; i < 25; i++) {
         O.xzy = (k1 * abs(O.xyz/dot(O,O)-k2));
       }
   }
