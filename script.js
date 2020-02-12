@@ -63,7 +63,7 @@ function main() {
       vec2 r1=(U / R.y-vec2(0.05*R.x/R.y,0.5));
       float l = length(r1);
       // vec2 rotate=vec2(cos(time),sin(time));
-      vec2 rotate=vec2(cos(-0.5*ssX),sin(0.5*ssY));
+      vec2 rotate=vec2(-0.5*ssX,0.5*ssY);
       r1=vec2(r1.x*rotate.x+r1.y*rotate.y,r1.y*rotate.x-r1.x*rotate.y);
       vec2 c3 = abs(r1.xy/l);
     if (c3.x>0.5) c3=abs(c3*0.5+vec2(-c3.y,c3.x)*0.86602540);
