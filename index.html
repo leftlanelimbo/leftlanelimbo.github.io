@@ -346,8 +346,10 @@
         var clientX, clientY;
         window.addEventListener('touchstart', function (e) {
                 // Cache the client X/Y coordinates
-                clientX = e.touches[0].clientX;
-                clientY = e.touches[0].clientY;
+                // clientX = e.touches[0].clientX;
+                // clientY = e.touches[0].clientY;
+                clientX = e.touches[0].force;
+                clientY = e.touches[0].force;
                 touchX.innerText = `tX ${clientX}`;
                 touchY.innerText = `tY ${clientY}`;
             }, false);
