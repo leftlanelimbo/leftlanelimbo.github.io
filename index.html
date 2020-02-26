@@ -336,7 +336,14 @@
         }
 
     
-        
+        function fullscreen() {
+                // var el = document.getElementById('c');
+
+                if (body.requestFullscreen) {
+                    body.requestFullscreen();
+                }
+            }
+
 
         
         document.getElementById('enter').addEventListener("click",onClickDeviceMotion);
@@ -386,13 +393,6 @@
                 // Process the data ... 
             }, false);
 
-        function fullscreen() {
-                var el = document.getElementById('c');
-
-                if (el.requestFullscreen) {
-                    el.requestFullscreen();
-                }
-            }
 
         
     </script>    
