@@ -348,9 +348,11 @@
                 // Cache the client X/Y coordinates
                 clientX = e.touches[0].clientX;
                 clientY = e.touches[0].clientY;
+                touchX.innerText = `tX ${clientX}`;
+                touchY.innerText = `tY ${clientY}`;
             }, false);
 
-        src.addEventListener('touchend', function (e) {
+        window.addEventListener('touchend', function (e) {
                 var deltaX, deltaY;
 
                 // Compute the change in X and Y coordinates. 
