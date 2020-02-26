@@ -148,6 +148,26 @@
         display:block;
         color: white;
         }
+        #touchXexp {
+        position: absolute;
+        top: 250px;
+        /* width: 100vw; */
+        /* height: 80vh; */
+        text-align: left;
+        z-index: 150;
+        display:block;
+        color: white;
+        }
+        #touchYexp {
+        position: absolute;
+        top: 270px;
+        /* width: 100vw; */
+        /* height: 80vh; */
+        text-align: left;
+        z-index: 150;
+        display:block;
+        color: white;
+        }
 
 
         #enter{
@@ -174,6 +194,9 @@
 
     <p id='touchX'>touchx</p>
     <p id='touchY'>touchy</p>
+    
+    <p id='touchXexp'>touchx</p>
+    <p id='touchYexp'>touchy</p>
 
 
 
@@ -202,6 +225,10 @@
         
         let left_position = 20.0;
         let width = 50.0;
+
+        let stX = 0.0;
+        let stY = 0.0;
+
 
         wrapped = document.getElementById('wrapper');
 
@@ -389,6 +416,12 @@
 
                 touchX.innerText = `tX ${deltaX}`;
                 touchY.innerText = `tY ${deltaY}`;
+
+                stX = deltaX + smoothing_factor * (stX - deltaX);
+                stY = deltaY + smoothing_factor * (stY - deltaY);
+
+                touchXexp.innerText = `tXexp ${deltaX}`;
+                touchYexp.innerText = `tYexp ${deltaY}`;
 
                 // Process the data ... 
             }, false);
