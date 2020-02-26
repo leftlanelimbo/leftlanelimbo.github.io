@@ -1,29 +1,319 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>3dStems</title>
-	<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>perspective_tilt</title>
+    <style>
+        body{
+            background-color: black;
+            perspective: 1000px;
+            perspective-origin: 50% 50%;
+            /* margin: 0; */
+            overflow: hidden;
+        }
+        img{
+            max-width: 100%;
+        }
+        #wrapper{
+        position:absolute;
+        display:block;
+        margin-left:auto;
+        margin-right:auto;
+        transform: rotateY(0deg);
+        top: 10vh; 
+        left: 8vh;
+        width:50%;
+        }
+        /* #wrapper:hover{
+        transform: rotateY(20deg);
+        } */
+        #xval {
+        position: absolute;
+        top: 10px;
+        /* width: 100vw; */
+        /* height: 100vh; */
+        text-align: left;
+        z-index: 150;
+        display:block;
+        color:white;
+        }
+        #yval {
+        position: absolute;
+        top: 30px;
+        /* width: 100vw; */
+        /* height: 80vh; */
+        text-align: left;
+        z-index: 150;
+        display:block;
+        color: white;
+        }
+        #zval {
+        position: absolute;
+        top: 50px;
+        /* width: 100vw; */
+        /* height: 80vh; */
+        text-align: left;
+        z-index: 150;
+        display:block;
+        color: white;
+        }
+        #alpha {
+        position: absolute;
+        top: 70px;
+        /* width: 100vw; */
+        /* height: 80vh; */
+        text-align: left;
+        z-index: 150;
+        display:block;
+        color: white;
+        }
+        #beta {
+        position: absolute;
+        top: 90px;
+        /* width: 100vw; */
+        /* height: 80vh; */
+        text-align: left;
+        z-index: 150;
+        display:block;
+        color: white;
+        }
+        /* #gamma {
+        position: absolute;
+        top: 110px;
+        text-align: left;
+        z-index: 150;
+        display:block;
+        color: white;
+        } */
+
+        #dbeta {
+        position: absolute;
+        top: 110px;
+        /* width: 100vw; */
+        /* height: 80vh; */
+        text-align: left;
+        z-index: 150;
+        display:block;
+        color: white;
+        }
+
+        #Oalpha {
+        position: absolute;
+        top: 150px;
+        /* width: 100vw; */
+        /* height: 80vh; */
+        text-align: left;
+        z-index: 150;
+        display:block;
+        color: white;
+        }
+        #Obeta {
+        position: absolute;
+        top: 170px;
+        /* width: 100vw; */
+        /* height: 80vh; */
+        text-align: left;
+        z-index: 150;
+        display:block;
+        color: white;
+        }
+        #Ogamma {
+        position: absolute;
+        top: 190px;
+        /* width: 100vw; */
+        /* height: 80vh; */
+        text-align: left;
+        z-index: 150;
+        display:block;
+        color: white;
+        }
+
+        #enter{
+        z-index:150;
+        }
+
+
+    </style>
 </head>
-
 <body>
-	<canvas id="c"></canvas>
-	<!-- <audio loop id="music" preload="auto" style="display: none">
-		<source src="audio_antenna.mp3" type="audio/mpeg">
-	</audio> -->
+    <p id='xval'>xval</p>
+    <p id='yval'>yval</p>
+    <p id='zval'>zval</p>
 
-	<div id="overlay">
-		<div>
-			<button id="startButton">L O A D I N G</button>
-			<!-- <p>HEADPHONES ~highly~ RECOMMENDED</p> -->
-		</div>
-	</div>
+    <p id='alpha'>alpha</p>
+    <p id='beta'>beta</p>
+    <!-- <p id='gamma'>gamma</p> -->
 
-	<!-- <button id="motion">Click Me</button> -->
-	<script src="https://threejs.org/build/three.js"></script>
-	<script src="script.js"></script>
+    <p id='dbeta'>dbeta</p>
+
+    <p id='Oalpha'>oalpha</p>
+    <p id='Obeta'>obeta</p>
+    <p id='Ogamma'>ogamma</p>
+
+    <div id="wrapper">
+        <img src='https://images.unsplash.com/photo-1579225922986-3f8226580045?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2134&q=80'>
+    </div>
+
+    <button id=enter>Click me</button>
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.0.4/gsap.min.js"></script>
+
+    <script>
+        let x_merge, y_merge;
+        
+        let sX = 0.0;
+        let sY = 0.0;
+        let sB = 0.0; // need to intialize to value you want it to start close to 
+        let sB_last = 0.0
+
+        let sA = 50.0;
+        let dB = 0.0;
+        let smoothing_factor = 0.9;
+        
+        let left_position = 20.0;
+        let width = 50.0;
+
+        wrapped = document.getElementById('wrapper');
+
+        function merge_vals(){
+            // wrapped.style.transform = `rotateY(${x_merge}deg) rotateX(${y_merge}deg)`;
+            // gsap.to('#wrapper',{duration:.25, transform: `rotateY(${x_merge}deg) rotateX(${y_merge}deg)`})
+            gsap.to('#wrapper',{duration:.25, rotateY: `${x_merge}deg`})
+            gsap.to('#wrapper',{duration:.25, rotateX: `${y_merge}deg`})
+        }
+
+        //https://stackoverflow.com/questions/596467/how-do-i-convert-a-float-number-to-a-whole-number-in-javascript
+        function float2int(value) {
+                return value | 0;
+        }
+
+        function handleMotionEvent(event) {
+                // t = event.acceleration;
+                // console.log(t);
+                x = event.accelerationIncludingGravity.x; //* 0.1;
+                y = event.accelerationIncludingGravity.y; //* 0.1;
+                z = event.accelerationIncludingGravity.z; //* 0.1;
+
+                a = event.rotationRate.alpha; //* 0.1;
+                b = event.rotationRate.beta; //* 0.1;
+                g = event.rotationRate.gamma; //* 0.1;
+
+
+                sX = x + smoothing_factor * (sX - x);
+                sY = y + smoothing_factor * (sY - y);
+
+                sB = b + smoothing_factor * (sB - b);
+                sA = a + smoothing_factor * (sA - a);
+
+                console.log(sB.toFixed(2),sB_last.toFixed(2));
+                dB = sB-sB_last;
+                sB_last = sB;
+                console.log(dB.toFixed(2));
+                
+                
+                xval.innerText = `motion event acceleration xval ${sX.toFixed(2)}`;
+                yval.innerText = `motion event acceleration yval ${sY.toFixed(2)}`;
+                zval.innerText = `motion event acceleration zval ${z.toFixed(2)}`;
+
+                alpha.innerText = `motion event rotationRate alpha ${sA.toFixed(2)}`;
+                beta.innerText = `rotationRate beta ${sB.toFixed(2)}`;
+                // gamma.innerText = `motion event rotationRate gamma ${g}`;
+                
+                
+                dbeta.innerText = `derivative of beta ${dB.toFixed(2)}`;
+
+                // merge_vals();
+
+                // wrapped.style.transform = `rotateY(${-sX*10}deg) rotateX(${-sY*10+20}deg)`; //tilt using position
+                wrapped.style.transform = `rotateY(${sB*0.5}deg) rotateX(${-sA*.5}deg)`; //tilt using acceleration
+                
+                // //left_position using rotation rate
+                // left_position += sB;
+                // // wrapped.style.left = '30vw';
+                // left_space = float2int(left_position*0.04);                
+                // wrapped.style.left = `${left_space}vw`;
+                
+                //left_position using x_val
+                wrapped.style.left = `${(-sX+2)*30}px`;
+
+
+                // //size using rotation
+                // width += sA*.05;
+                // // full_width = float2int(width);
+                // wrapped.style.width = `${width}%`;
+
+                //size using yval
+                wrapped.style.width = `${(sY+5)*10}%`;
+        }
+        
+        function handleOrientationEvent(event) {
+            //the problem with orientationEvent is that you get gimble lock when holding phone vertical 
+            oA = event.alpha;//* 0.01;
+            oB = event.beta;//* 0.01;
+            oG = event.gamma;//* 0.01;
+
+            // assign global variable to combine values from Orientation and Motion
+            // y_merge = oB;
+            
+            Oalpha.innerText = `orientation event alpha ${oA}`;
+            Obeta.innerText = `orientation event beta ${oB}`;
+            Ogamma.innerText = `orientation event gamma ${oG}`;
+
+            // gsap.to('#wrapper',{duration:.25, rotateY: `${-oG}deg`})
+            // wrapped.style.transform = `rotateY(${-oG}deg) rotateX(${-oB+90}deg)`;
+
+            // wrapped.style.transform = `rotateX(${-oB+90}deg)`;
+            
+
+        }
+
+
+        //https://developer.mozilla.org/en-US/docs/Web/API/DeviceMotionEvent
+        function onClickDeviceMotion() {
+                // feature detect
+                if (typeof DeviceMotionEvent.requestPermission === 'function') {
+                    DeviceMotionEvent.requestPermission()
+                        .then(permissionState => {
+                            if (permissionState === 'granted') {
+                                window.addEventListener('devicemotion', handleMotionEvent, true);
+
+                            }
+                        })
+                        .catch(console.error);
+                } else {
+                    // handle regular non iOS 13+ devices
+                    window.addEventListener('devicemotion', handleMotionEvent, true);
+                    console.log(console.error);
+                }
+            }
+
+        function onClickDeviceOrientation() {
+            // feature detect
+            if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+                DeviceOrientationEvent.requestPermission()
+                    .then(permissionState => {
+                        if (permissionState === 'granted') {
+                            window.addEventListener('deviceorientation', handleOrientationEvent, true);
+
+                        }
+                    })
+                    .catch(console.error);
+            } else {
+                // handle regular non iOS 13+ devices
+                window.addEventListener('deviceorientation', handleOrientationEvent, true);
+                console.log(console.error);
+            }
+        }
+
+        
+        document.getElementById('enter').addEventListener("click",onClickDeviceMotion);
+        document.getElementById('enter').addEventListener("click",onClickDeviceOrientation);
+
+        
+    </script>    
 </body>
-
 </html>
