@@ -369,6 +369,22 @@
                 // Process the data ... 
             }, false);
 
+        window.addEventListener('touchmove', function (e) {
+                var deltaX, deltaY;
+
+                // Compute the change in X and Y coordinates. 
+                // The first touch point in the changedTouches
+                // list is the touch point that was just removed from the surface.
+                deltaX = e.changedTouches[0].clientX;
+                deltaY = e.changedTouches[0].clientY;
+
+                touchX.innerText = `tX ${deltaX}`;
+                touchY.innerText = `tY ${deltaY}`;
+
+                // Process the data ... 
+            }, false);
+
+
         
     </script>    
 </body>
