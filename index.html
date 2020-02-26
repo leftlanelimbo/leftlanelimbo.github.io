@@ -372,10 +372,16 @@
             }
 
 
+        function vibration() {
+            window.navigator.vibrate([200, 100, 200]);
+        }
         
         document.getElementById('enter').addEventListener("click",onClickDeviceMotion);
         document.getElementById('enter').addEventListener("click",onClickDeviceOrientation);
         document.getElementById('enter').addEventListener("click",fullscreen);
+        document.getElementById('enter').addEventListener("click",vibration);
+
+
         
 
 
