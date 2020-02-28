@@ -435,10 +435,11 @@
 
             touchXexp.innerText = `tXexp ${stX}`;
             touchYexp.innerText = `tYexp ${stY}`;
-            window.requestAnimationFrame(loop);
+            requestAnimationFrame(loop);
             
         }
-        window.requestAnimationFrame(loop);
+        loop();
+        // window.requestAnimationFrame(loop);
 
         
     </script>    
