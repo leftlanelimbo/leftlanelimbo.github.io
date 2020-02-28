@@ -430,11 +430,13 @@
             }, false);
 
         function loop(){
+            stX = 0.0;
+            stY = 0.0;
             stX = deltaX + smoothing_factor * (stX - deltaX);
             stY = deltaY + smoothing_factor * (stY - deltaY);
             console.log(stX);
-            console.log(deltaX);
-            console.log(smoothing_factor);
+            // console.log(deltaX);
+            // console.log(smoothing_factor);
 
             touchXexp.innerText = `tXexp ${stX}`;
             touchYexp.innerText = `tYexp ${stY}`;
