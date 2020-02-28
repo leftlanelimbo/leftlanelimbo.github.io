@@ -424,19 +424,21 @@
                 touchX.innerText = `tX ${deltaX}`;
                 touchY.innerText = `tY ${deltaY}`;
 
-                stX = deltaX + smoothing_factor * (stX - deltaX);
-                stY = deltaY + smoothing_factor * (stY - deltaY);
 
-                touchXexp.innerText = `tXexp ${stX}`;
-                touchYexp.innerText = `tYexp ${stY}`;
 
                 // Process the data ... 
             }, false);
 
-        // function loop(){
+        function loop(){
+            stX = deltaX + smoothing_factor * (stX - deltaX);
+            stY = deltaY + smoothing_factor * (stY - deltaY);
 
-        // }
-
+            touchXexp.innerText = `tXexp ${stX}`;
+            touchYexp.innerText = `tYexp ${stY}`;
+            window.requestAnimationFrame(loop);
+            
+        }
+        loop();
 
         
     </script>    
