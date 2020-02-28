@@ -262,10 +262,10 @@
                 sB = b + smoothing_factor * (sB - b);
                 sA = a + smoothing_factor * (sA - a);
 
-                console.log(sB.toFixed(2),sB_last.toFixed(2));
+                // console.log(sB.toFixed(2),sB_last.toFixed(2));
                 dB = sB-sB_last;
                 sB_last = sB;
-                console.log(dB.toFixed(2));
+                // console.log(dB.toFixed(2));
                 
                 
                 xval.innerText = `motion event acceleration xval ${sX.toFixed(2)}`;
