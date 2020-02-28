@@ -412,6 +412,8 @@
             }, false);
 
         var deltaX, deltaY;
+        var stX = 0.0;
+        var stY = 0.0;
         window.addEventListener('touchmove', function (e) {
                 
 
@@ -439,8 +441,7 @@
                 // Process the data ... 
             }, false);
         
-        // var stX = 0.0;
-        // var stY = 0.0;
+
         function loop(){
             
             stX = deltaX + smoothing_factor * (stX - deltaX);
